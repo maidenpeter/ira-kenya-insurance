@@ -1,0 +1,427 @@
+<title>Kenya Insurance Loss Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#f4f6f3; --surface:#ffffff; --ink:#15202b; --ink-2:#4f5a64; --muted:#6d7780;
+  --rule:#d9dfdb; --rule-soft:#e8ece9; --accent:#184f95; --accent-soft:#e3ecf8;
+  --gain:#2a78d6; --loss:#e0612e; --crit:#c23b3b; --ok:#0b6e4f; --warn:#a86f00;
+  --serif:"EB Garamond", Garamond, "Adobe Garamond Pro", Georgia, serif;
+  --ui:"IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#10161c; --surface:#172029; --ink:#e7ebee; --ink-2:#b4bdc5; --muted:#8f99a3;
+    --rule:#2b3640; --rule-soft:#222c35; --accent:#86b6ef; --accent-soft:#1d2a3a;
+    --gain:#4a97ee; --loss:#ee7a45; --crit:#ec6b67; --ok:#3fbf8f; --warn:#f0b43a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#10161c; --surface:#172029; --ink:#e7ebee; --ink-2:#b4bdc5; --muted:#8f99a3;
+  --rule:#2b3640; --rule-soft:#222c35; --accent:#86b6ef; --accent-soft:#1d2a3a;
+  --gain:#4a97ee; --loss:#ee7a45; --crit:#ec6b67; --ok:#3fbf8f; --warn:#f0b43a;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--serif); font-size:17px; line-height:1.45}
+a{color:var(--accent)}
+.wrap{max-width:1180px; margin:0 auto; padding-inline:20px; padding-block:28px 56px; display:flex; flex-direction:column; gap:40px}
+header.top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 24px; border-bottom:1px solid var(--rule); padding-bottom:18px}
+.eyebrow{font-family:var(--ui); font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+h1{font-size:clamp(32px,4.6vw,48px); font-weight:500; line-height:1.04; margin:4px 0 8px; text-wrap:balance}
+h2{font-size:clamp(24px,3vw,31px); font-weight:500; line-height:1.12; margin:0; text-wrap:balance}
+h3{font-size:20px; font-weight:500; margin:0}
+p{margin:0}
+.lede{color:var(--ink-2); max-width:64ch}
+.stamp{font-family:var(--ui); font-size:13px; color:var(--muted); text-align:right; line-height:1.55}
+.small{font-family:var(--ui); font-size:13px; color:var(--muted)}
+section{display:flex; flex-direction:column; gap:14px; min-width:0}
+.sechead{display:flex; flex-direction:column; gap:6px; max-width:74ch}
+.sechead p{color:var(--ink-2)}
+.panel{background:var(--surface); border:1px solid var(--rule); border-radius:8px; padding:18px; min-width:0}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.loss{color:var(--loss)} .gain{color:var(--gain)}
+
+/* hero */
+.hero{display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:28px; align-items:center}
+.bignums{display:flex; flex-direction:column; gap:18px}
+.bn{display:flex; flex-direction:column; gap:2px}
+.bn .v{font-size:clamp(44px,6vw,68px); line-height:1; font-variant-numeric:tabular-nums lining-nums; letter-spacing:-.01em}
+.bn .k{font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.thesis{font-size:clamp(20px,2.3vw,25px); line-height:1.3; max-width:36ch}
+.chart svg{display:block; width:100%; height:auto}
+.chart text{font-family:var(--ui); font-size:12px; fill:var(--muted); font-variant-numeric:tabular-nums}
+.chart .lab{fill:var(--ink-2)}
+.chart .strong{fill:var(--ink); font-weight:600}
+
+/* heat grid */
+.controls{display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center}
+.seg{display:flex; gap:3px; background:var(--rule-soft); padding:3px; border-radius:8px; flex-wrap:wrap}
+.seg button{font-family:var(--ui); font-size:14px; border:0; background:transparent; color:var(--ink-2); padding:6px 11px; border-radius:6px; cursor:pointer; font-variant-numeric:tabular-nums}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.1)}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-family:var(--ui); font-size:14px; font-variant-numeric:tabular-nums}
+th{font-weight:500; color:var(--muted); text-align:right; font-size:12px; letter-spacing:.05em; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid var(--rule); white-space:nowrap}
+td{text-align:right; padding:6px 8px; border-bottom:1px solid var(--rule-soft); white-space:nowrap}
+th.l, td.l{text-align:left}
+.heat td.c{padding:0; border:2px solid var(--surface)}
+.heat td.c span{display:block; padding:9px 6px; text-align:center; border-radius:3px; font-size:13px}
+.heat td.name{font-family:var(--serif); font-size:16px; padding-right:12px}
+.heat tr.total td{border-top:1px solid var(--rule)}
+.heat tr.total td.name{font-weight:600}
+.scale{display:flex; align-items:center; gap:8px; font-family:var(--ui); font-size:12px; color:var(--ink-2)}
+.scale i{display:inline-block; width:180px; height:10px; border-radius:2px}
+
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.note{font-family:var(--ui); font-size:13px; color:var(--ink-2); max-width:78ch}
+.stat{display:flex; flex-wrap:wrap; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:8px; overflow:hidden}
+.stat > div{flex:1 1 180px; background:var(--surface); padding:14px 16px; display:flex; flex-direction:column; gap:3px}
+.stat .v{font-size:32px; line-height:1.05; font-variant-numeric:tabular-nums lining-nums}
+.stat .k{font-family:var(--ui); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.stat .s{font-family:var(--ui); font-size:13px; color:var(--ink-2)}
+.chip{font-family:var(--ui); font-size:12px; padding:2px 7px; border-radius:999px; border:1px solid var(--rule); color:var(--ink-2); white-space:nowrap}
+.chip.crit{border-color:var(--crit); color:var(--crit)}
+.chip.ok{border-color:var(--ok); color:var(--ok)}
+.method{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.method ul{margin:0; padding-left:1.1em; display:flex; flex-direction:column; gap:6px; font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.formula{font-family:var(--ui); font-size:15px; background:var(--rule-soft); border-radius:6px; padding:10px 12px; overflow-x:auto; white-space:nowrap}
+footer{border-top:1px solid var(--rule); padding-top:16px; font-family:var(--ui); font-size:13px; color:var(--muted); display:flex; flex-direction:column; gap:6px}
+footer p{max-width:110ch}
+.tip{position:fixed; z-index:10; background:var(--ink); color:var(--ground); font-family:var(--ui); font-size:12px; padding:6px 9px; border-radius:5px; pointer-events:none; max-width:300px; line-height:1.35}
+@media (max-width: 900px){
+  .hero, .grid2, .method{grid-template-columns:minmax(0,1fr)}
+  .stamp{text-align:left}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Kenyan general insurance, class by class</div>
+      <h1>Kenya Insurance Loss Map</h1>
+      <p class="lede">Where Kenya's general insurers lose money on underwriting, who carries the loss, and what it would take to close the gap. Built from the Insurance Regulatory Authority's quarterly returns, full years 2018 to 2025.</p>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <section class="hero">
+    <div class="bignums" id="bignums"></div>
+    <div class="panel">
+      <h3>Underwriting result by class, 2018 to 2025 combined</h3>
+      <p class="small" style="margin:2px 0 8px">KSh billions. Earned premium less claims, commissions and management expenses.</p>
+      <div class="chart" id="cumchart"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Year by year</div>
+      <h2>The same two classes, every year</h2>
+      <p>Combined ratio by class: claims, commissions and expenses per shilling of earned premium. Above 100% the class loses money before investment income.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" id="heatmode" role="group" aria-label="Measure">
+        <button type="button" data-m="cr" aria-pressed="true">Combined ratio</button>
+        <button type="button" data-m="lr" aria-pressed="false">Loss ratio</button>
+        <button type="button" data-m="uw" aria-pressed="false">Result, KSh bn</button>
+      </div>
+      <div class="scale" id="heatscale"></div>
+    </div>
+    <div class="panel tablewrap"><table class="heat" id="heat"></table></div>
+    <p class="note">Motor Commercial includes PSV. Companies move business between the two, and in Q4 2025 one insurer moved KSh 1.6bn of earned premium out of PSV, leaving PSV negative for the year. Combined, the class is unaffected.</p>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Rate adequacy</div>
+      <h2>What premiums would have to do</h2>
+      <p id="gaplede"></p>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Premium change needed, 2023 to 2025 experience</h3>
+        <p class="small" style="margin:2px 0 8px">Bar: to bring the combined ratio to 100%. Tick: if the class could count on its share of the market's investment income.</p>
+        <div class="chart" id="gapchart"></div>
+      </div>
+      <div class="panel">
+        <h3>Motor and medical, insurer by insurer</h3>
+        <p class="small" style="margin:2px 0 8px">Premium change each insurer's own book needs to break even, 2023 to 2025. Books under KSh 0.3bn of earned premium are left out.</p>
+        <div class="controls" style="margin-bottom:8px"><div class="seg" id="bookseg" role="group" aria-label="Book"><button type="button" data-b="Motor" aria-pressed="true">Motor</button><button type="button" data-b="Medical" aria-pressed="false">Medical</button></div></div>
+        <div class="chart" id="compgap"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Who carries it</div>
+      <h2 id="motorh"></h2>
+      <p id="motorp"></p>
+    </div>
+    <div class="panel"><div class="chart" id="motorchart"></div></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">A reserving warning</div>
+      <h2>Motor results that are too good to be true</h2>
+      <p id="lowlede"></p>
+    </div>
+    <div class="stat" id="lowstat"></div>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Every insurer's motor loss ratio, every year</h3>
+        <p class="small" style="margin:2px 0 8px">Books over KSh 0.2bn of earned premium. Line: the market. Red: insurers that later faced regulator action, negative equity or a capital shortfall.</p>
+        <div class="chart" id="dotchart"></div>
+      </div>
+      <div class="panel tablewrap"><table id="lowtable"></table></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Scale</div>
+      <h2>Small insurers pay far more to run</h2>
+      <p id="scalelede"></p>
+    </div>
+    <div class="panel">
+      <div class="controls" style="margin-bottom:8px"><div class="seg" id="scaleyears" role="group" aria-label="Year"></div></div>
+      <div class="chart" id="scalechart"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Method</div><h2>How the numbers are built</h2></div>
+    <div class="method">
+      <div style="display:flex; flex-direction:column; gap:12px">
+        <p>Every figure comes from IRA's quarterly industry statistics: each insurer's class tables at the fourth quarter, year to date, as extracted and checked in ira-kenya-data. Insurers only, micro insurers included, which is how IRA counts the market. The class totals match IRA's own PDF industry releases for 2020 to 2024.</p>
+        <p>The premium change comes from the loss ratio method of ratemaking, with commissions as a variable expense and management expenses as fixed, all on earned premium:</p>
+        <div class="formula">change = (loss ratio + expense ratio) &divide; (1 &minus; commission ratio &minus; target margin) &minus; 1</div>
+        <p class="small">Werner and Modlin, Basic Ratemaking, Casualty Actuarial Society, 2016.</p>
+      </div>
+      <ul>
+        <li>The rate change is an indication of the size of the gap, not a filed rate. It has no loss trend, no development beyond what insurers booked, and no charge for capital, so the true need is higher.</li>
+        <li>The investment income version credits each class with the whole market's investment income as a share of earned premium. Much of that income is earned on shareholders' capital, so this version flatters the classes.</li>
+        <li>Net commissions go negative in heavily reinsured classes such as fire industrial and engineering, where reinsurers' commissions exceed what insurers pay out.</li>
+        <li>A low loss ratio is a warning, not proof. It can come from a good book, heavy reinsurance or thin reserves. The test compares ten insurers with twenty-eight, a small sample.</li>
+        <li>2016 is left out because IRA's 2016 class tables have no earned premium or expense split. IRA has no year-end 2017 workbook online.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Source: Insurance Regulatory Authority, Kenya, quarterly industry statistics, full years 2018 to 2025 (unaudited returns). Regulator actions: Capital FM (Resolution, April 2022; Xplico and Invesco, December 2023), IRA on X (Trident and Corporate, March 2026). Pricing context: in September 2024 the Court of Appeal held that IRA may regulate premium rates but struck down its 2009 motor minimum rate guidelines as disproportionate (EY tax alert). Everything here is public data.</p>
+    <p>Marion Peter &middot; github.com/maidenpeter/ira-kenya-insurance</p>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const D = /*__DATA__*/null;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const bn = v => v===null ? 'n/a' : (v<0?'-':'+') + (Math.abs(v)/1000).toFixed(1);
+const bnPlain = v => (v<0?'-':'') + 'KSh ' + (Math.abs(v)/1000).toFixed(1) + 'bn';
+const pc = (v, d=0) => v===null ? 'n/a' : (v*100).toFixed(d) + '%';
+const spc = (v, d=0) => v===null ? 'n/a' : (v>0?'+':v<0?'-':'') + Math.abs(v*100).toFixed(d) + '%';
+const tip = $('tip');
+function showTip(e, h){ tip.innerHTML = h; tip.hidden = false; const r = tip.getBoundingClientRect(); let x = e.clientX+14, y = e.clientY+14; if (x+r.width > innerWidth-8) x = e.clientX-r.width-14; if (y+r.height > innerHeight-8) y = e.clientY-r.height-14; tip.style.left = x+'px'; tip.style.top = y+'px'; }
+function bindTips(root){ root.querySelectorAll('[data-tip]').forEach(el => { el.addEventListener('mousemove', e => showTip(e, el.dataset.tip)); el.addEventListener('mouseleave', () => tip.hidden = true); }); }
+const H = D.head, Y = D.years, LAST = Y[Y.length-1];
+
+$('stamp').innerHTML = `Full years ${Y[0]} to ${LAST}<br>${D.classes.length} classes, ${H.motor_insurers} motor insurers<br>KSh, IRA quarterly returns`;
+
+$('bignums').innerHTML = `
+  <p class="thesis">Kenya's general insurers lost <b class="num">${bnPlain(Math.abs(H.total))}</b> on underwriting from ${Y[0]} to ${LAST}. Motor alone lost more than all of it.</p>
+  <div class="bn"><span class="v loss">${bn(H.motor)}bn</span><span class="k">motor, private and commercial</span></div>
+  <div class="bn"><span class="v gain">${bn(H.rest)}bn</span><span class="k">every other class together, ${bn(H.wiba)}bn of it from workmen's compensation</span></div>
+  <p class="small">In ${LAST} motor was ${pc(H.gp_share)} of gross premium, ${pc(H.nep_share)} of earned premium and ${pc(H.claims_share)} of claims.</p>`;
+
+function divBars(el, rows, opts){
+  // rows: [{label, v, tip, strong}] horizontal diverging bars around zero
+  const W = 560, rowH = opts.rowH || 26, L = opts.L || 170, R = 56, T = 8;
+  const H_ = T + rows.length*rowH + 22;
+  const vals = rows.map(r => r.v).filter(v => v!==null);
+  const span0 = Math.max(...vals) - Math.min(...vals);
+  const lo = Math.min(0, ...vals.map(v => v - 0.22*span0*(v<0)), opts.min ?? 0), hi = Math.max(0, ...vals.map(v => v + 0.14*span0*(v>0)), opts.max ?? 0);
+  const x = v => L + (v - lo)/(hi - lo || 1) * (W - L - R);
+  let s = `<svg viewBox="0 0 ${W} ${H_}" role="img" aria-label="${esc(opts.aria||'')}">`;
+  (opts.ticks||[]).forEach(t => s += `<line x1="${x(t)}" x2="${x(t)}" y1="${T}" y2="${H_-20}" stroke="var(--rule-soft)"/><text x="${x(t)}" y="${H_-6}" text-anchor="middle">${opts.fmtTick ? opts.fmtTick(t) : t}</text>`);
+  s += `<line x1="${x(0)}" x2="${x(0)}" y1="${T}" y2="${H_-20}" stroke="var(--muted)"/>`;
+  rows.forEach((r, i) => {
+    const y = T + i*rowH;
+    s += `<text x="${L-8}" y="${y+rowH/2+4}" text-anchor="end" class="${r.strong?'strong':'lab'}">${esc(r.label)}</text>`;
+    if (r.v === null) { s += `<text x="${x(0)+6}" y="${y+rowH/2+4}">${r.na||'n/a'}</text>`; return; }
+    const x0 = x(Math.min(0, r.v)), w = Math.max(1, Math.abs(x(r.v) - x(0)));
+    s += `<rect x="${x0}" y="${y+5}" width="${w}" height="${rowH-10}" rx="2" fill="var(${r.v<0?'--loss':'--gain'})" ${r.tip?`data-tip="${esc(r.tip)}"`:''}/>`;
+    if (r.tick !== undefined && r.tick !== null) s += `<line x1="${x(r.tick)}" x2="${x(r.tick)}" y1="${y+2}" y2="${y+rowH-2}" stroke="var(--ink)" stroke-width="2"/>`;
+    const lx = r.v < 0 ? x0 - 5 : x0 + w + 5;
+    s += `<text x="${lx}" y="${y+rowH/2+4}" text-anchor="${r.v<0?'end':'start'}" class="lab">${opts.fmt(r.v)}</text>`;
+  });
+  el.innerHTML = s + '</svg>';
+  bindTips(el);
+}
+
+divBars($('cumchart'), D.classes.map(c => ({label: c.replace("Workmen's Compensation","Workmen's comp."), v: D.cum[c], tip: `${c}: ${bnPlain(D.cum[c])} over ${Y[0]} to ${LAST}`})),
+  {fmt: v => bn(v), aria: 'Cumulative underwriting result by class', L: 150, rowH: 24});
+
+// heat grid
+let heatMode = 'cr';
+function heatColor(v, mode){
+  if (v === null) return {bg:'transparent', fg:'var(--muted)'};
+  let t;
+  if (mode === 'uw') t = Math.max(-1, Math.min(1, v/4000));
+  else t = Math.max(-1, Math.min(1, (v - (mode==='cr'?1:0.7)) / (mode==='cr'?0.35:0.35)));
+  const pct = Math.round(Math.abs(t)*85);
+  const bad = mode==='uw' ? t < 0 : t > 0;
+  const col = bad ? 'var(--loss)' : 'var(--gain)';
+  return {bg:`color-mix(in oklab, ${col} ${pct}%, var(--surface))`, fg: pct > 55 ? '#ffffff' : 'var(--ink)'};
+}
+function renderHeat(){
+  document.querySelectorAll('#heatmode button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === heatMode));
+  const lab = {cr:['under 100%','over 100%'], lr:['low','high'], uw:['profit','loss']}[heatMode];
+  $('heatscale').innerHTML = `<span>${lab[0]}</span><i style="background:linear-gradient(90deg, var(--gain), var(--surface), var(--loss))"></i><span>${lab[1]}</span>`;
+  let h = `<thead><tr><th class="l">Class</th>${Y.map(y => `<th>${y}</th>`).join('')}<th>${Y[0]} to ${String(LAST).slice(2)}</th></tr></thead><tbody>`;
+  D.classes.concat(['All classes']).forEach(c => {
+    const g = D.grid[c];
+    const vals = g[heatMode];
+    h += `<tr class="${c==='All classes'?'total':''}"><td class="l name">${esc(c)}</td>`;
+    vals.forEach((v, i) => {
+      const col = heatColor(v, heatMode);
+      const txt = v===null ? '' : heatMode==='uw' ? bn(v) : pc(v);
+      h += `<td class="c"><span style="background:${col.bg}; color:${col.fg}" data-tip="${esc(c)}, ${Y[i]}: combined ratio ${pc(g.cr[i],1)}, loss ratio ${pc(g.lr[i],1)}, result ${g.uw[i]===null?'n/a':bnPlain(g.uw[i])}, earned premium ${g.nep[i]===null?'n/a':bnPlain(g.nep[i])}">${txt}</span></td>`;
+    });
+    h += `<td class="num ${D.cum[c]<0?'loss':'gain'}">${bn(D.cum[c])}</td></tr>`;
+  });
+  $('heat').innerHTML = h + '</tbody>';
+  bindTips($('heat'));
+}
+document.querySelectorAll('#heatmode button').forEach(b => b.onclick = () => { heatMode = b.dataset.m; renderHeat(); });
+renderHeat();
+
+// rate gap
+const gaps = D.gaps.filter(g => g.shown && g.cls !== 'All classes').sort((a,b) => b.be - a.be);
+const all = D.gaps.find(g => g.cls === 'All classes');
+const mc = D.gaps.find(g => g.cls === 'Motor Commercial'), mp = D.gaps.find(g => g.cls === 'Motor Private'), med = D.gaps.find(g => g.cls === 'Medical');
+$('gaplede').innerHTML = `On ${Y.includes(2023)?'2023 to 2025':'recent'} experience, motor commercial premiums would need to rise ${spc(mc.be)} and motor private ${spc(mp.be)} just to break even on underwriting. Medical is close, at ${spc(med.be)}. Counting the market's investment income, ${pc(D.yld,1)} of earned premium, ${(() => { const st = gaps.filter(g => g.ai > 0).map(g => g.cls.toLowerCase()); return st.length ? (st.length===1 ? 'only ' + st[0] + ' still falls short.' : st.join(', ') + ' still fall short.') : 'every class breaks even.'; })()} That is the most generous reading: much of that income is earned on shareholders' capital, not on the premium.`;
+divBars($('gapchart'), gaps.map(g => ({label: g.cls.replace("Workmen's Compensation","Workmen's comp."), v: g.be, tick: g.ai,
+  tip: `${g.cls}: loss ratio ${pc(g.lr,1)}, commissions ${pc(g.cm,1)}, expenses ${pc(g.ex,1)}, combined ${pc(g.cr,1)}. Change to break even ${spc(g.be,1)}; with investment income ${spc(g.ai,1)}`})),
+  {fmt: v => spc(v), aria: 'Premium change needed by class', L: 150, rowH: 24, ticks: [-0.3,-0.2,-0.1,0.1,0.2], fmtTick: v => spc(v)});
+
+let book = 'Motor';
+function renderCompGap(){
+  document.querySelectorAll('#bookseg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.b === book));
+  const rows = D.comp_gap.filter(x => x.book === book).sort((a,b) => b.be - a.be);
+  divBars($('compgap'), rows.map(x => ({label: x.name, v: x.be, tip: `${x.name}, ${book.toLowerCase()} 2023 to 2025: combined ratio ${pc(x.cr,1)}, earned premium ${bnPlain(x.nep)}, change to break even ${spc(x.be,1)}`})),
+    {fmt: v => spc(v), aria: 'Premium change needed by insurer', L: 130, rowH: 20});
+}
+document.querySelectorAll('#bookseg button').forEach(b => b.onclick = () => { book = b.dataset.b; renderCompGap(); });
+renderCompGap();
+
+// motor by insurer
+const motor = D.motor.filter(m => Math.abs(m.uw) >= 1);
+const profitable = D.motor.filter(m => m.uw > 50);  // KSh 50m over eight years
+$('motorh').textContent = `${D.motor.length} insurers wrote motor. ${profitable.length===3?'Three':profitable.length} made a real profit on it.`;
+$('motorp').innerHTML = `Ten insurers account for ${pc(H.top10)} of the motor underwriting loss from ${Y[0]} to ${LAST}. The only meaningful motor profits were made by ${profitable.map(m => esc(m.name)).join(', ').replace(/, ([^,]*)$/, ' and $1')}${(() => { const lowIds = new Set(D.lows.map(l => l.id)); const hit = profitable.filter(m => lowIds.has(m.id)); return hit.length ? ', and ' + hit.map(m => esc(m.name)).join(' and ') + ' also appears below among the results too good to be true.' : '.'; })()}`;
+(function(){
+  const rows = motor;
+  const W = 1100, rowH = 17, L = 170, T = 24;
+  const Hh = T + rows.length*rowH + 8;
+  const lo = Math.min(...rows.map(r => r.uw)) * 1.1, hi = Math.max(0, ...rows.map(r => r.uw)) * 1.3;
+  const mid = 640;
+  const x = v => L + (v - lo)/(hi - lo) * (mid - 60 - L);
+  const shareMax = Math.max(...rows.map(r => r.share));
+  const xs = v => mid + 40 + v/shareMax * (W - mid - 110);
+  let s = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Motor underwriting result by insurer">`;
+  s += `<text x="${L}" y="12" class="lab">Motor underwriting result, ${Y[0]} to ${LAST} (KSh bn)</text><text x="${mid+40}" y="12" class="lab">Share of motor gross premium</text>`;
+  s += `<line x1="${x(0)}" x2="${x(0)}" y1="${T-4}" y2="${Hh-4}" stroke="var(--muted)"/>`;
+  rows.forEach((r, i) => {
+    const y = T + i*rowH;
+    const x0 = x(Math.min(0, r.uw)), w = Math.max(1, Math.abs(x(r.uw) - x(0)));
+    s += `<text x="${L-8}" y="${y+rowH/2+4}" text-anchor="end" class="lab">${esc(r.name)}</text>`;
+    s += `<rect x="${x0}" y="${y+3}" width="${w}" height="${rowH-6}" rx="2" fill="var(${r.uw<0?'--loss':'--gain'})" data-tip="${esc(r.full)}: ${bnPlain(r.uw)}, combined ratio ${pc(r.cr,1)}${r.lossshare?`, ${pc(r.lossshare,1)} of all motor losses`:''}"/>`;
+    s += `<text x="${r.uw<0 ? x0-4 : x0+w+4}" y="${y+rowH/2+4}" text-anchor="${r.uw<0?'end':'start'}">${bn(r.uw)}</text>`;
+    s += `<rect x="${mid+40}" y="${y+4}" width="${Math.max(1, xs(r.share)-(mid+40))}" height="${rowH-8}" rx="2" fill="var(--muted)" opacity=".45"/>`;
+    s += `<text x="${xs(r.share)+4}" y="${y+rowH/2+4}">${pc(r.share,1)}</text>`;
+  });
+  $('motorchart').innerHTML = s + '</svg>';
+  bindTips($('motorchart'));
+})();
+
+// low loss ratios
+const t40 = D.tests.find(t => Math.abs(t.threshold - 0.4) < 1e-6);
+const nLater = new Set(D.lows.filter(l => l.later).map(l => l.id)).size;
+$('lowlede').innerHTML = `The market's motor loss ratio has run between ${pc(Math.min(...Object.values(D.motor_lr)))} and ${pc(Math.max(...Object.values(D.motor_lr)))}. ${t40.low_insurers} insurers booked a year under 40%, roughly half the market's. ${t40.low_with_trouble} of those ${t40.low_insurers} faced regulator action, negative equity or equity below IRA's minimum capital at some point since ${Y[0]}, against ${t40.other_with_trouble} of the other ${t40.other_insurers}. A motor book that looks far better than everyone else's is more often a reserving question than a pricing success.`;
+$('lowstat').innerHTML = `
+  <div><span class="k">Booked a motor year under 40%</span><span class="v">${pc(t40.share_low)}</span><span class="s">${t40.low_with_trouble} of ${t40.low_insurers} insurers ran into capital trouble or regulator action</span></div>
+  <div><span class="k">Every other motor insurer</span><span class="v">${pc(t40.share_other)}</span><span class="s">${t40.other_with_trouble} of ${t40.other_insurers}</span></div>
+  <div><span class="k">Chance of a gap this wide by luck</span><span class="v">${t40.fisher_p < 0.01 ? '&lt; 1%' : pc(t40.fisher_p,1)}</span><span class="s">Fisher's exact test, p = ${t40.fisher_p.toFixed(3)}. Holds at 35%, 45% and 50% thresholds</span></div>
+  <div><span class="k">Trouble came in the same year or later</span><span class="v">${nLater} of ${t40.low_insurers}</span><span class="s">the low loss ratio came first, not after</span></div>`;
+(function(){
+  const W = 560, Hh = 300, L = 40, R = 12, T = 12, B = 26;
+  const ys = Y;
+  const xs = y => L + (ys.indexOf(y) + 0.5) * (W-L-R)/ys.length;
+  const lmax = 1.4;
+  const yv = v => T + (1 - Math.min(v, lmax)/lmax) * (Hh-T-B);
+  const trouble = new Set(D.lows.filter(l => l.later).map(l => l.id).concat(D.actions.map(a => a.company_id)));
+  let s = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Motor loss ratios by insurer and year">`;
+  [0,0.4,0.8,1.2].forEach(v => s += `<line x1="${L}" x2="${W-R}" y1="${yv(v)}" y2="${yv(v)}" stroke="var(--rule-soft)"/><text x="${L-6}" y="${yv(v)+4}" text-anchor="end">${pc(v)}</text>`);
+  s += `<rect x="${L}" y="${yv(0.4)}" width="${W-L-R}" height="${yv(0)-yv(0.4)}" fill="var(--crit)" opacity=".06"/>`;
+  ys.forEach(y => s += `<text x="${xs(y)}" y="${Hh-8}" text-anchor="middle">${y}</text>`);
+  s += `<polyline fill="none" stroke="var(--ink)" stroke-width="1.5" points="${ys.map(y => `${xs(y)},${yv(D.motor_lr[y])}`).join(' ')}"/>`;
+  const lowKey = new Set(D.lows.map(l => l.id + ':' + l.y));
+  D.dots.forEach((d, i) => {
+    const jitter = ((i * 37) % 21 - 10) * 1.6;
+    const isLow = lowKey.has(d.id + ':' + d.y);
+    const bad = isLow && trouble.has(d.id);
+    const fill = isLow ? (bad ? 'var(--crit)' : 'var(--gain)') : 'var(--muted)';
+    s += `<circle cx="${xs(d.y)+jitter}" cy="${yv(d.lr)}" r="${isLow?4.5:3}" fill="${fill}" opacity="${isLow?1:.45}" data-tip="${esc(d.name)}, ${d.y}: motor loss ratio ${pc(d.lr,1)} on ${bnPlain(d.nep)} earned premium${d.lr>lmax?' (off the scale)':''}"/>`;
+  });
+  s += `<text x="${W-R}" y="${yv(D.motor_lr[LAST])-6}" text-anchor="end" class="lab">market</text>`;
+  $('dotchart').innerHTML = s + '</svg>';
+  bindTips($('dotchart'));
+})();
+(function(){
+  let h = '<thead><tr><th class="l">Insurer</th><th>Year</th><th>Motor LR</th><th>Market</th><th class="l">Since then</th></tr></thead><tbody>';
+  D.lows.forEach(l => {
+    const bits = [];
+    if (l.action) bits.push(`<span class="chip crit">${esc(l.action)}</span>`);
+    if (l.neg) bits.push(`<span class="chip crit">negative equity ${esc(l.neg)}</span>`);
+    if (l.below) bits.push(`<span class="chip crit">below capital floor ${esc(l.below)}</span>`);
+    if (!bits.length) bits.push('<span class="chip ok">no capital trouble</span>');
+    h += `<tr><td class="l" style="font-family:var(--serif); font-size:16px">${esc(l.name)}</td><td>${l.y}</td><td>${pc(l.lr,1)}</td><td>${pc(l.mkt,1)}</td><td class="l" style="white-space:normal; min-width:220px">${bits.join(' ')}</td></tr>`;
+  });
+  $('lowtable').innerHTML = h + '</tbody>';
+})();
+
+// scale
+let sy = LAST;
+function renderScale(){
+  const S = D.scale[sy];
+  $('scaleyears').innerHTML = Y.map(y => `<button type="button" data-y="${y}" aria-pressed="${y===sy}">${y}</button>`).join('');
+  $('scaleyears').querySelectorAll('button').forEach(b => b.onclick = () => { sy = +b.dataset.y; renderScale(); });
+  $('scalelede').innerHTML = `Management expenses fall steadily with size. In ${sy}, insurers writing under KSh 3bn a year (${S.n_small} of them) spent a median ${pc(S.small)} of gross premium on management expenses; the ${S.n_large} writing over KSh 10bn spent ${pc(S.large)}. Each doubling of premium comes with about ${Math.abs(S.per_doubling*100).toFixed(0)} points less expense (correlation ${S.rho.toFixed(2)}). A small insurer starts every year with that handicap before it pays a claim.`;
+  const W = 1100, Hh = 380, L = 56, R = 20, T = 14, B = 34;
+  const gmin = 300, gmax = 40000;
+  const xv = g => L + (Math.log(g) - Math.log(gmin))/(Math.log(gmax) - Math.log(gmin)) * (W-L-R);
+  const emax = 0.8;
+  const yv = e => T + (1 - Math.min(e, emax)/emax) * (Hh-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Management expense ratio against size">`;
+  [0,0.2,0.4,0.6,0.8].forEach(v => s += `<line x1="${L}" x2="${W-R}" y1="${yv(v)}" y2="${yv(v)}" stroke="var(--rule-soft)"/><text x="${L-6}" y="${yv(v)+4}" text-anchor="end">${pc(v)}</text>`);
+  [500,1000,2000,5000,10000,20000,40000].forEach(g => s += `<text x="${xv(g)}" y="${Hh-12}" text-anchor="middle">${g>=1000?(g/1000)+'bn':g+'m'}</text>`);
+  s += `<text x="${W-R}" y="${Hh-0}" text-anchor="end">gross premium, KSh (log scale)</text>`;
+  const fx = g => S.icpt + S.slope * Math.log(g*1000);
+  s += `<line x1="${xv(gmin)}" y1="${yv(fx(gmin))}" x2="${xv(gmax)}" y2="${yv(fx(gmax))}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4"/>`;
+  S.pts.forEach(p => {
+    const off = p.ex > emax;
+    s += `<circle cx="${xv(Math.max(gmin, Math.min(gmax, p.gp)))}" cy="${yv(p.ex)}" r="5" fill="var(--accent)" opacity=".75" data-tip="${esc(p.name)}, ${sy}: gross premium ${bnPlain(p.gp)}, management expenses ${pc(p.ex,1)} of it${off?' (off the scale)':''}"/>`;
+    if (p.ex > 0.5 || p.gp === Math.max(...S.pts.map(q => q.gp))) s += `<text x="${xv(Math.max(gmin, Math.min(gmax, p.gp)))+7}" y="${yv(p.ex)+4}" class="lab">${esc(p.name)}</text>`;
+  });
+  $('scalechart').innerHTML = s + '</svg>';
+  bindTips($('scalechart'));
+}
+renderScale();
+</script>
