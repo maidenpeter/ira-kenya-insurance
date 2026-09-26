@@ -1,0 +1,5 @@
+threshold,low_insurers,low_with_trouble,other_insurers,other_with_trouble,share_low,share_other,fisher_p
+0.3500,8,6,30,9,0.7500,0.3000,0.0391
+0.4000,10,8,28,7,0.8000,0.2500,0.0061
+0.4500,11,9,27,6,0.8182,0.2222,0.0011
+0.5000,12,9,26,6,0.7500,0.2308,0.0041
