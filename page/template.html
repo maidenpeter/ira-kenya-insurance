@@ -174,7 +174,7 @@ footer p{max-width:110ch}
     <div class="grid2">
       <div class="panel">
         <h3>Every insurer's motor loss ratio, every year</h3>
-        <p class="small" style="margin:2px 0 8px">Books over KSh 0.2bn of earned premium. Line: the market. Red: insurers that later faced regulator action, negative equity or a capital shortfall.</p>
+        <p class="small" style="margin:2px 0 8px">Books over KSh 0.2bn of earned premium, private and commercial motor together. Line: the whole market's motor loss ratio. Red: insurers that later faced regulator action, negative equity or a capital shortfall.</p>
         <div class="chart" id="dotchart"></div>
       </div>
       <div class="panel tablewrap"><table id="lowtable"></table></div>
@@ -354,7 +354,7 @@ $('motorp').innerHTML = `Ten insurers account for ${pc(H.top10)} of the motor un
 // low loss ratios
 const t40 = D.tests.find(t => Math.abs(t.threshold - 0.4) < 1e-6);
 const nLater = new Set(D.lows.filter(l => l.later).map(l => l.id)).size;
-$('lowlede').innerHTML = `The market's motor loss ratio has run between ${pc(Math.min(...Object.values(D.motor_lr)))} and ${pc(Math.max(...Object.values(D.motor_lr)))}. ${t40.low_insurers} insurers booked a year under 40%, roughly half the market's. ${t40.low_with_trouble} of those ${t40.low_insurers} faced regulator action, negative equity or equity below IRA's minimum capital at some point since ${Y[0]}, against ${t40.other_with_trouble} of the other ${t40.other_insurers}. A motor book that looks far better than everyone else's is more often a reserving question than a pricing success.`;
+$('lowlede').innerHTML = `The market's loss ratio on all motor business, private and commercial together, has run between ${pc(Math.min(...Object.values(D.motor_lr)))} and ${pc(Math.max(...Object.values(D.motor_lr)))}. ${t40.low_insurers} insurers booked a year under 40%, roughly half the market's. ${t40.low_with_trouble} of those ${t40.low_insurers} faced regulator action, negative equity or equity below IRA's minimum capital at some point since ${Y[0]}, against ${t40.other_with_trouble} of the other ${t40.other_insurers}. A motor book that looks far better than everyone else's is more often a reserving question than a pricing success.`;
 $('lowstat').innerHTML = `
   <div><span class="k">Booked a motor year under 40%</span><span class="v">${pc(t40.share_low)}</span><span class="s">${t40.low_with_trouble} of ${t40.low_insurers} insurers ran into capital trouble or regulator action</span></div>
   <div><span class="k">Every other motor insurer</span><span class="v">${pc(t40.share_other)}</span><span class="s">${t40.other_with_trouble} of ${t40.other_insurers}</span></div>
@@ -380,12 +380,12 @@ $('lowstat').innerHTML = `
     const fill = isLow ? (bad ? 'var(--crit)' : 'var(--gain)') : 'var(--muted)';
     s += `<circle cx="${xs(d.y)+jitter}" cy="${yv(d.lr)}" r="${isLow?4.5:3}" fill="${fill}" opacity="${isLow?1:.45}" data-tip="${esc(d.name)}, ${d.y}: motor loss ratio ${pc(d.lr,1)} on ${bnPlain(d.nep)} earned premium${d.lr>lmax?' (off the scale)':''}"/>`;
   });
-  s += `<text x="${W-R}" y="${yv(D.motor_lr[LAST])-6}" text-anchor="end" class="lab">market</text>`;
+  s += `<text x="${W-R}" y="${yv(D.motor_lr[LAST])-6}" text-anchor="end" class="lab">market, all motor</text>`;
   $('dotchart').innerHTML = s + '</svg>';
   bindTips($('dotchart'));
 })();
 (function(){
-  let h = '<thead><tr><th class="l">Insurer</th><th>Year</th><th>Motor LR</th><th>Market</th><th class="l">Since then</th></tr></thead><tbody>';
+  let h = '<thead><tr><th class="l">Insurer</th><th>Year</th><th>Motor LR</th><th>Market, all motor</th><th class="l">Since then</th></tr></thead><tbody>';
   D.lows.forEach(l => {
     const bits = [];
     if (l.action) bits.push(`<span class="chip crit">${esc(l.action)}</span>`);
