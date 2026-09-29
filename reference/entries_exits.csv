@@ -1,0 +1,16 @@
+company_id,kind,year_in_data,what_happened,source
+resolution,exit,2021,statutory management April 2022,https://www.capitalfm.co.ke/business/2022/04/resolution-insurance-placed-under-statutory-management-over-unsettled-claims/
+invesco,exit,2023,licence cancelled and liquidation December 2023; statutory management August 2024,https://www.capitalfm.co.ke/business/2023/12/xplico-insurance-placed-under-statutory-management-as-invesco-liquidated/
+xplico,exit,2022,statutory management December 2023,https://www.capitalfm.co.ke/business/2023/12/xplico-insurance-placed-under-statutory-management-as-invesco-liquidated/
+trident,exit,2022,stopped filing complete returns after 2022; statutory management March 2026,https://x.com/ira_kenya/status/2031600557375344841
+corporate,exit,2024,statutory management March 2026,https://x.com/ira_kenya/status/2031600557375344841
+allianz_kenya,merger,2021,merged with Jubilee General as Jubilee Allianz General,https://www.allianz.com/en/mediacenter/news/financials/stakes_investments/221005_Allianz-completes-final-acquisition-of-majority-stake-in-Jubilees-general-insurance-business-in-East-Africa.html
+saham,merger,2020,consolidated into MUA Insurance in 2021,https://www.the-star.co.ke/business/kenya/2021-08-06-mua-kenya-and-saham-kenya-consolidated-to-one-entity/
+sanlam_general,merger,2024,business transferred to Jubilee Allianz General (now Sanlam Allianz General) in September 2025,https://www.businessdailyafrica.com/bd/corporate/companies/sanlam-completes-transfer-of-business-to-jubilee-allianz-5252576
+jubilee_composite,split,2019,general business split into Jubilee Health and Jubilee General from Q1 2020,IRA quarterly statistics
+jubilee_health,split,2020,"health business of Jubilee Insurance, reported separately from Q1 2020",IRA quarterly statistics
+star_discover,entry,2023,first reported Q1 2023,IRA quarterly statistics
+definite,entry,2025,"licensed 11 December 2024, focused on public service vehicles",https://www.businessdailyafrica.com/bd/corporate/companies/karauri-mysterious-investors-bet-on-matatu-insurance-4882946
+equity_general,entry,2025,"Equity Group's general insurer, approved in principle by IRA in May 2023, first reported Q1 2025",https://www.the-star.co.ke/business/kenya/2023-05-16-equity-ventures-into-full-time-general-insurance/
+equity_health,entry,2025,first reported Q3 2025,IRA quarterly statistics
+bupa_global,entry,2025,"international private medical insurer, opened in Nairobi in 2025 after IRA licensing",https://www.the-star.co.ke/business/2025-04-03-global-insurance-provider-bupa-unveils-africa-office-in-nairobi

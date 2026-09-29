@@ -1,0 +1,9 @@
+year,top5,top5_expense_ratio,rest_share,rest_expenses,rest_expected_at_top5_rates,extra_expense,market_underwriting_result
+2018,jubilee_composite;cic_general;apa;old_mutual_general;britam_general,0.2138,0.6265,19259986.0000,18879161.0063,380824.9937,-1650520.0000
+2019,jubilee_composite;cic_general;old_mutual_general;apa;britam_general,0.2058,0.6197,19692667.0000,18521965.1592,1170701.8408,-2971015.0000
+2020,old_mutual_general;cic_general;apa;jubilee_health;britam_general,0.1933,0.6415,19443349.0000,18814113.5924,629235.4076,-1179119.0000
+2021,old_mutual_general;cic_general;ga;apa;britam_general,0.1764,0.6315,21395674.0000,18063212.3537,3332461.6463,-6343491.0000
+2022,old_mutual_general;apa;ga;cic_general;britam_general,0.1562,0.5966,21648729.0000,16988044.8320,4660684.1680,-3719948.0000
+2023,apa;old_mutual_general;cic_general;britam_general;ga,0.1546,0.5754,23790972.0000,18045049.2559,5745922.7441,-4955991.0000
+2024,old_mutual_general;apa;britam_general;ga;cic_general,0.1496,0.5689,23093573.5590,18560551.8021,4533021.7569,-5237380.4320
+2025,cic_general;apa;old_mutual_general;ga;jubilee_health,0.1500,0.5926,27774464.8210,24283304.7510,3491160.0700,-7005715.9300

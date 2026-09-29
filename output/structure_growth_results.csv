@@ -1,0 +1,28 @@
+company_id,company_name,written_premium_2018,written_premium_2025,growth_a_year,combined_ratio,underwriting_result,gained_share,market_growth_a_year
+aar,AAR Insurance Kenya,5608947.0000,12772094.7866,0.1247,1.0238,-1049688.9417,True,0.0842
+amaco,African Merchant Assurance,2179262.0000,3850884.6855,0.0847,1.0373,-532812.6986,True,0.0842
+apa,APA Insurance,9558988.0000,19381233.9220,0.1062,1.0058,-391835.6547,True,0.0842
+britam_general,Britam General Insurance,8048803.0000,14944763.2803,0.0924,1.0554,-3504245.5204,True,0.0842
+cannon_general,Cannon General Insurance,1023188.0000,2417007.2022,0.1307,1.2041,-1885697.9497,True,0.0842
+cic_general,CIC General Insurance,10210133.0000,20641498.6195,0.1058,1.0316,-2829576.8786,True,0.0842
+directline,Directline Assurance Company,3002685.0000,2734058.5005,-0.0133,1.1417,-3667044.9023,False,0.0842
+fidelity_shield,Fidelity Shield Insurance,2273702.0000,5013813.7950,0.1196,1.0379,-587145.2389,True,0.0842
+first_assurance,First Assurance Company,3789809.0000,7258166.6250,0.0973,1.1027,-2413346.2424,True,0.0842
+ga,GA Insurance,6042555.0000,17109612.5440,0.1603,0.8961,4410361.0975,True,0.0842
+geminia,Geminia Insurance,4514593.0000,5023942.9760,0.0154,1.0508,-1634651.2112,False,0.0842
+heritage,The Heritage Insurance Company,5435640.0000,8693256.3360,0.0694,0.9658,1146095.6860,False,0.0842
+icea_lion_general,ICEA Lion General Insurance,5609278.0000,9043875.1600,0.0706,0.9346,1915297.9268,False,0.0842
+intra_africa,Intra-Africa Assurance,1213688.0000,3488486.5880,0.1628,0.9176,1014932.7310,True,0.0842
+kenindia,Kenindia Assurance Company,2854686.0000,2673456.0650,-0.0093,1.2102,-2652496.5657,False,0.0842
+kenya_orient,Kenya Orient Insurance,1446485.0000,1113669.6431,-0.0367,1.2631,-2691917.0241,False,0.0842
+kenyan_alliance,The Kenyan Alliance Insurance,1250565.0000,1666338.4557,0.0419,1.1381,-1467431.9306,False,0.0842
+madison,Madison Insurance Company,4480216.0000,9439464.7159,0.1123,1.0240,-1018460.7397,True,0.0842
+mayfair,Mayfair Insurance Company,3004592.0000,9011418.5920,0.1699,0.8873,2236855.7698,True,0.0842
+mua,MUA Insurance (formerly Phoenix of East Africa),750195.0000,2156791.1790,0.1628,1.3647,-3593328.8690,True,0.0842
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),3634716.0000,3632539.5865,-0.0001,0.9358,479557.1254,False,0.0842
+occidental,Occidental Insurance Company,2602360.0000,1737331.4389,-0.0561,1.1250,-1810153.9661,False,0.0842
+old_mutual_general,Old Mutual General Insurance (formerly UAP),9255347.0000,18363291.0863,0.1028,1.0007,-64052.1787,True,0.0842
+pacis,Pacis Insurance Company,1307535.0000,3536786.3350,0.1528,1.0362,-475365.9052,True,0.0842
+pioneer,Pioneer Insurance,591857.0000,3015500.2574,0.2619,1.0437,-407998.3784,True,0.0842
+takaful,Takaful Insurance of Africa,966116.0000,1031266.3441,0.0094,1.1153,-592346.7168,False,0.0842
+tausi,Tausi Assurance Company,1174203.0000,2192444.4400,0.0933,0.8544,1184749.6995,True,0.0842

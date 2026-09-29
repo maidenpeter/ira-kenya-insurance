@@ -1,0 +1,315 @@
+company_id,company_name,year,written_premium,share,rank
+jubilee_composite,Jubilee Insurance Company (general business before the 2020 split),2016,14089298.0000,0.1158,1
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2016,10982069.0000,0.0903,2
+apa,APA Insurance,2016,8995974.0000,0.0739,3
+cic_general,CIC General Insurance,2016,8407498.0000,0.0691,4
+britam_general,Britam General Insurance,2016,6997226.0000,0.0575,5
+icea_lion_general,ICEA Lion General Insurance,2016,6304587.0000,0.0518,6
+aar,AAR Insurance Kenya,2016,6244856.0000,0.0513,7
+heritage,The Heritage Insurance Company,2016,5340179.0000,0.0439,8
+ga,GA Insurance,2016,4782084.0000,0.0393,9
+resolution,Resolution Insurance Company,2016,3956999.0000,0.0325,10
+first_assurance,First Assurance Company,2016,3930952.0000,0.0323,11
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2016,3669939.0000,0.0302,12
+directline,Directline Assurance Company,2016,3224740.0000,0.0265,13
+amaco,African Merchant Assurance,2016,3162248.0000,0.0260,14
+madison,Madison Insurance Company,2016,3102440.0000,0.0255,15
+kenindia,Kenindia Assurance Company,2016,2996565.0000,0.0246,16
+kenya_orient,Kenya Orient Insurance,2016,2525537.0000,0.0208,17
+mayfair,Mayfair Insurance Company,2016,2302051.0000,0.0189,18
+invesco,Invesco Assurance Company,2016,2300894.0000,0.0189,19
+geminia,Geminia Insurance,2016,2222724.0000,0.0183,20
+occidental,Occidental Insurance Company,2016,2033090.0000,0.0167,21
+cannon_general,Cannon General Insurance,2016,1725576.0000,0.0142,22
+fidelity_shield,Fidelity Shield Insurance,2016,1717327.0000,0.0141,23
+saham,Saham Assurance Kenya,2016,1563081.0000,0.0128,24
+trident,Trident Insurance Company,2016,1295773.0000,0.0106,25
+kenyan_alliance,The Kenyan Alliance Insurance,2016,1095924.0000,0.0090,26
+monarch,The Monarch Insurance,2016,1051639.0000,0.0086,27
+pacis,Pacis Insurance Company,2016,1042138.0000,0.0086,28
+intra_africa,Intra-Africa Assurance,2016,1014278.0000,0.0083,29
+sanlam_general,Sanlam General Insurance,2016,1002199.0000,0.0082,30
+tausi,Tausi Assurance Company,2016,963338.0000,0.0079,31
+takaful,Takaful Insurance of Africa,2016,816450.0000,0.0067,32
+mua,MUA Insurance (formerly Phoenix of East Africa),2016,438726.0000,0.0036,33
+corporate,Corporate Insurance Company,2016,312615.0000,0.0026,34
+allianz_kenya,Allianz Insurance Company of Kenya,2016,63060.0000,0.0005,35
+jubilee_composite,Jubilee Insurance Company (general business before the 2020 split),2018,11112352.0000,0.0861,1
+cic_general,CIC General Insurance,2018,10210133.0000,0.0791,2
+apa,APA Insurance,2018,9558988.0000,0.0741,3
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2018,9255347.0000,0.0717,4
+britam_general,Britam General Insurance,2018,8048803.0000,0.0624,5
+ga,GA Insurance,2018,6042555.0000,0.0468,6
+resolution,Resolution Insurance Company,2018,5701692.0000,0.0442,7
+icea_lion_general,ICEA Lion General Insurance,2018,5609278.0000,0.0435,8
+aar,AAR Insurance Kenya,2018,5608947.0000,0.0435,9
+heritage,The Heritage Insurance Company,2018,5435640.0000,0.0421,10
+geminia,Geminia Insurance,2018,4514593.0000,0.0350,11
+madison,Madison Insurance Company,2018,4480216.0000,0.0347,12
+first_assurance,First Assurance Company,2018,3789809.0000,0.0294,13
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2018,3634716.0000,0.0282,14
+mayfair,Mayfair Insurance Company,2018,3004592.0000,0.0233,15
+directline,Directline Assurance Company,2018,3002685.0000,0.0233,16
+kenindia,Kenindia Assurance Company,2018,2854686.0000,0.0221,17
+occidental,Occidental Insurance Company,2018,2602360.0000,0.0202,18
+saham,Saham Assurance Kenya,2018,2532957.0000,0.0196,19
+fidelity_shield,Fidelity Shield Insurance,2018,2273702.0000,0.0176,20
+sanlam_general,Sanlam General Insurance,2018,2202961.0000,0.0171,21
+amaco,African Merchant Assurance,2018,2179262.0000,0.0169,22
+invesco,Invesco Assurance Company,2018,1531029.0000,0.0119,23
+kenya_orient,Kenya Orient Insurance,2018,1446485.0000,0.0112,24
+xplico,Xplico Insurance Company,2018,1309453.0000,0.0101,25
+pacis,Pacis Insurance Company,2018,1307535.0000,0.0101,26
+monarch,The Monarch Insurance,2018,1257635.0000,0.0097,27
+kenyan_alliance,The Kenyan Alliance Insurance,2018,1250565.0000,0.0097,28
+intra_africa,Intra-Africa Assurance,2018,1213688.0000,0.0094,29
+tausi,Tausi Assurance Company,2018,1174203.0000,0.0091,30
+cannon_general,Cannon General Insurance,2018,1023188.0000,0.0079,31
+takaful,Takaful Insurance of Africa,2018,966116.0000,0.0075,32
+mua,MUA Insurance (formerly Phoenix of East Africa),2018,750195.0000,0.0058,33
+allianz_kenya,Allianz Insurance Company of Kenya,2018,703858.0000,0.0055,34
+pioneer,Pioneer Insurance,2018,591857.0000,0.0046,35
+trident,Trident Insurance Company,2018,546099.0000,0.0042,36
+corporate,Corporate Insurance Company,2018,299159.0000,0.0023,37
+jubilee_composite,Jubilee Insurance Company (general business before the 2020 split),2019,12294977.0000,0.0938,1
+cic_general,CIC General Insurance,2019,10654093.0000,0.0813,2
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2019,9371847.0000,0.0715,3
+apa,APA Insurance,2019,9337231.0000,0.0712,4
+britam_general,Britam General Insurance,2019,8208739.0000,0.0626,5
+ga,GA Insurance,2019,6605860.0000,0.0504,6
+aar,AAR Insurance Kenya,2019,5861920.0000,0.0447,7
+icea_lion_general,ICEA Lion General Insurance,2019,5855812.0000,0.0447,8
+heritage,The Heritage Insurance Company,2019,5634335.0000,0.0430,9
+resolution,Resolution Insurance Company,2019,5357625.0000,0.0409,10
+geminia,Geminia Insurance,2019,5155021.0000,0.0393,11
+madison,Madison Insurance Company,2019,4211585.0000,0.0321,12
+first_assurance,First Assurance Company,2019,3672370.0000,0.0280,13
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2019,3618271.0000,0.0276,14
+mayfair,Mayfair Insurance Company,2019,3017304.0000,0.0230,15
+sanlam_general,Sanlam General Insurance,2019,2859045.0000,0.0218,16
+occidental,Occidental Insurance Company,2019,2810253.0000,0.0214,17
+kenindia,Kenindia Assurance Company,2019,2468467.0000,0.0188,18
+directline,Directline Assurance Company,2019,2428130.0000,0.0185,19
+fidelity_shield,Fidelity Shield Insurance,2019,2348477.0000,0.0179,20
+saham,Saham Assurance Kenya,2019,2254014.0000,0.0172,21
+kenyan_alliance,The Kenyan Alliance Insurance,2019,1671663.0000,0.0127,22
+pacis,Pacis Insurance Company,2019,1480965.0000,0.0113,23
+amaco,African Merchant Assurance,2019,1474181.0000,0.0112,24
+xplico,Xplico Insurance Company,2019,1440828.0000,0.0110,25
+monarch,The Monarch Insurance,2019,1308997.0000,0.0100,26
+kenya_orient,Kenya Orient Insurance,2019,1303039.0000,0.0099,27
+takaful,Takaful Insurance of Africa,2019,1272336.0000,0.0097,28
+intra_africa,Intra-Africa Assurance,2019,1216766.0000,0.0093,29
+tausi,Tausi Assurance Company,2019,1203827.0000,0.0092,30
+allianz_kenya,Allianz Insurance Company of Kenya,2019,910744.0000,0.0069,31
+cannon_general,Cannon General Insurance,2019,885463.0000,0.0068,32
+pioneer,Pioneer Insurance,2019,860493.0000,0.0066,33
+mua,MUA Insurance (formerly Phoenix of East Africa),2019,796148.0000,0.0061,34
+trident,Trident Insurance Company,2019,655901.0000,0.0050,35
+corporate,Corporate Insurance Company,2019,619313.0000,0.0047,36
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2020,10605343.0000,0.0811,1
+cic_general,CIC General Insurance,2020,10196749.0000,0.0779,2
+apa,APA Insurance,2020,9508815.0000,0.0727,3
+jubilee_health,Jubilee Health Insurance,2020,8336809.0000,0.0637,4
+britam_general,Britam General Insurance,2020,8253941.0000,0.0631,5
+ga,GA Insurance,2020,7840649.0000,0.0599,6
+icea_lion_general,ICEA Lion General Insurance,2020,6057394.0000,0.0463,7
+heritage,The Heritage Insurance Company,2020,5765208.0000,0.0441,8
+aar,AAR Insurance Kenya,2020,5683964.0000,0.0434,9
+geminia,Geminia Insurance,2020,5157210.0000,0.0394,10
+resolution,Resolution Insurance Company,2020,4287042.0000,0.0328,11
+madison,Madison Insurance Company,2020,4228697.0000,0.0323,12
+first_assurance,First Assurance Company,2020,4144459.0000,0.0317,13
+sanlam_general,Sanlam General Insurance,2020,4066095.0000,0.0311,14
+mayfair,Mayfair Insurance Company,2020,3300417.0000,0.0252,15
+sanlam_allianz_general,Sanlam Allianz General Insurance (formerly Jubilee General / Jubilee Allianz General),2020,3063525.0000,0.0234,16
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2020,3045834.0000,0.0233,17
+occidental,Occidental Insurance Company,2020,2812086.0000,0.0215,18
+directline,Directline Assurance Company,2020,2626423.0000,0.0201,19
+kenindia,Kenindia Assurance Company,2020,2470756.0000,0.0189,20
+kenyan_alliance,The Kenyan Alliance Insurance,2020,2136880.0000,0.0163,21
+fidelity_shield,Fidelity Shield Insurance,2020,2060189.0000,0.0157,22
+saham,Saham Assurance Kenya,2020,2035611.0000,0.0156,23
+monarch,The Monarch Insurance,2020,1496361.0000,0.0114,24
+pacis,Pacis Insurance Company,2020,1445893.0000,0.0111,25
+kenya_orient,Kenya Orient Insurance,2020,1444109.0000,0.0110,26
+tausi,Tausi Assurance Company,2020,1180206.0000,0.0090,27
+cannon_general,Cannon General Insurance,2020,1130829.0000,0.0086,28
+intra_africa,Intra-Africa Assurance,2020,1105383.0000,0.0084,29
+amaco,African Merchant Assurance,2020,1069484.0000,0.0082,30
+corporate,Corporate Insurance Company,2020,932958.0000,0.0071,31
+allianz_kenya,Allianz Insurance Company of Kenya,2020,929347.0000,0.0071,32
+pioneer,Pioneer Insurance,2020,883816.0000,0.0068,33
+mua,MUA Insurance (formerly Phoenix of East Africa),2020,828146.0000,0.0063,34
+trident,Trident Insurance Company,2020,705812.0000,0.0054,35
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2021,13183224.0000,0.0865,1
+cic_general,CIC General Insurance,2021,11422040.0000,0.0750,2
+ga,GA Insurance,2021,11021966.0000,0.0723,3
+apa,APA Insurance,2021,10626654.0000,0.0698,4
+britam_general,Britam General Insurance,2021,9881854.0000,0.0649,5
+jubilee_health,Jubilee Health Insurance,2021,9342283.0000,0.0613,6
+aar,AAR Insurance Kenya,2021,6686858.0000,0.0439,7
+heritage,The Heritage Insurance Company,2021,6331467.0000,0.0416,8
+icea_lion_general,ICEA Lion General Insurance,2021,6331150.0000,0.0416,9
+madison,Madison Insurance Company,2021,5784652.0000,0.0380,10
+sanlam_general,Sanlam General Insurance,2021,4857950.0000,0.0319,11
+geminia,Geminia Insurance,2021,4800245.0000,0.0315,12
+first_assurance,First Assurance Company,2021,4513424.0000,0.0296,13
+mayfair,Mayfair Insurance Company,2021,4262081.0000,0.0280,14
+resolution,Resolution Insurance Company,2021,4158395.0000,0.0273,15
+directline,Directline Assurance Company,2021,3589899.0000,0.0236,16
+mua,MUA Insurance (formerly Phoenix of East Africa),2021,3554097.0000,0.0233,17
+sanlam_allianz_general,Sanlam Allianz General Insurance (formerly Jubilee General / Jubilee Allianz General),2021,3489031.0000,0.0229,18
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2021,3224826.0000,0.0212,19
+occidental,Occidental Insurance Company,2021,3124815.0000,0.0205,20
+kenindia,Kenindia Assurance Company,2021,2580576.0000,0.0169,21
+fidelity_shield,Fidelity Shield Insurance,2021,2281328.0000,0.0150,22
+kenyan_alliance,The Kenyan Alliance Insurance,2021,1937872.0000,0.0127,23
+kenya_orient,Kenya Orient Insurance,2021,1684629.0000,0.0111,24
+pacis,Pacis Insurance Company,2021,1667830.0000,0.0109,25
+cannon_general,Cannon General Insurance,2021,1590938.0000,0.0104,26
+intra_africa,Intra-Africa Assurance,2021,1544171.0000,0.0101,27
+pioneer,Pioneer Insurance,2021,1403558.0000,0.0092,28
+tausi,Tausi Assurance Company,2021,1322352.0000,0.0087,29
+monarch,The Monarch Insurance,2021,1223585.0000,0.0080,30
+trident,Trident Insurance Company,2021,1190788.0000,0.0078,31
+allianz_kenya,Allianz Insurance Company of Kenya,2021,1150690.0000,0.0076,32
+amaco,African Merchant Assurance,2021,1008356.0000,0.0066,33
+takaful,Takaful Insurance of Africa,2021,910128.0000,0.0060,34
+corporate,Corporate Insurance Company,2021,667262.0000,0.0044,35
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2022,14858673.0000,0.0880,1
+apa,APA Insurance,2022,14654657.0000,0.0868,2
+ga,GA Insurance,2022,13919501.0000,0.0824,3
+cic_general,CIC General Insurance,2022,13860381.0000,0.0821,4
+britam_general,Britam General Insurance,2022,10850663.0000,0.0642,5
+jubilee_health,Jubilee Health Insurance,2022,9001961.0000,0.0533,6
+madison,Madison Insurance Company,2022,7749677.0000,0.0459,7
+icea_lion_general,ICEA Lion General Insurance,2022,7301805.0000,0.0432,8
+aar,AAR Insurance Kenya,2022,7243553.0000,0.0429,9
+heritage,The Heritage Insurance Company,2022,7048403.0000,0.0417,10
+geminia,Geminia Insurance,2022,5731604.0000,0.0339,11
+mayfair,Mayfair Insurance Company,2022,5520092.0000,0.0327,12
+first_assurance,First Assurance Company,2022,5507501.0000,0.0326,13
+directline,Directline Assurance Company,2022,4268899.0000,0.0253,14
+sanlam_allianz_general,Sanlam Allianz General Insurance (formerly Jubilee General / Jubilee Allianz General),2022,4004875.0000,0.0237,15
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2022,3619996.0000,0.0214,16
+mua,MUA Insurance (formerly Phoenix of East Africa),2022,3590642.0000,0.0213,17
+sanlam_general,Sanlam General Insurance,2022,3298535.0000,0.0195,18
+fidelity_shield,Fidelity Shield Insurance,2022,3094819.0000,0.0183,19
+occidental,Occidental Insurance Company,2022,2819534.0000,0.0167,20
+kenindia,Kenindia Assurance Company,2022,2372033.0000,0.0140,21
+kenya_orient,Kenya Orient Insurance,2022,2176188.0000,0.0129,22
+trident,Trident Insurance Company,2022,2152829.0000,0.0127,23
+intra_africa,Intra-Africa Assurance,2022,2135782.0000,0.0126,24
+pacis,Pacis Insurance Company,2022,1965147.0000,0.0116,25
+tausi,Tausi Assurance Company,2022,1645872.0000,0.0097,26
+pioneer,Pioneer Insurance,2022,1635759.0000,0.0097,27
+kenyan_alliance,The Kenyan Alliance Insurance,2022,1547565.0000,0.0092,28
+cannon_general,Cannon General Insurance,2022,1342135.0000,0.0079,29
+invesco,Invesco Assurance Company,2022,1224797.0000,0.0073,30
+amaco,African Merchant Assurance,2022,1035997.0000,0.0061,31
+takaful,Takaful Insurance of Africa,2022,935013.0000,0.0055,32
+xplico,Xplico Insurance Company,2022,809363.0000,0.0048,33
+apa,APA Insurance,2023,17308839.0000,0.0905,1
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2023,16680144.0000,0.0872,2
+cic_general,CIC General Insurance,2023,16009181.0000,0.0837,3
+britam_general,Britam General Insurance,2023,15694734.0000,0.0820,4
+ga,GA Insurance,2023,15557596.0000,0.0813,5
+jubilee_health,Jubilee Health Insurance,2023,11811950.0000,0.0617,6
+aar,AAR Insurance Kenya,2023,9558333.0000,0.0500,7
+icea_lion_general,ICEA Lion General Insurance,2023,8721390.0000,0.0456,8
+madison,Madison Insurance Company,2023,8292488.0000,0.0433,9
+heritage,The Heritage Insurance Company,2023,7488861.0000,0.0391,10
+mayfair,Mayfair Insurance Company,2023,7200725.0000,0.0376,11
+geminia,Geminia Insurance,2023,6238585.0000,0.0326,12
+first_assurance,First Assurance Company,2023,5672533.0000,0.0296,13
+directline,Directline Assurance Company,2023,4865225.0000,0.0254,14
+sanlam_allianz_general,Sanlam Allianz General Insurance (formerly Jubilee General / Jubilee Allianz General),2023,4711346.0000,0.0246,15
+fidelity_shield,Fidelity Shield Insurance,2023,3578909.0000,0.0187,16
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2023,3360770.0000,0.0176,17
+mua,MUA Insurance (formerly Phoenix of East Africa),2023,2784719.0000,0.0146,18
+sanlam_general,Sanlam General Insurance,2023,2756111.0000,0.0144,19
+occidental,Occidental Insurance Company,2023,2745147.0000,0.0143,20
+pacis,Pacis Insurance Company,2023,2703625.0000,0.0141,21
+intra_africa,Intra-Africa Assurance,2023,2413899.0000,0.0126,22
+tausi,Tausi Assurance Company,2023,2091812.0000,0.0109,23
+kenyan_alliance,The Kenyan Alliance Insurance,2023,2070134.0000,0.0108,24
+kenindia,Kenindia Assurance Company,2023,1821762.0000,0.0095,25
+amaco,African Merchant Assurance,2023,1723316.0000,0.0090,26
+kenya_orient,Kenya Orient Insurance,2023,1637580.0000,0.0086,27
+pioneer,Pioneer Insurance,2023,1595570.0000,0.0083,28
+cannon_general,Cannon General Insurance,2023,1586410.0000,0.0083,29
+takaful,Takaful Insurance of Africa,2023,878159.0000,0.0046,30
+invesco,Invesco Assurance Company,2023,735892.0000,0.0038,31
+monarch,The Monarch Insurance,2023,384253.0000,0.0020,32
+corporate,Corporate Insurance Company,2023,288692.0000,0.0015,33
+star_discover,Star Discover Insurance,2023,249870.0000,0.0013,34
+star_discover_micro,Star Discover Micro Insurance,2023,120171.0000,0.0006,35
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2024,18389021.0443,0.0901,1
+apa,APA Insurance,2024,18030998.6290,0.0883,2
+britam_general,Britam General Insurance,2024,17633352.6300,0.0864,3
+ga,GA Insurance,2024,17008587.3170,0.0833,4
+cic_general,CIC General Insurance,2024,16930548.2506,0.0830,5
+jubilee_health,Jubilee Health Insurance,2024,13937945.0546,0.0683,6
+aar,AAR Insurance Kenya,2024,10957139.0947,0.0537,7
+icea_lion_general,ICEA Lion General Insurance,2024,9143199.0450,0.0448,8
+madison,Madison Insurance Company,2024,8531077.3521,0.0418,9
+mayfair,Mayfair Insurance Company,2024,8502315.6910,0.0417,10
+heritage,The Heritage Insurance Company,2024,8328964.2160,0.0408,11
+first_assurance,First Assurance Company,2024,6145270.0930,0.0301,12
+geminia,Geminia Insurance,2024,6131427.8530,0.0300,13
+fidelity_shield,Fidelity Shield Insurance,2024,4085108.8010,0.0200,14
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2024,3551010.0639,0.0174,15
+directline,Directline Assurance Company,2024,3421152.1589,0.0168,16
+amaco,African Merchant Assurance,2024,3374896.0790,0.0165,17
+sanlam_general,Sanlam General Insurance,2024,3050908.0252,0.0149,18
+pacis,Pacis Insurance Company,2024,3025044.7090,0.0148,19
+intra_africa,Intra-Africa Assurance,2024,2752298.9280,0.0135,20
+kenindia,Kenindia Assurance Company,2024,2392315.7080,0.0117,21
+star_discover,Star Discover Insurance,2024,2279708.8184,0.0112,22
+tausi,Tausi Assurance Company,2024,2223316.8740,0.0109,23
+kenyan_alliance,The Kenyan Alliance Insurance,2024,2174248.6985,0.0107,24
+mua,MUA Insurance (formerly Phoenix of East Africa),2024,2122521.1914,0.0104,25
+cannon_general,Cannon General Insurance,2024,2100156.7960,0.0103,26
+occidental,Occidental Insurance Company,2024,2063966.8740,0.0101,27
+pioneer,Pioneer Insurance,2024,1917254.6821,0.0094,28
+kenya_orient,Kenya Orient Insurance,2024,1468532.9164,0.0072,29
+monarch,The Monarch Insurance,2024,1100040.5563,0.0054,30
+takaful,Takaful Insurance of Africa,2024,958924.8617,0.0047,31
+corporate,Corporate Insurance Company,2024,139977.8411,0.0007,32
+turaco_micro,Turaco Micro Insurance,2024,130674.0000,0.0006,33
+star_discover_micro,Star Discover Micro Insurance,2024,102770.1330,0.0005,34
+cic_general,CIC General Insurance,2025,20641498.6195,0.0909,1
+apa,APA Insurance,2025,19381233.9220,0.0853,2
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2025,18363291.0863,0.0808,3
+ga,GA Insurance,2025,17109612.5440,0.0753,4
+jubilee_health,Jubilee Health Insurance,2025,17047504.5542,0.0750,5
+britam_general,Britam General Insurance,2025,14944763.2803,0.0658,6
+aar,AAR Insurance Kenya,2025,12772094.7866,0.0562,7
+madison,Madison Insurance Company,2025,9439464.7159,0.0416,8
+icea_lion_general,ICEA Lion General Insurance,2025,9043875.1600,0.0398,9
+mayfair,Mayfair Insurance Company,2025,9011418.5920,0.0397,10
+heritage,The Heritage Insurance Company,2025,8693256.3360,0.0383,11
+sanlam_allianz_general,Sanlam Allianz General Insurance (formerly Jubilee General / Jubilee Allianz General),2025,7726888.8080,0.0340,12
+first_assurance,First Assurance Company,2025,7258166.6250,0.0320,13
+bupa_global,Bupa Global Insurance,2025,5329053.4580,0.0235,14
+geminia,Geminia Insurance,2025,5023942.9760,0.0221,15
+fidelity_shield,Fidelity Shield Insurance,2025,5013813.7950,0.0221,16
+amaco,African Merchant Assurance,2025,3850884.6855,0.0170,17
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2025,3632539.5865,0.0160,18
+pacis,Pacis Insurance Company,2025,3536786.3350,0.0156,19
+intra_africa,Intra-Africa Assurance,2025,3488486.5880,0.0154,20
+pioneer,Pioneer Insurance,2025,3015500.2574,0.0133,21
+directline,Directline Assurance Company,2025,2734058.5005,0.0120,22
+kenindia,Kenindia Assurance Company,2025,2673456.0650,0.0118,23
+cannon_general,Cannon General Insurance,2025,2417007.2022,0.0106,24
+tausi,Tausi Assurance Company,2025,2192444.4400,0.0097,25
+star_discover,Star Discover Insurance,2025,2164247.1220,0.0095,26
+mua,MUA Insurance (formerly Phoenix of East Africa),2025,2156791.1790,0.0095,27
+equity_general,Equity General Insurance,2025,1789049.5348,0.0079,28
+occidental,Occidental Insurance Company,2025,1737331.4389,0.0076,29
+kenyan_alliance,The Kenyan Alliance Insurance,2025,1666338.4557,0.0073,30
+definite,Definite Assurance Company,2025,1148723.7724,0.0051,31
+kenya_orient,Kenya Orient Insurance,2025,1113669.6431,0.0049,32
+takaful,Takaful Insurance of Africa,2025,1031266.3441,0.0045,33
+equity_health,Equity Health Insurance,2025,19165.8596,0.0001,34

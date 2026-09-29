@@ -1,0 +1,10 @@
+year,insurers,written_premium,hhi,top5_share,top10_share,leader,leader_share,equivalent_insurers,insurers_over_10bn,share_over_10bn
+2016,35,121674074.0000,524.7110,0.4066,0.6254,Jubilee Insurance Company (general business before the 2020 split),0.1158,19.0581,2,0.2061
+2018,37,129027339.0000,463.0317,0.3735,0.5935,Jubilee Insurance Company (general business before the 2020 split),0.0861,21.5968,2,0.1653
+2019,36,131126040.0000,476.5977,0.3803,0.6039,Jubilee Insurance Company (general business before the 2020 split),0.0938,20.9821,2,0.1750
+2020,35,130836440.0000,457.6108,0.3585,0.5916,Old Mutual General Insurance (formerly UAP),0.0811,21.8526,2,0.1590
+2021,35,152350974.0000,464.7297,0.3685,0.5948,Old Mutual General Insurance (formerly UAP),0.0865,21.5179,4,0.3036
+2022,33,168924251.0000,509.9363,0.4034,0.6304,Old Mutual General Insurance (formerly UAP),0.0880,19.6103,5,0.4034
+2023,35,191338731.0000,548.3485,0.4246,0.6644,APA Insurance,0.0905,18.2366,6,0.4864
+2024,34,204104674.9860,566.0443,0.4311,0.6813,Old Mutual General Insurance (formerly UAP),0.0901,17.6665,7,0.5531
+2025,34,227167626.2686,530.2965,0.4074,0.6504,CIC General Insurance,0.0909,18.8574,7,0.5294
