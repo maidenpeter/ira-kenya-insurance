@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>
+<title>Kenya Insurance Market Structure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#f4f6f3; --surface:#ffffff; --ink:#15202b; --ink-2:#4f5a64; --muted:#6d7780;
+  --rule:#d9dfdb; --rule-soft:#e8ece9; --accent:#184f95; --accent-soft:#e3ecf8;
+  --gain:#2a78d6; --loss:#e0612e; --crit:#c23b3b; --ok:#0b6e4f; --warn:#a86f00;
+  --serif:"EB Garamond", Garamond, "Adobe Garamond Pro", Georgia, serif;
+  --ui:"IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#10161c; --surface:#172029; --ink:#e7ebee; --ink-2:#b4bdc5; --muted:#8f99a3;
+    --rule:#2b3640; --rule-soft:#222c35; --accent:#86b6ef; --accent-soft:#1d2a3a;
+    --gain:#4a97ee; --loss:#ee7a45; --crit:#ec6b67; --ok:#3fbf8f; --warn:#f0b43a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#10161c; --surface:#172029; --ink:#e7ebee; --ink-2:#b4bdc5; --muted:#8f99a3;
+  --rule:#2b3640; --rule-soft:#222c35; --accent:#86b6ef; --accent-soft:#1d2a3a;
+  --gain:#4a97ee; --loss:#ee7a45; --crit:#ec6b67; --ok:#3fbf8f; --warn:#f0b43a;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--serif); font-size:17px; line-height:1.45}
+a{color:var(--accent)}
+.wrap{max-width:1180px; margin:0 auto; padding-inline:20px; padding-block:28px 56px; display:flex; flex-direction:column; gap:40px}
+header.top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 24px; border-bottom:1px solid var(--rule); padding-bottom:18px}
+.eyebrow{font-family:var(--ui); font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+h1{font-size:clamp(32px,4.6vw,48px); font-weight:500; line-height:1.04; margin:4px 0 8px; text-wrap:balance}
+h2{font-size:clamp(24px,3vw,31px); font-weight:500; line-height:1.12; margin:0; text-wrap:balance}
+h3{font-size:20px; font-weight:500; margin:0}
+p{margin:0}
+.lede{color:var(--ink-2); max-width:64ch}
+.stamp{font-family:var(--ui); font-size:13px; color:var(--muted); text-align:right; line-height:1.55}
+.small{font-family:var(--ui); font-size:13px; color:var(--muted)}
+section{display:flex; flex-direction:column; gap:14px; min-width:0}
+.sechead{display:flex; flex-direction:column; gap:6px; max-width:74ch}
+.sechead p{color:var(--ink-2)}
+.panel{background:var(--surface); border:1px solid var(--rule); border-radius:8px; padding:18px; min-width:0}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.loss{color:var(--loss)} .gain{color:var(--gain)}
+
+/* hero */
+.hero{display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:28px; align-items:center}
+.bignums{display:flex; flex-direction:column; gap:18px}
+.bn{display:flex; flex-direction:column; gap:2px}
+.bn .v{font-size:clamp(44px,6vw,68px); line-height:1; font-variant-numeric:tabular-nums lining-nums; letter-spacing:-.01em}
+.bn .k{font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.thesis{font-size:clamp(20px,2.3vw,25px); line-height:1.3; max-width:36ch}
+.chart svg{display:block; width:100%; height:auto}
+.chart text{font-family:var(--ui); font-size:12px; fill:var(--muted); font-variant-numeric:tabular-nums}
+.chart .lab{fill:var(--ink-2)}
+.chart .strong{fill:var(--ink); font-weight:600}
+
+/* heat grid */
+.controls{display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center}
+.seg{display:flex; gap:3px; background:var(--rule-soft); padding:3px; border-radius:8px; flex-wrap:wrap}
+.seg button{font-family:var(--ui); font-size:14px; border:0; background:transparent; color:var(--ink-2); padding:6px 11px; border-radius:6px; cursor:pointer; font-variant-numeric:tabular-nums}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.1)}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-family:var(--ui); font-size:14px; font-variant-numeric:tabular-nums}
+th{font-weight:500; color:var(--muted); text-align:right; font-size:12px; letter-spacing:.05em; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid var(--rule); white-space:nowrap}
+td{text-align:right; padding:6px 8px; border-bottom:1px solid var(--rule-soft); white-space:nowrap}
+th.l, td.l{text-align:left}
+.heat td.c{padding:0; border:2px solid var(--surface)}
+.heat td.c span{display:block; padding:9px 6px; text-align:center; border-radius:3px; font-size:13px}
+.heat td.name{font-family:var(--serif); font-size:16px; padding-right:12px}
+.heat tr.total td{border-top:1px solid var(--rule)}
+.heat tr.total td.name{font-weight:600}
+.scale{display:flex; align-items:center; gap:8px; font-family:var(--ui); font-size:12px; color:var(--ink-2)}
+.scale i{display:inline-block; width:180px; height:10px; border-radius:2px}
+
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.note{font-family:var(--ui); font-size:13px; color:var(--ink-2); max-width:78ch}
+.stat{display:flex; flex-wrap:wrap; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:8px; overflow:hidden}
+.stat > div{flex:1 1 180px; background:var(--surface); padding:14px 16px; display:flex; flex-direction:column; gap:3px}
+.stat .v{font-size:32px; line-height:1.05; font-variant-numeric:tabular-nums lining-nums}
+.stat .k{font-family:var(--ui); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.stat .s{font-family:var(--ui); font-size:13px; color:var(--ink-2)}
+.chip{font-family:var(--ui); font-size:12px; padding:2px 7px; border-radius:999px; border:1px solid var(--rule); color:var(--ink-2); white-space:nowrap}
+.chip.crit{border-color:var(--crit); color:var(--crit)}
+.chip.ok{border-color:var(--ok); color:var(--ok)}
+.method{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.method ul{margin:0; padding-left:1.1em; display:flex; flex-direction:column; gap:6px; font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.formula{font-family:var(--ui); font-size:15px; background:var(--rule-soft); border-radius:6px; padding:10px 12px; overflow-x:auto; white-space:nowrap}
+footer{border-top:1px solid var(--rule); padding-top:16px; font-family:var(--ui); font-size:13px; color:var(--muted); display:flex; flex-direction:column; gap:6px}
+footer p{max-width:110ch}
+.tip{position:fixed; z-index:10; background:var(--ink); color:var(--ground); font-family:var(--ui); font-size:12px; padding:6px 9px; border-radius:5px; pointer-events:none; max-width:300px; line-height:1.35}
+@media (max-width: 900px){
+  .hero, .grid2, .method{grid-template-columns:minmax(0,1fr)}
+  .stamp{text-align:left}
+}
+</style>
+
+<style>
+.strip{display:flex; height:64px; border-radius:6px; overflow:hidden; gap:2px; background:var(--surface)}
+.strip i{display:block; height:100%; min-width:2px; background:color-mix(in oklab, var(--accent) 35%, var(--surface))}
+.strip i.big{background:var(--accent)}
+.strip i:hover{outline:2px solid var(--ink); outline-offset:-2px}
+.striplab{display:flex; justify-content:space-between; font-family:var(--ui); font-size:12px; color:var(--muted); margin-top:6px; gap:12px; flex-wrap:wrap}
+.thresh{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-family:var(--ui); font-size:13px; color:var(--ink-2); align-items:center}
+.meter{position:relative; height:14px; background:linear-gradient(90deg, color-mix(in oklab, var(--gain) 25%, var(--surface)) 0 33.3%, color-mix(in oklab, var(--warn) 25%, var(--surface)) 33.3% 60%, color-mix(in oklab, var(--loss) 30%, var(--surface)) 60% 100%); border-radius:3px}
+.meter b{position:absolute; top:-5px; width:3px; height:24px; background:var(--ink); border-radius:1px}
+.meterlab{position:relative; height:16px; font-family:var(--ui); font-size:11px; color:var(--muted)}
+.meterlab span{position:absolute; transform:translateX(-50%)}
+.lanes{display:flex; flex-direction:column; gap:0}
+.lane{display:grid; grid-template-columns:150px 1fr; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--rule-soft)}
+.lane .nm{font-size:16px}
+.track2{position:relative; height:22px}
+.track2 .bar{position:absolute; top:6px; height:10px; border-radius:5px; background:color-mix(in oklab, var(--accent) 45%, var(--surface))}
+.track2 .end{position:absolute; top:1px; font-family:var(--ui); font-size:11px; white-space:nowrap}
+.kind{font-family:var(--ui); font-size:11px; padding:1px 6px; border-radius:999px; border:1px solid var(--rule); color:var(--ink-2)}
+.kind.exit{border-color:var(--crit); color:var(--crit)} .kind.entry{border-color:var(--ok); color:var(--ok)} .kind.merger{border-color:var(--accent); color:var(--accent)}
+.lanewrap{overflow-x:auto}
+.lanes{min-width:620px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Kenyan general insurance, who holds the market</div>
+      <h1>Kenya Insurance Market Structure</h1>
+      <p class="lede">How the general insurance market is divided, who is gaining and losing ground, who came and went, and what a market of many small insurers costs. Built from the Insurance Regulatory Authority's quarterly returns.</p>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <section>
+    <div class="hero">
+      <div class="bignums" id="bignums"></div>
+      <div class="panel">
+        <h3 id="striph"></h3>
+        <p class="small" style="margin:2px 0 10px">Each block is one insurer, sized by written premium. Dark blocks write over KSh 10bn a year.</p>
+        <div class="strip" id="strip"></div>
+        <div class="striplab" id="striplab"></div>
+        <div style="margin-top:18px" class="thresh" id="thresh"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Consolidation</div>
+      <h2>Scale is arriving, slowly</h2>
+      <p id="scalelede"></p>
+    </div>
+    <div class="grid2">
+      <div class="panel"><h3>Share held by insurers writing over KSh 10bn</h3><p class="small" style="margin:2px 0 8px">Bars: share of written premium. Label: how many insurers. Premium is nominal, so part of this is inflation.</p><div class="chart" id="bigchart"></div></div>
+      <div class="panel"><h3>Top 5 and top 10 share</h3><p class="small" style="margin:2px 0 8px">Share of written premium held by the largest five and ten insurers each year.</p><div class="chart" id="topchart"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">The cost of fragmentation</div>
+      <h2>What running many small insurers costs</h2>
+      <p id="fraglede"></p>
+    </div>
+    <div class="stat" id="fragstat"></div>
+    <div class="panel"><h3>Extra management expense outside the five largest, against the market's underwriting loss</h3><p class="small" style="margin:2px 0 8px">KSh billions. Extra expense is measured class for class against the five largest insurers' expense rates that year.</p><div class="chart" id="fragchart"></div></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Growth and results</div>
+      <h2>The insurers losing ground are the ones losing money</h2>
+      <p id="growlede"></p>
+    </div>
+    <div class="panel"><div class="chart" id="growchart"></div></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Share shifts</div>
+      <h2>Who gained and lost ground, 2020 to 2025</h2>
+      <p>Percentage points of market share. Pro forma for mergers: where one insurer took over another, the absorbed company's 2020 premium is counted with the buyer, so the change shows real growth rather than acquisition.</p>
+    </div>
+    <div class="panel"><div class="chart" id="shiftchart"></div></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">The book</div>
+      <h2>Medical is taking over the book</h2>
+      <p id="mixlede"></p>
+    </div>
+    <div class="grid2">
+      <div class="panel"><h3>Share of market gross premium by class</h3><div class="chart" id="mixchart"></div></div>
+      <div class="panel tablewrap"><table id="classtable"></table></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <div class="eyebrow">Entries and exits</div>
+      <h2>Who came and who went</h2>
+      <p>Years in which each company reported written premium to IRA, with what happened. Exits through the regulator, through mergers and through a split are marked separately.</p>
+    </div>
+    <div class="panel lanewrap"><div class="lanes" id="lanes"></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><div class="eyebrow">Method</div><h2>How the numbers are built</h2></div>
+    <div class="method">
+      <div style="display:flex; flex-direction:column; gap:12px">
+        <p>Written premium is gross direct premium plus inward reinsurance for each insurer at the fourth quarter, year to date, from IRA's quarterly returns as extracted and checked in ira-kenya-data. Insurers only, micro insurers included. 2017 is missing because IRA has no year-end 2017 workbook online.</p>
+        <p>The Herfindahl-Hirschman index is the sum of each insurer's squared percentage share, from 0 to 10,000. The US Department of Justice and Federal Trade Commission treat 1,000 to 1,800 as moderately concentrated and over 1,800 as highly concentrated. One divided by the index gives the equivalent number of equal-sized insurers.</p>
+      </div>
+      <ul>
+        <li>Fragmentation cost takes the five largest insurers' management expenses over gross premium in each class as the benchmark, and compares every other insurer's actual expenses with what it would spend at those rates on its own mix. Insurers leaner than the benchmark reduce the total. It is a measure of the size of the gap, not a claim that every insurer could reach that cost: part of it may be the price of serving smaller clients.</li>
+        <li>Growth runs from 2018 to 2025 for insurers with at least KSh 0.5bn of premium in 2018 that still report in 2025. Growth and share are nominal.</li>
+        <li>Share shifts are pro forma for three mergers: Saham into MUA, and Allianz Kenya and Sanlam General into what is now Sanlam Allianz General.</li>
+        <li>Companies are joined across renames with the sourced crosswalk in ira-kenya-data. Entry and exit sources are in reference/entries_exits.csv.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Source: Insurance Regulatory Authority, Kenya, quarterly industry statistics, full years 2016 to 2025 (unaudited returns). Concentration thresholds: US Department of Justice, Herfindahl-Hirschman Index, under the 2023 Merger Guidelines. Entries and exits: Capital FM, IRA on X, Allianz, The Star, Business Daily. Everything here is public data.</p>
+    <p>Marion Peter &middot; github.com/maidenpeter/ira-kenya-insurance</p>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const D = {"market":[{"y":2016,"n":35,"wp":121674.1,"hhi":524.7,"top5":0.4066,"top10":0.6254,"leader":"Jubilee","lshare":0.1158,"eq":19.06,"big":2,"bigshare":0.2061},{"y":2018,"n":37,"wp":129027.3,"hhi":463.0,"top5":0.3735,"top10":0.5935,"leader":"Jubilee","lshare":0.0861,"eq":21.6,"big":2,"bigshare":0.1653},{"y":2019,"n":36,"wp":131126.0,"hhi":476.6,"top5":0.3803,"top10":0.6039,"leader":"Jubilee","lshare":0.0938,"eq":20.98,"big":2,"bigshare":0.175},{"y":2020,"n":35,"wp":130836.4,"hhi":457.6,"top5":0.3585,"top10":0.5916,"leader":"Old Mutual General","lshare":0.0811,"eq":21.85,"big":2,"bigshare":0.159},{"y":2021,"n":35,"wp":152351.0,"hhi":464.7,"top5":0.3685,"top10":0.5948,"leader":"Old Mutual General","lshare":0.0865,"eq":21.52,"big":4,"bigshare":0.3036},{"y":2022,"n":33,"wp":168924.3,"hhi":509.9,"top5":0.4034,"top10":0.6304,"leader":"Old Mutual General","lshare":0.088,"eq":19.61,"big":5,"bigshare":0.4034},{"y":2023,"n":35,"wp":191338.7,"hhi":548.3,"top5":0.4246,"top10":0.6644,"leader":"APA Insurance","lshare":0.0905,"eq":18.24,"big":6,"bigshare":0.4864},{"y":2024,"n":34,"wp":204104.7,"hhi":566.0,"top5":0.4311,"top10":0.6813,"leader":"Old Mutual General","lshare":0.0901,"eq":17.67,"big":7,"bigshare":0.5531},{"y":2025,"n":34,"wp":227167.6,"hhi":530.3,"top5":0.4074,"top10":0.6504,"leader":"CIC General","lshare":0.0909,"eq":18.86,"big":7,"bigshare":0.5294}],"strip":[{"id":"cic_general","name":"CIC General","wp":20641.5,"share":0.0909},{"id":"apa","name":"APA Insurance","wp":19381.2,"share":0.0853},{"id":"old_mutual_general","name":"Old Mutual General","wp":18363.3,"share":0.0808},{"id":"ga","name":"GA Insurance","wp":17109.6,"share":0.0753},{"id":"jubilee_health","name":"Jubilee Health","wp":17047.5,"share":0.075},{"id":"britam_general","name":"Britam General","wp":14944.8,"share":0.0658},{"id":"aar","name":"AAR Insurance Kenya","wp":12772.1,"share":0.0562},{"id":"madison","name":"Madison","wp":9439.5,"share":0.0416},{"id":"icea_lion_general","name":"ICEA Lion General","wp":9043.9,"share":0.0398},{"id":"mayfair","name":"Mayfair","wp":9011.4,"share":0.0397},{"id":"heritage","name":"The Heritage","wp":8693.3,"share":0.0383},{"id":"sanlam_allianz_general","name":"Sanlam Allianz General","wp":7726.9,"share":0.034},{"id":"first_assurance","name":"First","wp":7258.2,"share":0.032},{"id":"bupa_global","name":"Bupa Global","wp":5329.1,"share":0.0235},{"id":"geminia","name":"Geminia","wp":5023.9,"share":0.0221},{"id":"fidelity_shield","name":"Fidelity Shield","wp":5013.8,"share":0.0221},{"id":"amaco","name":"African Merchant","wp":3850.9,"share":0.017},{"id":"ncba_insurance","name":"NCBA","wp":3632.5,"share":0.016},{"id":"pacis","name":"Pacis","wp":3536.8,"share":0.0156},{"id":"intra_africa","name":"Intra-Africa","wp":3488.5,"share":0.0154},{"id":"pioneer","name":"Pioneer","wp":3015.5,"share":0.0133},{"id":"directline","name":"Directline","wp":2734.1,"share":0.012},{"id":"kenindia","name":"Kenindia","wp":2673.5,"share":0.0118},{"id":"cannon_general","name":"Cannon General","wp":2417.0,"share":0.0106},{"id":"tausi","name":"Tausi","wp":2192.4,"share":0.0097},{"id":"star_discover","name":"Star Discover","wp":2164.2,"share":0.0095},{"id":"mua","name":"MUA Insurance","wp":2156.8,"share":0.0095},{"id":"equity_general","name":"Equity General","wp":1789.0,"share":0.0079},{"id":"occidental","name":"Occidental","wp":1737.3,"share":0.0076},{"id":"kenyan_alliance","name":"The Kenyan Alliance","wp":1666.3,"share":0.0073},{"id":"definite","name":"Definite","wp":1148.7,"share":0.0051},{"id":"kenya_orient","name":"Kenya Orient","wp":1113.7,"share":0.0049},{"id":"takaful","name":"Takaful Insurance of Africa","wp":1031.3,"share":0.0045},{"id":"equity_health","name":"Equity Health","wp":19.2,"share":0.0001}],"shift":[{"id":"resolution","name":"Resolution","s20":0.0328,"s25":0.0,"d":-3.277,"absorbed":null},{"id":"sanlam_allianz_general","name":"Sanlam Allianz General","s20":0.0616,"s25":0.034,"d":-2.758,"absorbed":"Allianz Insurance Company of Kenya, Sanlam General"},{"id":"geminia","name":"Geminia","s20":0.0394,"s25":0.0221,"d":-1.73,"absorbed":null},{"id":"occidental","name":"Occidental","s20":0.0215,"s25":0.0076,"d":-1.385,"absorbed":null},{"id":"mua","name":"MUA Insurance","s20":0.0219,"s25":0.0095,"d":-1.239,"absorbed":"Saham Assurance Kenya"},{"id":"monarch","name":"The Monarch","s20":0.0114,"s25":0.0,"d":-1.144,"absorbed":null},{"id":"kenyan_alliance","name":"The Kenyan Alliance","s20":0.0163,"s25":0.0073,"d":-0.9,"absorbed":null},{"id":"directline","name":"Directline","s20":0.0201,"s25":0.012,"d":-0.804,"absorbed":null},{"id":"ncba_insurance","name":"NCBA","s20":0.0233,"s25":0.016,"d":-0.729,"absorbed":null},{"id":"corporate","name":"Corporate","s20":0.0071,"s25":0.0,"d":-0.713,"absorbed":null},{"id":"kenindia","name":"Kenindia","s20":0.0189,"s25":0.0118,"d":-0.712,"absorbed":null},{"id":"icea_lion_general","name":"ICEA Lion General","s20":0.0463,"s25":0.0398,"d":-0.649,"absorbed":null},{"id":"kenya_orient","name":"Kenya Orient","s20":0.011,"s25":0.0049,"d":-0.614,"absorbed":null},{"id":"heritage","name":"The Heritage","s20":0.0441,"s25":0.0383,"d":-0.58,"absorbed":null},{"id":"trident","name":"Trident","s20":0.0054,"s25":0.0,"d":-0.539,"absorbed":null},{"id":"tausi","name":"Tausi","s20":0.009,"s25":0.0097,"d":0.063,"absorbed":null},{"id":"cannon_general","name":"Cannon General","s20":0.0086,"s25":0.0106,"d":0.2,"absorbed":null},{"id":"britam_general","name":"Britam General","s20":0.0631,"s25":0.0658,"d":0.27,"absorbed":null},{"id":"pacis","name":"Pacis","s20":0.0111,"s25":0.0156,"d":0.452,"absorbed":null},{"id":"takaful","name":"Takaful Insurance of Africa","s20":0.0,"s25":0.0045,"d":0.454,"absorbed":null},{"id":"definite","name":"Definite","s20":0.0,"s25":0.0051,"d":0.506,"absorbed":null},{"id":"fidelity_shield","name":"Fidelity Shield","s20":0.0157,"s25":0.0221,"d":0.632,"absorbed":null},{"id":"pioneer","name":"Pioneer","s20":0.0068,"s25":0.0133,"d":0.652,"absorbed":null},{"id":"intra_africa","name":"Intra-Africa","s20":0.0084,"s25":0.0154,"d":0.691,"absorbed":null},{"id":"equity_general","name":"Equity General","s20":0.0,"s25":0.0079,"d":0.787,"absorbed":null},{"id":"amaco","name":"African Merchant","s20":0.0082,"s25":0.017,"d":0.878,"absorbed":null},{"id":"madison","name":"Madison","s20":0.0323,"s25":0.0416,"d":0.923,"absorbed":null},{"id":"star_discover","name":"Star Discover","s20":0.0,"s25":0.0095,"d":0.953,"absorbed":null},{"id":"jubilee_health","name":"Jubilee Health","s20":0.0637,"s25":0.075,"d":1.132,"absorbed":null},{"id":"apa","name":"APA Insurance","s20":0.0727,"s25":0.0853,"d":1.264,"absorbed":null},{"id":"aar","name":"AAR Insurance Kenya","s20":0.0434,"s25":0.0562,"d":1.278,"absorbed":null},{"id":"cic_general","name":"CIC General","s20":0.0779,"s25":0.0909,"d":1.293,"absorbed":null},{"id":"mayfair","name":"Mayfair","s20":0.0252,"s25":0.0397,"d":1.444,"absorbed":null},{"id":"ga","name":"GA Insurance","s20":0.0599,"s25":0.0753,"d":1.539,"absorbed":null},{"id":"bupa_global","name":"Bupa Global","s20":0.0,"s25":0.0235,"d":2.346,"absorbed":null}],"years":[2018,2019,2020,2021,2022,2023,2024,2025],"cmix":{"Medical":[0.3122,0.3235,0.3438,0.3375,0.325,0.3465,0.3739,0.4106],"Motor Private":[0.1754,0.1782,0.1753,0.1587,0.164,0.1512,0.1415,0.1398],"Motor Commercial":[0.1832,0.1691,0.1546,0.1514,0.1549,0.1369,0.1328,0.131],"Fire Industrial":[0.0875,0.0871,0.0874,0.0907,0.1047,0.1068,0.1056,0.1022],"Workmen's Compensation":[0.05,0.0487,0.0495,0.0806,0.0781,0.077,0.0655,0.0503],"Other classes":[0.1917,0.1933,0.1895,0.1811,0.1732,0.1815,0.1807,0.166]},"chhi":{"Medical":1019.0,"Motor Private":567.0,"Motor Commercial":635.0,"Fire Industrial":712.0,"Workmen's Compensation":601.0},"ctop3":{"Medical":0.4377,"Motor Private":0.2919,"Motor Commercial":0.3192,"Fire Industrial":0.3368,"Workmen's Compensation":0.2749},"growth":[{"id":"aar","name":"AAR Insurance Kenya","g":0.1247,"cr":1.0238,"uw":-1049.7,"wp":12772.1,"gained":true},{"id":"amaco","name":"African Merchant","g":0.0847,"cr":1.0373,"uw":-532.8,"wp":3850.9,"gained":true},{"id":"apa","name":"APA Insurance","g":0.1062,"cr":1.0058,"uw":-391.8,"wp":19381.2,"gained":true},{"id":"britam_general","name":"Britam General","g":0.0924,"cr":1.0554,"uw":-3504.2,"wp":14944.8,"gained":true},{"id":"cannon_general","name":"Cannon General","g":0.1307,"cr":1.2041,"uw":-1885.7,"wp":2417.0,"gained":true},{"id":"cic_general","name":"CIC General","g":0.1058,"cr":1.0316,"uw":-2829.6,"wp":20641.5,"gained":true},{"id":"directline","name":"Directline","g":-0.0133,"cr":1.1417,"uw":-3667.0,"wp":2734.1,"gained":false},{"id":"fidelity_shield","name":"Fidelity Shield","g":0.1196,"cr":1.0379,"uw":-587.1,"wp":5013.8,"gained":true},{"id":"first_assurance","name":"First","g":0.0973,"cr":1.1027,"uw":-2413.3,"wp":7258.2,"gained":true},{"id":"ga","name":"GA Insurance","g":0.1603,"cr":0.8961,"uw":4410.4,"wp":17109.6,"gained":true},{"id":"geminia","name":"Geminia","g":0.0154,"cr":1.0508,"uw":-1634.7,"wp":5023.9,"gained":false},{"id":"heritage","name":"The Heritage","g":0.0694,"cr":0.9658,"uw":1146.1,"wp":8693.3,"gained":false},{"id":"icea_lion_general","name":"ICEA Lion General","g":0.0706,"cr":0.9346,"uw":1915.3,"wp":9043.9,"gained":false},{"id":"intra_africa","name":"Intra-Africa","g":0.1628,"cr":0.9176,"uw":1014.9,"wp":3488.5,"gained":true},{"id":"kenindia","name":"Kenindia","g":-0.0093,"cr":1.2102,"uw":-2652.5,"wp":2673.5,"gained":false},{"id":"kenya_orient","name":"Kenya Orient","g":-0.0367,"cr":1.2631,"uw":-2691.9,"wp":1113.7,"gained":false},{"id":"kenyan_alliance","name":"The Kenyan Alliance","g":0.0419,"cr":1.1381,"uw":-1467.4,"wp":1666.3,"gained":false},{"id":"madison","name":"Madison","g":0.1123,"cr":1.024,"uw":-1018.5,"wp":9439.5,"gained":true},{"id":"mayfair","name":"Mayfair","g":0.1699,"cr":0.8873,"uw":2236.9,"wp":9011.4,"gained":true},{"id":"mua","name":"MUA Insurance","g":0.1628,"cr":1.3647,"uw":-3593.3,"wp":2156.8,"gained":true},{"id":"ncba_insurance","name":"NCBA","g":-0.0001,"cr":0.9358,"uw":479.6,"wp":3632.5,"gained":false},{"id":"occidental","name":"Occidental","g":-0.0561,"cr":1.125,"uw":-1810.2,"wp":1737.3,"gained":false},{"id":"old_mutual_general","name":"Old Mutual General","g":0.1028,"cr":1.0007,"uw":-64.1,"wp":18363.3,"gained":true},{"id":"pacis","name":"Pacis","g":0.1528,"cr":1.0362,"uw":-475.4,"wp":3536.8,"gained":true},{"id":"pioneer","name":"Pioneer","g":0.2619,"cr":1.0437,"uw":-408.0,"wp":3015.5,"gained":true},{"id":"takaful","name":"Takaful Insurance of Africa","g":0.0094,"cr":1.1153,"uw":-592.3,"wp":1031.3,"gained":false},{"id":"tausi","name":"Tausi","g":0.0933,"cr":0.8544,"uw":1184.7,"wp":2192.4,"gained":true}],"gstats":{"mkt":0.0842,"cr_gain":1.0316,"cr_lose":1.1201,"n_gain":17,"n_lose":10,"lose_over_110":6,"gain_over_110":3},"frag":[{"y":2018,"extra":380.8,"uw":-1650.5,"bench":0.2138,"rest":0.6265,"top5":["Jubilee","CIC General","APA Insurance","Old Mutual General","Britam General"]},{"y":2019,"extra":1170.7,"uw":-2971.0,"bench":0.2058,"rest":0.6197,"top5":["Jubilee","CIC General","Old Mutual General","APA Insurance","Britam General"]},{"y":2020,"extra":629.2,"uw":-1179.1,"bench":0.1933,"rest":0.6415,"top5":["Old Mutual General","CIC General","APA Insurance","Jubilee Health","Britam General"]},{"y":2021,"extra":3332.5,"uw":-6343.5,"bench":0.1764,"rest":0.6315,"top5":["Old Mutual General","CIC General","GA Insurance","APA Insurance","Britam General"]},{"y":2022,"extra":4660.7,"uw":-3719.9,"bench":0.1562,"rest":0.5966,"top5":["Old Mutual General","APA Insurance","GA Insurance","CIC General","Britam General"]},{"y":2023,"extra":5745.9,"uw":-4956.0,"bench":0.1546,"rest":0.5754,"top5":["APA Insurance","Old Mutual General","CIC General","Britam General","GA Insurance"]},{"y":2024,"extra":4533.0,"uw":-5237.4,"bench":0.1496,"rest":0.5689,"top5":["Old Mutual General","APA Insurance","Britam General","GA Insurance","CIC General"]},{"y":2025,"extra":3491.2,"uw":-7005.7,"bench":0.15,"rest":0.5926,"top5":["CIC General","APA Insurance","Old Mutual General","GA Insurance","Jubilee Health"]}],"events":[{"id":"resolution","name":"Resolution","kind":"exit","first":2016,"last":2021,"what":"statutory management April 2022","src":"https://www.capitalfm.co.ke/business/2022/04/resolution-insurance-placed-under-statutory-management-over-unsettled-claims/"},{"id":"invesco","name":"Invesco","kind":"exit","first":2016,"last":2023,"what":"licence cancelled and liquidation December 2023; statutory management August 2024","src":"https://www.capitalfm.co.ke/business/2023/12/xplico-insurance-placed-under-statutory-management-as-invesco-liquidated/"},{"id":"xplico","name":"Xplico","kind":"exit","first":2018,"last":2022,"what":"statutory management December 2023","src":"https://www.capitalfm.co.ke/business/2023/12/xplico-insurance-placed-under-statutory-management-as-invesco-liquidated/"},{"id":"trident","name":"Trident","kind":"exit","first":2016,"last":2022,"what":"stopped filing complete returns after 2022; statutory management March 2026","src":"https://x.com/ira_kenya/status/2031600557375344841"},{"id":"corporate","name":"Corporate","kind":"exit","first":2016,"last":2024,"what":"statutory management March 2026","src":"https://x.com/ira_kenya/status/2031600557375344841"},{"id":"allianz_kenya","name":"Allianz Insurance Company of Kenya","kind":"merger","first":2016,"last":2021,"what":"merged with Jubilee General as Jubilee Allianz General","src":"https://www.allianz.com/en/mediacenter/news/financials/stakes_investments/221005_Allianz-completes-final-acquisition-of-majority-stake-in-Jubilees-general-insurance-business-in-East-Africa.html"},{"id":"saham","name":"Saham Assurance Kenya","kind":"merger","first":2016,"last":2020,"what":"consolidated into MUA Insurance in 2021","src":"https://www.the-star.co.ke/business/kenya/2021-08-06-mua-kenya-and-saham-kenya-consolidated-to-one-entity/"},{"id":"sanlam_general","name":"Sanlam General","kind":"merger","first":2016,"last":2024,"what":"business transferred to Jubilee Allianz General (now Sanlam Allianz General) in September 2025","src":"https://www.businessdailyafrica.com/bd/corporate/companies/sanlam-completes-transfer-of-business-to-jubilee-allianz-5252576"},{"id":"jubilee_composite","name":"Jubilee","kind":"split","first":2016,"last":2019,"what":"general business split into Jubilee Health and Jubilee General from Q1 2020","src":null},{"id":"jubilee_health","name":"Jubilee Health","kind":"split","first":2020,"last":2025,"what":"health business of Jubilee Insurance, reported separately from Q1 2020","src":null},{"id":"star_discover","name":"Star Discover","kind":"entry","first":2023,"last":2025,"what":"first reported Q1 2023","src":null},{"id":"definite","name":"Definite","kind":"entry","first":2025,"last":2025,"what":"licensed 11 December 2024, focused on public service vehicles","src":"https://www.businessdailyafrica.com/bd/corporate/companies/karauri-mysterious-investors-bet-on-matatu-insurance-4882946"},{"id":"equity_general","name":"Equity General","kind":"entry","first":2025,"last":2025,"what":"Equity Group's general insurer, approved in principle by IRA in May 2023, first reported Q1 2025","src":"https://www.the-star.co.ke/business/kenya/2023-05-16-equity-ventures-into-full-time-general-insurance/"},{"id":"equity_health","name":"Equity Health","kind":"entry","first":2025,"last":2025,"what":"first reported Q3 2025","src":null},{"id":"bupa_global","name":"Bupa Global","kind":"entry","first":2025,"last":2025,"what":"international private medical insurer, opened in Nairobi in 2025 after IRA licensing","src":"https://www.the-star.co.ke/business/2025-04-03-global-insurance-provider-bupa-unveils-africa-office-in-nairobi"}],"last":2025};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pc = (v, d=0) => v===null ? 'n/a' : (v*100).toFixed(d) + '%';
+const bnPlain = v => (v<0?'-':'') + 'KSh ' + (Math.abs(v)/1000).toFixed(1) + 'bn';
+const bn = v => (v<0?'-':'') + (Math.abs(v)/1000).toFixed(1);
+const tip = $('tip');
+function showTip(e, h){ tip.innerHTML = h; tip.hidden = false; const r = tip.getBoundingClientRect(); let x = e.clientX+14, y = e.clientY+14; if (x+r.width > innerWidth-8) x = e.clientX-r.width-14; if (y+r.height > innerHeight-8) y = e.clientY-r.height-14; tip.style.left = x+'px'; tip.style.top = y+'px'; }
+function bindTips(root){ root.querySelectorAll('[data-tip]').forEach(el => { el.addEventListener('mousemove', e => showTip(e, el.dataset.tip)); el.addEventListener('mouseleave', () => tip.hidden = true); }); }
+const M = D.market, L = M[M.length-1], F = M[0], Y = M.map(m => m.y);
+const m2020 = M.find(m => m.y === 2020);
+$('stamp').innerHTML = `Full years ${F.y} to ${L.y}<br>${L.n} insurers in ${L.y}<br>KSh, IRA quarterly returns`;
+
+$('bignums').innerHTML = `
+  <p class="thesis">Kenya has ${L.n} general insurers sharing ${bnPlain(L.wp)} of premium. The largest holds ${pc(L.lshare,1)}.</p>
+  <div class="bn"><span class="v">${Math.round(L.hhi)}</span><span class="k">Herfindahl-Hirschman index in ${L.y}, where 1,000 is the floor for a moderately concentrated market</span></div>
+  <div class="bn"><span class="v">${L.eq.toFixed(0)}</span><span class="k">equal-sized insurers would give the same concentration</span></div>
+  <p class="small">${(() => { const seq = M.map(m => m.leader).filter((l, i, a) => i === 0 || l !== a[i-1]); return `The top spot has changed hands ${seq.length-1} times since ${F.y}: ${seq.map(esc).join(', then ')}.`; })()}</p>`;
+
+$('striph').textContent = `${L.y} market shares, all ${L.n} insurers`;
+$('strip').innerHTML = D.strip.map(s => `<i class="${s.wp>=10000?'big':''}" style="flex:${s.share}" data-tip="${esc(s.name)}: ${bnPlain(s.wp)}, ${pc(s.share,1)} of the market"></i>`).join('');
+bindTips($('strip'));
+const nBig = D.strip.filter(s => s.wp >= 10000).length;
+$('striplab').innerHTML = `<span>Largest: ${esc(D.strip[0].name)}, ${pc(D.strip[0].share,1)}</span><span>${nBig} insurers over KSh 10bn hold ${pc(L.bigshare)}</span><span>Smallest: ${esc(D.strip[D.strip.length-1].name)}</span>`;
+(function(){
+  const max = 3000, pos = v => Math.min(100, v/max*100);
+  $('thresh').innerHTML = `<span>Market</span><div><div class="meter"><b style="left:calc(${pos(L.hhi)}% - 1px)" data-tip="HHI ${Math.round(L.hhi)} in ${L.y}"></b></div><div class="meterlab"><span style="left:0%; transform:none">0</span><span style="left:33.3%">1,000</span><span style="left:60%">1,800</span><span style="left:100%; transform:translateX(-100%)">3,000+</span></div></div>
+  <span>Medical</span><div><div class="meter"><b style="left:calc(${pos(D.chhi['Medical'])}% - 1px)" data-tip="Medical class HHI ${D.chhi['Medical']}"></b></div></div>`;
+  bindTips($('thresh'));
+})();
+
+function colChart(el, rows, opts){
+  const W = opts.W || 560, H = opts.H || 240, Lp = 40, R = 10, T = 16, B = 26;
+  const bw = (W-Lp-R)/rows.length;
+  const max = opts.max;
+  const yv = v => T + (1 - v/max) * (H-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.aria)}">`;
+  opts.ticks.forEach(t => s += `<line x1="${Lp}" x2="${W-R}" y1="${yv(t)}" y2="${yv(t)}" stroke="var(--rule-soft)"/><text x="${Lp-6}" y="${yv(t)+4}" text-anchor="end">${opts.fmtTick(t)}</text>`);
+  rows.forEach((r, i) => {
+    const x = Lp + i*bw + 6, w = bw - 12;
+    s += `<text x="${x+w/2}" y="${H-8}" text-anchor="middle">${r.label}</text>`;
+    (r.series||[]).forEach((sr, k) => {
+      if (sr.v === null) return;
+      if (sr.line) return;
+      const ww = w / (r.series.filter(q => !q.line).length);
+      const xx = x + k*ww;
+      s += `<rect x="${xx+1}" y="${yv(sr.v)}" width="${ww-2}" height="${yv(0)-yv(sr.v)}" rx="2" fill="${sr.fill}" data-tip="${esc(sr.tip)}"/>`;
+      if (sr.lab) s += `<text x="${xx+ww/2}" y="${yv(sr.v)-5}" text-anchor="middle" class="lab">${sr.lab}</text>`;
+    });
+  });
+  el.innerHTML = s + '</svg>';
+  bindTips(el);
+}
+colChart($('bigchart'), M.map(m => ({label: m.y, series:[{v: m.bigshare, fill:'var(--accent)', lab: `${m.big}`, tip: `${m.y}: ${m.big} insurers over KSh 10bn, ${pc(m.bigshare)} of written premium`}]})),
+  {max: 0.7, ticks:[0,0.2,0.4,0.6], fmtTick: v => pc(v), aria:'Share of insurers over KSh 10bn'});
+(function(){
+  const W = 560, H = 240, Lp = 40, R = 60, T = 14, B = 26;
+  const xs = y => Lp + (Y.indexOf(y) + 0.5) * (W-Lp-R)/Y.length;
+  const yv = v => T + (1 - (v-0.3)/0.45) * (H-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Top five and top ten share">`;
+  [0.3,0.4,0.5,0.6,0.7].forEach(t => s += `<line x1="${Lp}" x2="${W-R}" y1="${yv(t)}" y2="${yv(t)}" stroke="var(--rule-soft)"/><text x="${Lp-6}" y="${yv(t)+4}" text-anchor="end">${pc(t)}</text>`);
+  Y.forEach(y => s += `<text x="${xs(y)}" y="${H-8}" text-anchor="middle">${String(y).slice(2)}</text>`);
+  [['top10','var(--accent)','top 10'],['top5','var(--loss)','top 5']].forEach(([k,col,lab]) => {
+    s += `<polyline fill="none" stroke="${col}" stroke-width="2" points="${M.map(m => `${xs(m.y)},${yv(m[k])}`).join(' ')}"/>`;
+    M.forEach(m => s += `<circle cx="${xs(m.y)}" cy="${yv(m[k])}" r="3.5" fill="${col}" data-tip="${m.y}: ${lab} hold ${pc(m[k],1)}"/>`);
+    s += `<text x="${xs(L.y)+8}" y="${yv(L[k])+4}" style="fill:${col}">${lab} ${pc(L[k])}</text>`;
+  });
+  $('topchart').innerHTML = s + '</svg>'; bindTips($('topchart'));
+})();
+$('scalelede').innerHTML = `In ${m2020.y} two insurers wrote more than KSh 10bn a year and held ${pc(m2020.bigshare)} of the market. By ${L.y} ${L.big} did, holding ${pc(L.bigshare)}. The top ten's share rose from ${pc(m2020.top10)} to ${pc(L.top10)}. Premium grew ${pc(D.gstats.mkt,1)} a year from 2018, so part of the move past KSh 10bn is inflation, but the rising top ten share is not.`;
+
+// fragmentation
+const FR = D.frag, fsum = FR.reduce((a,f) => a+f.extra, 0), usum = FR.reduce((a,f) => a+f.uw, 0);
+$('fraglede').innerHTML = `The five largest insurers spent ${pc(FR[FR.length-1].bench,1)} of gross premium on management expenses in ${FR[FR.length-1].y}. Everyone else, measured class for class so that a medical book is compared with medical, spent more. From ${FR[0].y} to ${FR[FR.length-1].y} that difference came to ${bnPlain(fsum)}, against a market underwriting loss of ${bnPlain(Math.abs(usum))}. The market's size is not the problem; the way it is divided is a large part of it.`;
+$('fragstat').innerHTML = `
+  <div><span class="k">Extra expense outside the top five, ${FR[0].y} to ${FR[FR.length-1].y}</span><span class="v">${bnPlain(fsum)}</span><span class="s">class for class against the five largest</span></div>
+  <div><span class="k">Market underwriting loss, same years</span><span class="v loss">${bnPlain(Math.abs(usum))}</span><span class="s">earned premium less claims, commissions and expenses</span></div>
+  <div><span class="k">Extra expense as a share of the loss</span><span class="v">${pc(fsum/Math.abs(usum))}</span><span class="s">an order of magnitude, not a precise saving</span></div>`;
+colChart($('fragchart'), FR.map(f => ({label: f.y, series:[
+  {v: f.extra, fill:'var(--accent)', tip: `${f.y}: extra expense ${bnPlain(f.extra)} outside ${f.top5.join(', ')}`},
+  {v: Math.abs(f.uw), fill:'var(--loss)', tip: `${f.y}: underwriting loss ${bnPlain(Math.abs(f.uw))}`}]})),
+  {max: 8000, ticks:[0,2000,4000,6000,8000], fmtTick: v => (v/1000)+'bn', aria:'Extra expense and underwriting loss', W: 1100, H: 300});
+$('fragchart').insertAdjacentHTML('beforeend', `<div class="legend" style="display:flex; gap:14px; font-family:var(--ui); font-size:12px; color:var(--ink-2); margin-top:6px"><span><i class="sw" style="background:var(--accent)"></i> extra management expense</span><span><i class="sw" style="background:var(--loss)"></i> market underwriting loss</span></div>`);
+
+// growth vs results
+const G = D.gstats;
+$('growlede').innerHTML = `Premium grew ${pc(G.mkt,1)} a year from 2018 to 2025. The ${G.n_lose} insurers that grew slower than that, and so lost share, ran a median combined ratio of ${pc(G.cr_lose,1)} over the period; ${G.lose_over_110} of them were above 110%. The ${G.n_gain} that gained share ran a median of ${pc(G.cr_gain,1)}. The market is not rewarding cheap growth: the insurers pricing below cost are the ones shrinking.`;
+(function(){
+  const W = 1100, H = 420, Lp = 60, R = 20, T = 16, B = 40;
+  const gx = [-0.08, 0.30], cy = [0.8, 1.45];
+  const xs = v => Lp + (Math.max(gx[0], Math.min(gx[1], v)) - gx[0])/(gx[1]-gx[0]) * (W-Lp-R);
+  const ys = v => T + (1 - (Math.max(cy[0], Math.min(cy[1], v)) - cy[0])/(cy[1]-cy[0])) * (H-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Premium growth against combined ratio">`;
+  s += `<rect x="${Lp}" y="${ys(cy[1])}" width="${xs(G.mkt)-Lp}" height="${ys(1)-ys(cy[1])}" fill="var(--loss)" opacity=".07"/>`;
+  [0.8,0.9,1.0,1.1,1.2,1.3,1.4].forEach(t => s += `<line x1="${Lp}" x2="${W-R}" y1="${ys(t)}" y2="${ys(t)}" stroke="var(--rule-soft)"/><text x="${Lp-6}" y="${ys(t)+4}" text-anchor="end">${pc(t)}</text>`);
+  [-0.05,0,0.05,0.10,0.15,0.20,0.25].forEach(t => s += `<text x="${xs(t)}" y="${H-20}" text-anchor="middle">${(t*100).toFixed(0)}%</text>`);
+  s += `<text x="${W-R}" y="${H-4}" text-anchor="end">premium growth a year, 2018 to 2025</text><text x="${Lp}" y="${T-4}">combined ratio, 2018 to 2025</text>`;
+  s += `<line x1="${Lp}" x2="${W-R}" y1="${ys(1)}" y2="${ys(1)}" stroke="var(--ink)" stroke-width="1"/>`;
+  s += `<line x1="${xs(G.mkt)}" x2="${xs(G.mkt)}" y1="${T}" y2="${H-B}" stroke="var(--ink)" stroke-dasharray="4 4"/><text x="${xs(G.mkt)+6}" y="${T+10}" class="lab">market growth ${pc(G.mkt,1)}</text>`;
+  s += `<text x="${Lp+8}" y="${ys(cy[1])+16}" class="lab">losing share and losing money</text>`;
+  D.growth.forEach(p => {
+    const r = 4 + Math.sqrt(p.wp/1000)*1.6;
+    s += `<circle cx="${xs(p.g)}" cy="${ys(p.cr)}" r="${r}" fill="${p.gained?'var(--accent)':'var(--loss)'}" opacity=".75" data-tip="${esc(p.name)}: premium ${pc(p.g,1)} a year, combined ratio ${pc(p.cr,1)}, underwriting ${bnPlain(p.uw)} over 2018 to 2025"/>`;
+    if (p.cr > 1.15 || p.cr < 0.9) s += `<text x="${xs(p.g)+r+3}" y="${ys(p.cr)+4}" class="lab">${esc(p.name)}</text>`;
+  });
+  $('growchart').innerHTML = s + '</svg>'; bindTips($('growchart'));
+})();
+
+// share shifts
+(function(){
+  const rows = D.shift;
+  const W = 1100, rowH = 19, Lp = 190, R = 70, T = 6;
+  const H = T + rows.length*rowH + 6;
+  const lo = Math.min(...rows.map(r => r.d)) * 1.15, hi = Math.max(...rows.map(r => r.d)) * 1.3;
+  const x = v => Lp + (v - lo)/(hi - lo) * (W - Lp - R);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Share change 2020 to 2025">`;
+  s += `<line x1="${x(0)}" x2="${x(0)}" y1="${T}" y2="${H-4}" stroke="var(--muted)"/>`;
+  rows.forEach((r, i) => {
+    const y = T + i*rowH, x0 = x(Math.min(0, r.d)), w = Math.max(1, Math.abs(x(r.d)-x(0)));
+    s += `<text x="${Lp-8}" y="${y+rowH/2+4}" text-anchor="end" class="lab">${esc(r.name)}${r.absorbed?' *':''}</text>`;
+    s += `<rect x="${x0}" y="${y+3}" width="${w}" height="${rowH-6}" rx="2" fill="var(${r.d<0?'--loss':'--gain'})" data-tip="${esc(r.name)}: ${pc(r.s20,1)} in 2020 to ${pc(r.s25,1)} in 2025${r.absorbed?`, 2020 includes ${esc(r.absorbed)}`:''}"/>`;
+    s += `<text x="${r.d<0 ? x0-4 : x0+w+4}" y="${y+rowH/2+4}" text-anchor="${r.d<0?'end':'start'}">${r.d>0?'+':''}${r.d.toFixed(1)}</text>`;
+  });
+  $('shiftchart').innerHTML = s + '</svg><p class="small" style="margin-top:6px">* 2020 share includes companies it later absorbed.</p>'; bindTips($('shiftchart'));
+})();
+
+// class mix
+(function(){
+  const ys = D.years, classes = Object.keys(D.cmix);
+  const cols = ['var(--accent)','var(--loss)','color-mix(in oklab, var(--loss) 55%, var(--surface))','var(--ok)','var(--warn)','color-mix(in oklab, var(--muted) 45%, var(--surface))'];
+  const W = 560, H = 280, Lp = 40, R = 10, T = 10, B = 26;
+  const bw = (W-Lp-R)/ys.length;
+  const yv = v => T + (1 - v) * (H-T-B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Class mix by year">`;
+  [0,0.25,0.5,0.75,1].forEach(t => s += `<text x="${Lp-6}" y="${yv(t)+4}" text-anchor="end">${pc(t)}</text>`);
+  ys.forEach((y, i) => {
+    let acc = 0; const x = Lp + i*bw + 5, w = bw - 10;
+    classes.forEach((c, k) => {
+      const v = D.cmix[c][i] || 0;
+      s += `<rect x="${x}" y="${yv(acc+v)}" width="${w}" height="${Math.max(0, yv(acc)-yv(acc+v)-1)}" fill="${cols[k]}" data-tip="${esc(c)}, ${y}: ${pc(v,1)} of gross premium"/>`;
+      if (k === 0) s += `<text x="${x+w/2}" y="${yv(v)+14}" text-anchor="middle" style="fill:#fff; font-weight:600">${pc(v)}</text>`;
+      acc += v;
+    });
+    s += `<text x="${x+w/2}" y="${H-8}" text-anchor="middle">${y}</text>`;
+  });
+  $('mixchart').innerHTML = s + '</svg>' + `<div class="legend" style="display:flex; flex-wrap:wrap; gap:6px 14px; font-family:var(--ui); font-size:12px; color:var(--ink-2); margin-top:6px">${classes.map((c,k) => `<span><i class="sw" style="background:${cols[k]}"></i> ${esc(c)}</span>`).join('')}</div>`;
+  bindTips($('mixchart'));
+  let t = '<thead><tr><th class="l">Class</th><th>Share ' + D.last + '</th><th>HHI</th><th>Top 3 hold</th></tr></thead><tbody>';
+  classes.filter(c => c !== 'Other classes').forEach(c => t += `<tr><td class="l" style="font-family:var(--serif); font-size:16px">${esc(c)}</td><td>${pc(D.cmix[c][ys.length-1],1)}</td><td>${D.chhi[c]}</td><td>${pc(D.ctop3[c])}</td></tr>`);
+  $('classtable').innerHTML = t + '</tbody>';
+  const med = D.cmix['Medical'];
+  $('mixlede').innerHTML = `Medical grew from ${pc(med[0])} of gross premium in ${ys[0]} to ${pc(med[med.length-1])} in ${ys[ys.length-1]}, while motor private and commercial together fell from ${pc(D.cmix['Motor Private'][0] + D.cmix['Motor Commercial'][0])} to ${pc(D.cmix['Motor Private'][ys.length-1] + D.cmix['Motor Commercial'][ys.length-1])}. Medical is also the one large class that is concentrated: its HHI is ${D.chhi['Medical']}, just over 1,000, the floor for a moderately concentrated market, and three insurers write ${pc(D.ctop3['Medical'])} of it.`;
+})();
+
+// entries and exits
+(function(){
+  const y0 = 2016, y1 = D.last, span = y1 - y0 + 1;
+  const pos = y => ((y - y0) / span * 100);
+  const order = {exit:0, merger:1, split:2, entry:3};
+  const ev = D.events.slice().sort((a,b) => order[a.kind]-order[b.kind] || (a.last||0)-(b.last||0));
+  let h = `<div class="lane" style="border-bottom:1px solid var(--rule)"><span></span><div class="track2">${Array.from({length: span}, (_, i) => y0+i).map(y => `<span class="end small" style="left:${pos(y)}%">${y}</span>`).join('')}</div></div>`;
+  ev.forEach(e => {
+    const f = e.first ?? y0, l = e.last ?? y1;
+    const label = {exit:'regulator', merger:'merger', split:'split', entry:'new'}[e.kind];
+    const txt = e.src ? `<a href="${esc(e.src)}" target="_blank" rel="noopener">${esc(e.what)}</a>` : esc(e.what);
+    h += `<div class="lane"><span class="nm">${esc(e.name)} <span class="kind ${e.kind}">${label}</span></span>
+      <div><div class="track2"><span class="bar" style="left:${pos(f)}%; width:${pos(l+1)-pos(f)}%" data-tip="${esc(e.name)}: premium reported ${f} to ${l}"></span></div>
+      <div class="small" style="margin-top:2px">${f===l ? f : f + ' to ' + l}: ${txt}</div></div></div>`;
+  });
+  $('lanes').innerHTML = h; bindTips($('lanes'));
+})();
+</script>
+
+</body></html>
