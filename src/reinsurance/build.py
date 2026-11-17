@@ -14,7 +14,8 @@ the P&L basis from general_profit_loss.csv, and the Cedant Scorecard from ira-ke
   reinsurance_retention_change.csv  each insurer's retention in 2018 and 2025
   reinsurance_market.csv            per year: premium ceded and cession rate for the market, the return basis
                                     (IFRS 4 or IFRS 17), how far insurers' cession rates moved from the year
-                                    before, and the local reinsurers' accepted premium against what insurers ceded
+                                    before, the local reinsurers' accepted premium against what insurers ceded,
+                                    and the insurers IRA listed that year without a full-year return
   reinsurance_reinsurer_results.csv each local reinsurer, and all of them together, by class and year:
                                     premium accepted, earned premium, claims, commissions, expenses, result
                                     and the ratios on earned premium
@@ -28,7 +29,9 @@ Definitions (all KSh thousands, Q4 year to date):
   cession rate   ceded over gross premium; retention is net over gross premium, one less the cession rate
 
 Insurers are the insurer segment, micro insurers included, as module 1 counts the market. Reinsurers are the
-reinsurer segment. Motor Commercial PSV is folded into Motor Commercial, as in module 1. A company listed with
+reinsurer segment. The segment is taken from the company crosswalk, not from the panels, because the class panel
+tags the reinsurers' Q4 2025 gross direct and inward premium rows as insurer rows. An insurer IRA lists with an
+all-zero fourth-quarter return has no full-year figures and is left out of that year; the market file names them. Motor Commercial PSV is folded into Motor Commercial, as in module 1. A company listed with
 an all-zero return (it did not file, or its book had passed to another company) is left out, so a merged
 company is counted once in each year.
 
@@ -40,9 +43,10 @@ The returns moved the P&L and balance sheet to IFRS 17 lines from Q1 2024. The r
 tables kept their premium lines, so premium ceded is on one definition throughout; the market file shows
 how far insurers' cession rates moved across the switch next to every other year.
 
-Local reinsurers' accepted premium against insurers' premium ceded is an upper bound on the share that could
-have stayed in Kenya, not a measured flow: the reinsurers also accept business from outside Kenya, and
-insurers cede abroad and to each other.
+Local reinsurers' accepted premium against insurers' premium ceded is an upper bound on the share those five
+reinsurers could have taken, not a measured flow: they also accept business from outside Kenya, and insurers cede
+to reinsurers that do not file these returns (abroad, and the regional reinsurers that operate in Kenya under
+regional charters) and to each other.
 """
 import importlib.util
 import os
@@ -94,22 +98,40 @@ def group(r):
 
 
 def load():
+    cw = pd.read_csv(os.path.join(DATA, "reference", "company_crosswalk.csv")).drop_duplicates("company_id").set_index("company_id")
+    names, segs = cw.company_name, cw.segment
     c = pd.read_csv(os.path.join(DATA, "data", "processed", "general_by_class_panel.csv"))
     c = c[(c.quarter == 4) & c.year.isin(YEARS) & c.table.isin(LINES) & (c.class_of_business != "Total")]
+    c = c.assign(segment=c.company_id.map(segs))
     c = c.assign(**{"class": c.class_of_business.replace(CLASS_MAP)})
     cl = c.pivot_table(index=["segment", "company_id", "year", "class"], columns="table", values="ytd_ksh_000",
                        aggfunc="sum").reindex(columns=LINES).fillna(0).reset_index()
     cl = cl[cl[LINES].abs().sum(axis=1) > 0]
     rp = pd.read_csv(os.path.join(DATA, "data", "processed", "general_revenue_panel.csv"))
     rp = rp[(rp.quarter == 4) & rp.year.isin(YEARS)]
+    rp = rp.assign(segment=rp.company_id.map(segs))
     rv = rp.pivot_table(index=["segment", "company_id", "year"], columns="line", values="ytd_ksh_000", aggfunc="sum")
     flags = rp.drop_duplicates(["company_id", "year"]).set_index(["company_id", "year"]).quality_flags \
         if "quality_flags" in rp.columns else None
-    names = pd.read_csv(os.path.join(DATA, "reference", "company_crosswalk.csv")).drop_duplicates("company_id") \
-        .set_index("company_id").company_name
     pl = pd.read_csv(os.path.join(DATA, "data", "processed", "general_profit_loss.csv"), usecols=["year", "quarter", "reporting_basis"])
     basis = pl[pl.quarter == 4].groupby("year").reporting_basis.agg(lambda s: "/".join(sorted(s.dropna().unique())))
-    return cl, rv, flags, names, basis
+    # insurers IRA listed with an all-zero fourth-quarter return, other than a company whose book had passed to another
+    qf = pd.read_csv(os.path.join(DATA, "validation", "quality_flags.csv"))
+    nf = qf[(qf.quarter == 4) & (qf.flag == "not_filed") & qf.year.isin(YEARS) & (qf.company_id.map(segs) == "insurer")]
+    ee = pd.read_csv(os.path.join(ROOT, "reference", "entries_exits.csv"))
+    gone = ee[ee.kind == "merger"].set_index("company_id").year_in_data
+    nf = nf[~(nf.company_id.isin(gone.index) & (nf.year > nf.company_id.map(gone)))]
+    missing = nf.groupby("year").company_id.agg(lambda s: sorted(s))
+    return cl, rv, flags, names, basis, missing
+
+
+def tidy(d):
+    """Round floats to six places and turn -0.0 into 0.0, so the files are the same on every platform."""
+    d = d.copy()
+    for col in d.columns:
+        if d[col].dtype.kind == "f":
+            d[col] = d[col].round(6) + 0.0
+    return d
 
 
 def scorecard_rules():
@@ -121,7 +143,7 @@ def scorecard_rules():
 
 
 def main(out=OUT, quiet=False):
-    cl, rv, flags, names, basis = load()
+    cl, rv, flags, names, basis, missing = load()
     ins = cl[cl.segment == "insurer"].drop(columns="segment")
     re_ = cl[cl.segment == "reinsurer"].drop(columns="segment")
 
@@ -143,6 +165,9 @@ def main(out=OUT, quiet=False):
     r = rv.xs("insurer", level="segment")
     co["outward_reinsurance"] = r.outward_reinsurance.reindex(pd.MultiIndex.from_frame(co[["company_id", "year"]])).values
     co["reconcile_gap"] = co.ceded_premium - co.outward_reinsurance
+    idx = pd.MultiIndex.from_frame(co[["company_id", "year"]])
+    co["revenue_gross_premium"] = (r.gross_direct_premium.fillna(0) + r.inward_reinsurance.fillna(0)).reindex(idx).values
+    co["revenue_net_premium"] = r.net_premium_written.reindex(idx).values
     co["size_band"] = co.gross_premium.map(band)
     co["compared"] = co.gross_premium >= MIN_GP
     if flags is not None:
@@ -197,6 +222,7 @@ def main(out=OUT, quiet=False):
     mk["local_reinsurers"] = mk.year.map(rr.groupby(level="year").size())
     mk["local_reinsurers_accepted_premium"] = mk.year.map(acc)
     mk["local_share_upper_bound"] = (mk.local_reinsurers_accepted_premium / mk.ceded_premium).clip(upper=1)
+    mk["insurers_without_full_year_return"] = mk.year.map(lambda y: "; ".join(names.get(i, i) for i in missing.get(y, [])))
 
     # 6. local reinsurers: by reinsurer, class and year, and all of them together
     rcl = re_.copy()
@@ -245,14 +271,10 @@ def main(out=OUT, quiet=False):
     link["scorecard_metrics"] = len(sm.METRICS)
 
     os.makedirs(out, exist_ok=True)
-    kw = dict(index=False, lineterminator="\n", float_format="%.4f")
-    cc.to_csv(os.path.join(out, "reinsurance_class_cession.csv"), **kw)
-    co.to_csv(os.path.join(out, "reinsurance_insurer_retention.csv"), **kw)
-    sg.to_csv(os.path.join(out, "reinsurance_size_gradient.csv"), **kw)
-    rc.to_csv(os.path.join(out, "reinsurance_retention_change.csv"), **kw)
-    mk.to_csv(os.path.join(out, "reinsurance_market.csv"), **kw)
-    res.to_csv(os.path.join(out, "reinsurance_reinsurer_results.csv"), **kw)
-    link.to_csv(os.path.join(out, "reinsurance_scorecard_link.csv"), **kw)
+    kw = dict(index=False, lineterminator="\n", float_format="%.6f")
+    for frame, name in [(cc, "class_cession"), (co, "insurer_retention"), (sg, "size_gradient"), (rc, "retention_change"),
+                        (mk, "market"), (res, "reinsurer_results"), (link, "scorecard_link")]:
+        tidy(frame).to_csv(os.path.join(out, f"reinsurance_{name}.csv"), **kw)
 
     if quiet:
         return

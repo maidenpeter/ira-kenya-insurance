@@ -39,9 +39,13 @@ Gross premium is the class table's gross premium income (gross direct plus inwar
 
 Insurers are IRA's insurer segment with micro insurers; the local reinsurers are IRA's reinsurer segment. Retention by insurer, the size bands (under KSh 3bn, KSh 3bn to 10bn, over KSh 10bn) and the change since 2018 cover insurers writing at least KSh 0.5bn that year, the Cedant Scorecard's peer threshold. The change since 2018 counts MUA with Saham, whose book it took over in 2021; insurers formed after 2018 are left out because they have no like-for-like starting point.
 
-Claims in the class tables and revenue accounts are net of reinsurance, and IRA publishes no gross claims, so recoveries cannot be measured. The local reinsurers' accepted premium against what insurers ceded is an upper bound on the share that could have stayed in Kenya: the reinsurers also accept business from abroad, and insurers cede abroad and to each other.
+Claims in the class tables and revenue accounts are net of reinsurance, and IRA publishes no gross claims, so recoveries cannot be measured. The reinsurers' returns do not split their business by where it comes from either, so their result on Kenyan cessions alone cannot be measured.
 
-IRA's returns moved the profit and loss account and balance sheet to IFRS 17 lines from Q1 2024. The revenue account and class tables kept their premium lines, the identities hold in every year, and insurers' cession rates moved no more across the switch than in other years, so the series is treated as unbroken and the switch is marked on the chart.
+The local reinsurers are the companies IRA's returns list as reinsurers. Their accepted premium against what insurers ceded is an upper bound on the share those reinsurers could have taken. It is not a bound on what stayed in Kenya. They also accept business from abroad, and insurers also cede to reinsurers that do not file these returns (abroad, and the regional reinsurers that operate in Kenya under regional charters) and to each other.
+
+IRA's returns moved the profit and loss account and balance sheet to IFRS 17 lines from Q1 2024. The revenue account and class tables kept their premium lines, and the identities hold in every year. There is no systematic shift that year: the median insurer's cession rate barely moved, although the average size of insurers' moves was the largest of the seven years. So the series is treated as unbroken, and the switch is marked on the chart.
+
+A company IRA lists with an all-zero fourth-quarter return has no full-year figures and is left out of that year. That keeps a merged company to one count, and it also leaves out insurers that did not file a full year; they are named, by year, in `output/reinsurance_market.csv`. Each company's segment comes from the crosswalk, not from the panels.
 
 The Cedant Scorecard comparison uses its published scores as they stand, and also a score without the retention metric: the business profile pillar re-weighted to scale and diversification, the other pillars unchanged.
 

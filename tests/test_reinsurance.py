@@ -6,6 +6,7 @@ ira-kenya-reinsurance next to this repo (or IRA_DATA_DIR and IRA_REINSURANCE_DIR
 import importlib.util
 import json
 import os
+import re
 
 import numpy as np
 import pandas as pd
@@ -56,6 +57,9 @@ def test_classes_add_to_insurers_and_market():
     assert np.allclose(parts, total, atol=0.05)
     co = read("reinsurance_insurer_retention.csv")
     assert np.allclose(co.groupby("year")[PREMIUM].sum().sort_index(), total, atol=0.05)
+    # the class tables, added up, agree with each insurer's own revenue account: a wrong class or a double count shows here
+    assert ((co.gross_premium - co.revenue_gross_premium).abs() <= build.TOL).all()
+    assert ((co.net_premium - co.revenue_net_premium).abs() <= build.TOL).all()
     shares = cc[cc["class"] != "All classes"].groupby("year").share_of_ceded.sum()
     assert np.allclose(shares, 1, atol=1e-3)
     assert np.allclose(cc.ceded_premium, cc.gross_premium - cc.net_premium, atol=0.01)
@@ -114,6 +118,24 @@ def test_page_carries_the_current_outputs():
     page = open(os.path.join(ROOT, "page", "kenya-insurance-reinsurance-flows.html"), encoding="utf-8").read()
     assert js.replace("</", "<\\/") in page, "page is stale: run src/reinsurance/build_page.py"
     assert build_page.CAVEAT in js and build_page.CAVEAT_RE in js
+
+
+def test_page_ratios_are_not_rounded_before_display():
+    """The page rounds each figure once: the ratios it carries equal the KSh figures divided, not a rounded copy."""
+    page = open(os.path.join(ROOT, "page", "kenya-insurance-reinsurance-flows.html"), encoding="utf-8").read()
+    D = json.loads(page.split("const D = ", 1)[1].split(", F = D.F;", 1)[0].replace("<\\/", "</"))
+    for m in D["market"]:
+        assert m["cr"] == pytest.approx(m["ceded"] / m["gp"], rel=1e-9)
+        assert m["ub"] == pytest.approx(min(1, m["acc"] / m["ceded"]), rel=1e-9)
+    for q in D["re"]["all_local_reinsurers"]["years"]:
+        assert q["cr"] == pytest.approx(q["lr"] + q["cmr"] + q["er"], rel=1e-9)
+
+
+def test_no_negative_zero_in_outputs():
+    for f in os.listdir(OUT):
+        if f.startswith("reinsurance_"):
+            text = open(os.path.join(OUT, f), encoding="utf-8").read()
+            assert not re.search(r"(^|,)-0\.0+(,|$)", text, re.M), f"{f} has a negative zero"
 
 
 def test_everything_written_is_plain_ascii():
