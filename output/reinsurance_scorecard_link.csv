@@ -1,0 +1,5 @@
+retention_group,insurer_years,insurers,median_retention,median_score,median_score_without_retention,share_graded_d_or_e,spearman_retention_score,spearman_retention_score_without_retention,years,retention_weight,total_weight,scorecard_metrics
+Under 50%,29,12,0.4244,66.3548,69.6774,0.3103,,,2018 to 2025,5,100,10
+50% to 70%,94,22,0.6042,61.5498,62.9685,0.1170,,,2018 to 2025,5,100,10
+70% and over,147,30,0.8486,54.5972,53.5234,0.2517,,,2018 to 2025,5,100,10
+All scored,270,43,0.7232,58.0019,58.5883,0.2111,-0.2884,-0.3522,2018 to 2025,5,100,10
