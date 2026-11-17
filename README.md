@@ -2,7 +2,7 @@
 
 Kenya's general insurance market from the insurer's side: where the money is lost, who carries the loss and what it would take to close the gap. Built from the Insurance Regulatory Authority's quarterly returns, full years 2018 to 2025, using the tables in [ira-kenya-data](https://github.com/maidenpeter/ira-kenya-data).
 
-Two modules so far: where the money is lost (the Loss Map) and who holds the market (Market Structure). The IFRS 17 transition and reinsurance flows follow.
+Three modules so far: where the money is lost (the Loss Map), who holds the market (Market Structure) and what is passed on to reinsurers (Reinsurance Flows). The IFRS 17 transition follows.
 
 ## Where the money is lost
 
@@ -67,11 +67,33 @@ Kenya had 34 general insurers in 2025 sharing KSh 227.2bn of written premium. Th
 
 **Who came and went.** Five insurers left through the regulator (Resolution, Xplico, Invesco, Trident, Corporate), three through mergers (Saham into MUA; Allianz Kenya and Sanlam General into what is now Sanlam Allianz General), and Jubilee split its general business in 2020. Star Discover arrived in 2023, and Definite, Equity General, Equity Health and Bupa Global in 2025.
 
+<!-- reinsurance flows: written by src/reinsurance/build_page.py -->
+## Reinsurance flows
+
+From 2018 to 2025 Kenya's general insurers passed KSh 402.4bn of premium to reinsurers. In 2025 they ceded KSh 66.6bn, 29.3% of their gross premium; the rate has stayed between 28.2% (2018) and 32.3% (2023).
+
+**Where it goes out.** Motor keeps almost all of its premium (insurers cede 3.2% of it); aviation keeps almost none (99.3% ceded) and fire industrial cedes 78.9%. Medical and fire industrial together make up 57% of everything ceded in 2025: medical because it is the largest class, though only 21% of it is ceded, and fire industrial because most of it is.
+
+**Who depends on it.** There is no simple size gradient. In 2025 insurers writing under KSh 3bn kept a median 80% of their premium, those over KSh 10bn 75%, and those in between the least, 65%. The rank correlation between retention and size ran from -0.29 to -0.13 across the years.
+
+**Does it move.** Of 27 insurers writing at least KSh 0.5bn in both 2018 and 2025, 17 keep less of their premium than they did and 10 keep more (median change -3.5 points). The largest rise in the market rate came in 2023 (+3.5 points), 2.5 points of it from insurers ceding more within classes, medical above all. The returns moved to IFRS 17 statements in 2024 but kept their premium lines: insurers' cession rates moved by 5.5 points on average that year, against 3.4 to 5.1 in the others.
+
+**How much could stay in Kenya.** The five local reinsurers accepted KSh 32.4bn of premium in 2025, so at most 49% of what Kenyan insurers ceded could have gone to them. It is an upper bound, not a measured flow: the local reinsurers also write business from outside Kenya, and insurers cede abroad and to each other.
+
+**How the local reinsurers fare.** Continental Re, East Africa Re, Ghana Re, Kenya Re and WAICA Re made an underwriting profit together in every year from 2020 to 2024, and lost money in 2018, 2019 and 2025: a loss of KSh 0.94bn in 2025, a combined ratio of 103.5%. Their loss ratio fell from 65.1% in 2018 to 58.0% in 2025, while the commission they pay back to insurers rose from 23.2% to 32.0% of earned premium. Over 2018 to 2025 fire industrial (31% of their premium) made KSh 8.7bn and medical (19%) lost KSh 8.5bn, a combined ratio of 120.9%.
+
+**Recoveries.** IRA's class tables and revenue accounts carry claims net of reinsurance only, so what insurers recover from reinsurers cannot be measured from the returns, and the reinsurers' result on Kenyan business alone cannot be separated.
+
+**The Cedant Scorecard.** Insurers that keep less than half their premium had a median score of 69.7 on the scorecard's other measures, against 53.5 for those keeping 70% or more (rank correlation -0.35, 2018 to 2025). It is a correlation, not a cause, and 31% of the low-retention years were still graded D or E.
+<!-- reinsurance flows end -->
+
 ## See it
 
 `page/kenya-insurance-loss-map.html` opens in any browser: the class map year by year, the rate gap by class and by insurer, the motor loss by company, the low loss ratio test and the expense curve for any year.
 
 `page/kenya-insurance-market-structure.html`: every insurer's share, concentration over time, the fragmentation cost, growth against results, share shifts, the class mix and a timeline of entries and exits.
+
+`page/kenya-insurance-reinsurance-flows.html`: cession by class and year, retention against size for every insurer, the change in each insurer's retention, the local reinsurers' capacity against what is ceded, their results by company and class, and retention against the Cedant Scorecard.
 
 ## Files
 
@@ -91,6 +113,13 @@ Kenya had 34 general insurers in 2025 sharing KSh 227.2bn of written premium. Th
 | `output/structure_class_mix.csv` | Each class's share of the market and its own concentration |
 | `output/structure_growth_results.csv` | Premium growth 2018 to 2025 against combined ratio |
 | `output/structure_fragmentation.csv` | Extra management expense outside the five largest, class for class, against the underwriting result |
+| `output/reinsurance_class_cession.csv` | Insurers by class and year: gross, net and ceded premium, cession rate and each class's share of all premium ceded |
+| `output/reinsurance_insurer_retention.csv` | Every insurer and year: gross, net and ceded premium, retention, size band, and the revenue account's outward reinsurance it reconciles to |
+| `output/reinsurance_size_gradient.csv` | Retention by size band each year, and its rank correlation with size |
+| `output/reinsurance_retention_change.csv` | Each insurer's retention in the first and last year |
+| `output/reinsurance_market.csv` | Per year: premium ceded, cession rate, the return basis, how far insurers' rates moved, and the local reinsurers' accepted premium against it |
+| `output/reinsurance_reinsurer_results.csv` | Each local reinsurer, and all of them together, by class and year: premium accepted, claims, commissions, expenses, result and ratios |
+| `output/reinsurance_scorecard_link.csv` | Insurers grouped by retention against the Cedant Scorecard's score, with and without its retention metric |
 | `reference/regulator_actions.csv` | The five regulator interventions since 2022, with sources |
 | `reference/entries_exits.csv` | Every entry, exit, merger and split, with sources |
 
@@ -104,11 +133,12 @@ pip install -r requirements.txt
 pytest tests
 ```
 
-The tests check that every class result adds up, that classes add to the market, that the class totals match IRA's own PDF industry releases for 2020 to 2024, that market premium matches ira-kenya-data, that shares and pro forma shares add to one, and the rate, test, concentration and fragmentation arithmetic. GitHub Actions runs them on every push.
+The tests check that every class result adds up, that classes add to the market, that the class totals match IRA's own PDF industry releases for 2020 to 2024, that market premium matches ira-kenya-data, that shares and pro forma shares add to one, and the rate, test, concentration and fragmentation arithmetic. For reinsurance flows they check that every cession rate lies between 0 and 1, that classes add to insurers and to the market, that premium ceded reconciles to each insurer's outward reinsurance, that the reinsurers' results add up the same way, that merged companies are counted once, and that the README's figures match a fresh recomputation. GitHub Actions runs them on every push; the two tests that rebuild from ira-kenya-data run where it is present.
 
 ## Caveats
 
 - IRA's quarterly returns are unaudited. Class figures are net of reinsurance, as IRA publishes them.
+- No gross claims are published, so reinsurance recoveries cannot be measured. The local reinsurers' figures cover all the business they accept, from Kenya and abroad, so their share of Kenyan cessions is an upper bound and their results are not their result on Kenyan business alone.
 - The rate change is an indication of the size of the gap, not a filed rate: no loss trend, no development beyond what insurers booked, no charge for capital. The true need is higher.
 - Motor Commercial includes PSV. Insurers move business between the two; in Q4 2025 Madison moved KSh 1.6bn of earned premium from PSV to Motor Commercial, which left PSV with negative earned premium for the year.
 - A low loss ratio is a warning, not proof. It can reflect a good book, heavy reinsurance or thin reserves. The test compares ten insurers with twenty-eight.
