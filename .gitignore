@@ -7,3 +7,4 @@ Thumbs.db
 .pytest_cache/
 page/loss_map_data.json
 page/structure_data.json
+page/claims_data.json

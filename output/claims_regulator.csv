@@ -1,0 +1,21 @@
+company_id,company_name,action,action_date,period,open_claims,paid,payment_ratio,median_payment_ratio,share_of_median,under_half
+resolution,Resolution Insurance Company,statutory management,2022-04,2020Q2,401.000000,20.000000,0.049875,0.051596,0.966645,False
+resolution,Resolution Insurance Company,statutory management,2022-04,2020Q3,420.000000,26.000000,0.061905,0.058380,1.060380,False
+resolution,Resolution Insurance Company,statutory management,2022-04,2020Q4,461.000000,102.000000,0.221258,0.079939,2.767835,False
+resolution,Resolution Insurance Company,statutory management,2022-04,2021Q4,320.000000,89.000000,0.278125,0.095733,2.905216,False
+xplico,Xplico Insurance Company,statutory management,2023-12,2020Q3,4182.000000,130.000000,0.031086,0.058380,0.532477,False
+xplico,Xplico Insurance Company,statutory management,2023-12,2020Q4,4646.000000,52.000000,0.011192,0.079939,0.140007,True
+xplico,Xplico Insurance Company,statutory management,2023-12,2021Q4,5242.000000,174.000000,0.033193,0.095733,0.346725,True
+xplico,Xplico Insurance Company,statutory management,2023-12,2023Q2,4971.000000,171.000000,0.034400,0.089855,0.382839,True
+invesco,Invesco Assurance Company,"licence cancelled, liquidation",2023-12,2022Q4,20355.000000,181.000000,0.008892,0.085351,0.104182,True
+invesco,Invesco Assurance Company,"licence cancelled, liquidation",2023-12,2023Q1,20428.000000,244.000000,0.011944,0.093037,0.128379,True
+invesco,Invesco Assurance Company,"licence cancelled, liquidation",2023-12,2023Q2,20355.000000,255.000000,0.012528,0.089855,0.139425,True
+invesco,Invesco Assurance Company,"licence cancelled, liquidation",2023-12,2023Q3,20298.000000,238.000000,0.011725,0.087971,0.133283,True
+trident,Trident Insurance Company,statutory management,2026-03,2024Q3,1707.000000,709.000000,0.415349,0.105055,3.953634,False
+trident,Trident Insurance Company,statutory management,2026-03,2024Q4,1592.000000,660.000000,0.414573,0.093873,4.416318,False
+trident,Trident Insurance Company,statutory management,2026-03,2025Q1,1385.000000,907.000000,0.654874,0.093605,6.996143,False
+trident,Trident Insurance Company,statutory management,2026-03,2025Q4,10458.000000,7296.000000,0.697648,0.098849,7.057714,False
+corporate,Corporate Insurance Company,statutory management,2026-03,2025Q1,1360.000000,30.000000,0.022059,0.093605,0.235660,True
+corporate,Corporate Insurance Company,statutory management,2026-03,2025Q2,1341.000000,5.000000,0.003729,0.078742,0.047357,True
+corporate,Corporate Insurance Company,statutory management,2026-03,2025Q3,1341.000000,0.000000,0.000000,0.095347,0.000000,True
+corporate,Corporate Insurance Company,statutory management,2026-03,2025Q4,1342.000000,26.000000,0.019374,0.098849,0.195996,True

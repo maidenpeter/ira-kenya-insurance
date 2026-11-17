@@ -1,0 +1,6 @@
+check,pass,explained,fail
+counts_not_negative,3086,0,8
+movement_adds_up,2830,0,264
+opening_equals_last_closing,2545,0,152
+payment_ratio_as_printed,2955,0,2
+sum_equals_printed_total,943,6,0

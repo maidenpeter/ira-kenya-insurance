@@ -1,0 +1,726 @@
+<title>Kenya Claims Settlement</title>
+<script>try{var t=localStorage.getItem('mp-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Pinyon+Script&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ground:#15253b; --surface:#1c2f46; --sunk:#0f1d2f;
+  --ink:#ede7d8; --ink-2:#c4c0b4; --muted:#9c9b94;
+  --rule:rgba(237,231,216,.17); --rule-soft:rgba(237,231,216,.09); --rule-strong:rgba(237,231,216,.34);
+  --accent:#f0a63a; --accent-soft:rgba(240,166,58,.11); --on-accent:#0f1b2d; --on-strong:#0f1b2d;
+  --gain:#25a3a4; --loss:#d9694f; --crit:#ee8a72; --ok:#5cc9c9; --warn:#f0a63a; --series:#f0a63a;
+  --serif:"EB Garamond", Garamond, "Adobe Garamond Pro", Georgia, serif;
+  --ui:"IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --display:"IM Fell English", "EB Garamond", Garamond, Georgia, serif;
+  --display-sc:"IM Fell English SC", "IM Fell English", Georgia, serif;
+  --script:"Pinyon Script", "IM Fell English", cursive;
+  --label:"Old Standard TT", "EB Garamond", Georgia, serif;
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --ground:#ecdfc3; --surface:#f3e8cf; --sunk:#e2d3b2;
+  --ink:#2b2118; --ink-2:#433426; --muted:#534535;
+  --rule:rgba(43,33,24,.20); --rule-soft:rgba(43,33,24,.10); --rule-strong:rgba(43,33,24,.42);
+  --accent:#68450c; --accent-soft:rgba(104,69,12,.10); --on-accent:#f3e8cf; --on-strong:#ffffff;
+  --gain:#008a7e; --loss:#a8432a; --crit:#7a2d1b; --ok:#005049; --warn:#68450c; --series:#b08a2a;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--serif); font-size:17px; line-height:1.45}
+a{color:var(--accent)}
+.wrap{max-width:1180px; margin:0 auto; padding-inline:20px; padding-block:28px 56px; display:flex; flex-direction:column; gap:40px}
+header.top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 24px; border-bottom:1px solid var(--rule); padding-bottom:18px}
+.eyebrow{font-family:var(--ui); font-size:13px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+h1{font-size:clamp(32px,4.6vw,48px); font-weight:500; line-height:1.04; margin:4px 0 8px; text-wrap:balance}
+h2{font-size:clamp(24px,3vw,31px); font-weight:500; line-height:1.12; margin:0; text-wrap:balance}
+h3{font-size:20px; font-weight:500; margin:0}
+p{margin:0}
+.lede{color:var(--ink-2); max-width:64ch}
+.stamp{font-family:var(--ui); font-size:13px; color:var(--muted); text-align:right; line-height:1.55}
+.small{font-family:var(--ui); font-size:13px; color:var(--muted)}
+section{display:flex; flex-direction:column; gap:14px; min-width:0}
+.sechead{display:flex; flex-direction:column; gap:6px; max-width:74ch}
+.sechead p{color:var(--ink-2)}
+.panel{background:var(--surface); border:1px solid var(--rule); border-radius:8px; padding:18px; min-width:0}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.loss{color:var(--loss)} .gain{color:var(--gain)}
+
+/* hero */
+.hero{display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:28px; align-items:center}
+.bignums{display:flex; flex-direction:column; gap:18px}
+.bn{display:flex; flex-direction:column; gap:2px}
+.bn .v{font-size:clamp(44px,6vw,68px); line-height:1; font-variant-numeric:tabular-nums lining-nums; letter-spacing:-.01em}
+.bn .k{font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.thesis{font-size:clamp(20px,2.3vw,25px); line-height:1.3; max-width:36ch}
+.chart svg{display:block; width:100%; height:auto}
+.chart text{font-family:var(--ui); font-size:13px; fill:var(--muted); font-variant-numeric:tabular-nums}
+.chart .lab{fill:var(--ink-2)}
+.chart .strong{fill:var(--ink); font-weight:600}
+
+/* heat grid */
+.controls{display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center}
+.seg{display:flex; gap:3px; background:var(--rule-soft); padding:3px; border-radius:8px; flex-wrap:wrap}
+.seg button{font-family:var(--ui); font-size:14px; border:0; background:transparent; color:var(--ink-2); padding:6px 11px; border-radius:6px; cursor:pointer; font-variant-numeric:tabular-nums}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.1)}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-family:var(--ui); font-size:14px; font-variant-numeric:tabular-nums}
+th{font-weight:500; color:var(--muted); text-align:right; font-size:13px; letter-spacing:.05em; text-transform:uppercase; padding:6px 8px; border-bottom:1px solid var(--rule); white-space:nowrap}
+td{text-align:right; padding:6px 8px; border-bottom:1px solid var(--rule-soft); white-space:nowrap}
+th.l, td.l{text-align:left}
+.heat td.c{padding:0; border:2px solid var(--surface)}
+.heat td.c span{display:block; padding:9px 6px; text-align:center; border-radius:3px; font-size:13px}
+.heat td.name{font-family:var(--serif); font-size:16px; padding-right:12px}
+.heat tr.total td{border-top:1px solid var(--rule)}
+.heat tr.total td.name{font-weight:600}
+.scale{display:flex; align-items:center; gap:8px; font-family:var(--ui); font-size:13px; color:var(--ink-2)}
+.scale i{display:inline-block; width:180px; height:10px; border-radius:2px}
+
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.note{font-family:var(--ui); font-size:13px; color:var(--ink-2); max-width:78ch}
+.stat{display:flex; flex-wrap:wrap; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:8px; overflow:hidden}
+.stat > div{flex:1 1 180px; background:var(--surface); padding:14px 16px; display:flex; flex-direction:column; gap:3px}
+.stat .v{font-size:32px; line-height:1.05; font-variant-numeric:tabular-nums lining-nums}
+.stat .k{font-family:var(--ui); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.stat .s{font-family:var(--ui); font-size:13px; color:var(--ink-2)}
+.chip{font-family:var(--ui); font-size:13px; padding:2px 7px; border-radius:999px; border:1px solid var(--rule); color:var(--ink-2); white-space:nowrap}
+.chip.crit{border-color:var(--crit); color:var(--crit)}
+.chip.ok{border-color:var(--ok); color:var(--ok)}
+.method{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+.method ul{margin:0; padding-left:1.1em; display:flex; flex-direction:column; gap:6px; font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.formula{font-family:var(--ui); font-size:15px; background:var(--rule-soft); border-radius:6px; padding:10px 12px; overflow-x:auto; white-space:nowrap}
+footer{border-top:1px solid var(--rule); padding-top:16px; font-family:var(--ui); font-size:13px; color:var(--muted); display:flex; flex-direction:column; gap:6px}
+footer p{max-width:110ch}
+.tip{position:fixed; z-index:10; background:var(--ink); color:var(--ground); font-family:var(--ui); font-size:13px; padding:6px 9px; border-radius:5px; pointer-events:none; max-width:300px; line-height:1.35}
+@media (max-width: 900px){
+  .hero, .grid2, .method{grid-template-columns:minmax(0,1fr)}
+  .stamp{text-align:left}
+}
+
+/* ---------------------------------------------------------- copperplate layer, shared with maidenpeter.github.io */
+:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .93 0 0 0 0 .90 0 0 0 0 .84 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); --fox:rgba(0,0,0,.30); --hatch-line:rgba(10,20,32,.30)}
+:root[data-theme="light"]{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .30 0 0 0 0 .16 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); --fox:rgba(138,90,36,.16); --hatch-line:rgba(43,33,24,.26)}
+body{background-color:var(--ground);background-image:var(--grain)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 42%,transparent 58%,var(--fox) 100%)}
+.mp-sub,.wrap{position:relative;z-index:1}
+h1,h2{font-family:var(--display);font-weight:400;letter-spacing:0}
+.eyebrow{font-family:var(--label);letter-spacing:.16em}
+.sechead{border-top:3px double var(--rule-strong);padding-top:18px}
+.panel,.detail{border-radius:2px;outline:1px solid var(--rule);outline-offset:-6px}
+footer{border-top:3px double var(--rule-strong)}
+body{margin:0}
+.sw{display:inline-block;min-width:12px;min-height:12px;vertical-align:-1px}
+.track2 .bar,.sbar i{background-image:repeating-linear-gradient(135deg,var(--hatch-line) 0 1px,transparent 1px 4px)}
+
+/* mp-nav start */
+/* Site navigation. Written by tools/nav.py; edit it there, not here.
+   Needs the site tokens: --ground --surface --grain --ink --ink-2 --muted --rule --rule-soft --rule-strong --accent
+   --accent-soft --on-accent and the fonts --ui --serif --display --display-sc --script --label. */
+:root{--mp-side:0px;--mp-top:68px;--mp-sub:0px}
+:root:has(.mp-sub){--mp-sub:52px}
+html{scroll-padding-top:calc(var(--mp-top) + var(--mp-sub) + 20px)}
+@media (prefers-reduced-motion:no-preference){html.mp-ready{scroll-behavior:smooth}}
+body{padding-top:var(--mp-top)}
+.mp-top,.mp-side{box-sizing:border-box;font-family:var(--ui)}
+.mp-top *,.mp-side *{box-sizing:border-box}
+.mp-ic{flex:none;display:block;width:22px;height:22px}
+
+/* the top bar: where the reader is, the seal, name and role in the middle, then the switches */
+.mp-top{position:fixed;top:0;left:0;right:0;z-index:35;height:var(--mp-top);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-areas:"where brand tools";align-items:center;column-gap:18px;padding:0 22px;background-color:var(--ground);background-image:var(--grain,none);border-bottom:3px double var(--rule-strong);box-shadow:0 10px 24px -18px rgba(0,0,0,.6)}
+.mp-where{grid-area:where;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:1px 9px;line-height:1.3;white-space:nowrap;overflow:hidden;font-family:var(--label);font-size:13px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.mp-wc{display:block;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;color:var(--ink-2);text-decoration:none}
+a.mp-wc:hover{color:var(--accent)}
+span.mp-wc{color:var(--ink)}
+.mp-wn{flex:none;margin-right:4px;font-family:var(--display);font-weight:400;font-size:18px;line-height:1;letter-spacing:0;text-transform:none;color:var(--accent)}
+.mp-ws{flex:none;color:var(--rule-strong);font-family:var(--serif);font-size:16px;letter-spacing:0}
+.mp-brand{grid-area:brand;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.mp-who{display:flex;flex-direction:column;gap:1px;min-width:0}
+.mp-nm{font-family:var(--display-sc);font-weight:400;font-size:23px;line-height:1.05;letter-spacing:.02em;white-space:nowrap;color:var(--ink);transition:color .2s}
+.mp-role{font-family:var(--script);font-size:19px;line-height:1.1;white-space:nowrap;color:var(--accent)}
+.mp-seal{flex:none;display:block;width:48px;height:48px;color:var(--accent);overflow:visible}
+.mp-seal text{font-family:var(--display-sc);font-size:21px;fill:var(--ink);letter-spacing:0}
+.mp-beads{transform-origin:32px 32px;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.mp-brand:hover .mp-beads{transform:rotate(42deg)}
+.mp-brand:hover .mp-nm{color:var(--accent)}
+.mp-tools{grid-area:tools;justify-self:end;display:flex;align-items:center;gap:8px}
+.mp-theme,.mp-gh{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--ui);font-size:15px;line-height:1.2;white-space:nowrap;color:var(--ink-2);text-decoration:none;background:transparent;border:1px solid var(--rule);border-radius:2px;padding:6px 12px;min-height:38px;cursor:pointer}
+.mp-gh{width:40px;padding:0}
+.mp-gh .mp-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.mp-theme:hover,.mp-gh:hover{border-color:var(--accent);color:var(--ink)}
+.mp-theme[hidden]{display:none}
+.mp-top a:focus-visible,.mp-top button:focus-visible,.mp-side a:focus-visible,.mp-side button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* the side bar */
+.mp-nav{display:flex;margin:0;padding:0}
+.mp-nav a,.mp-nav .mp-ch-btn{position:relative;display:flex;align-items:center;color:var(--ink-2);text-decoration:none;font-family:var(--ui);font-size:16px;font-weight:400;line-height:1.3;border-radius:2px;transition:color .15s,background-color .15s}
+.mp-nav .mp-ch-btn{background:transparent;border:0;margin:0;cursor:pointer;-webkit-appearance:none;appearance:none}
+.mp-nav a:hover,.mp-nav .mp-ch-btn:hover{color:var(--accent)}
+.mp-nav > a[aria-current],.mp-nav > a.mp-here,.mp-nav .mp-ch-btn.mp-cur,.mp-nav .mp-ch-btn.mp-here{color:var(--ink);background:var(--accent-soft)}
+.mp-nav > a[aria-current] .mp-ic,.mp-nav > a.mp-here .mp-ic,.mp-ch-btn.mp-cur .mp-ic,.mp-ch-btn.mp-here .mp-ic{color:var(--accent)}
+.mp-nav > a[aria-current]::before,.mp-nav > a.mp-here::before,.mp-ch-btn.mp-cur::before,.mp-ch-btn.mp-here::before,.mp-nav .mp-ch-link[aria-current]::before,.mp-nav .mp-ch-link.mp-here::before{content:"";position:absolute;background:var(--accent)}
+.mp-nav.mp-spying > a[aria-current="page"]:not(.mp-here){color:var(--ink-2);background:transparent}
+.mp-nav.mp-spying > a[aria-current="page"]:not(.mp-here) .mp-ic{color:inherit}
+.mp-nav.mp-spying > a[aria-current="page"]:not(.mp-here)::before{display:none}
+.mp-nav .mp-back{color:var(--ink)}
+.mp-nav .mp-back[hidden]{display:none}
+.mp-s{display:none}
+/* chapters: a numeral, a title in engraved capitals, one line of story, then its pages */
+.mp-nav .mp-ch-link{display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:8px;align-items:baseline;padding:8px 10px 7px}
+.mp-num{grid-row:span 2;font-family:var(--display);font-size:21px;line-height:1;color:var(--accent);text-align:center}
+.mp-ch-t{font-family:var(--label);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink)}
+.mp-ch-line{grid-column:2;font-family:var(--serif);font-style:italic;font-size:14.5px;line-height:1.3;color:var(--muted);margin-top:2px}
+.mp-nav .mp-ch-link:hover .mp-ch-t,.mp-nav .mp-ch-link[aria-current] .mp-ch-t,.mp-nav .mp-ch-link.mp-here .mp-ch-t{color:var(--accent)}
+.mp-nav .mp-it{margin-left:22px;padding:5px 10px 5px 14px;font-size:15.5px;line-height:1.3;border-left:1px solid var(--rule);border-radius:0}
+.mp-nav .mp-it:hover{border-left-color:var(--accent)}
+.mp-nav .mp-it[aria-current]{color:var(--ink);border-left:2px solid var(--accent);padding-left:13px;background:var(--accent-soft)}
+/* industry groups in a chapter: a label that folds its pages away */
+.mp-grp{margin:1px 0 1px 22px}
+.mp-grp-t{list-style:none;display:flex;align-items:center;gap:8px;padding:6px 8px 5px 2px;font-family:var(--label);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);cursor:pointer;border-radius:2px}
+.mp-grp-t::-webkit-details-marker{display:none}
+.mp-grp-t::before{content:"";flex:none;width:6px;height:6px;margin:0 3px 2px 1px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(-45deg);transition:transform .15s}
+.mp-grp[open] > .mp-grp-t::before{transform:rotate(45deg);margin-bottom:4px}
+.mp-grp-t:hover{color:var(--ink)}
+.mp-grp-t:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mp-grp-n{margin-left:auto;font-family:var(--ui);font-size:12.5px;letter-spacing:0;color:var(--muted)}
+.mp-grp-in{display:flex;flex-direction:column;padding-bottom:4px}
+.mp-nav .mp-grp .mp-it{margin-left:0}
+.mp-it-n{display:inline-block;min-width:22px;font-family:var(--label);font-size:12px;letter-spacing:.04em;color:var(--muted);font-variant-numeric:tabular-nums}
+.mp-nav .mp-it[aria-current] .mp-it-n{color:var(--accent)}
+/* analyses inside an industry: a numeral and a name in plain type, their pages indented under them */
+.mp-grp .mp-grp{margin-left:0}
+.mp-an > .mp-grp-t,.mp-nav .mp-an-link{font-family:var(--ui);font-size:15.5px;letter-spacing:0;text-transform:none;color:var(--ink);line-height:1.3}
+.mp-an-n{flex:none;min-width:14px;font-family:var(--display);font-size:18px;line-height:1;color:var(--accent);text-align:center}
+.mp-nav .mp-an .mp-it{margin-left:14px}
+.mp-nav .mp-an-link{gap:8px;padding:6px 8px 5px 20px;border-left:0}
+.mp-nav .mp-an-link[aria-current]{border-left:2px solid var(--accent);padding-left:18px}
+@media (prefers-reduced-motion:reduce){.mp-grp-t::before{transition:none}}
+.mp-skip{position:absolute;left:-9999px;top:8px;z-index:40;padding:8px 14px;background:var(--accent);color:var(--on-accent,var(--ground));font-family:var(--ui);font-size:15px;text-decoration:none}
+.mp-skip:focus{left:12px}
+#mp-content:focus{outline:none}
+@supports not selector(:popover-open){@media (max-width:860px){.mp-items{display:none}}}
+
+/* the Kenya series strip: a second, labelled bar held under the top bar, the series' own contents */
+.mp-sub{position:sticky;top:var(--mp-top);z-index:25;min-height:var(--mp-sub);display:flex;align-items:center;background-color:var(--ground);background-image:linear-gradient(var(--accent-soft),var(--accent-soft)),var(--grain,none);border-bottom:1px solid var(--rule-strong);box-shadow:0 8px 18px -16px rgba(0,0,0,.6)}
+.mp-sub .mp-in{width:100%;max-width:1180px;margin:0 auto;padding:7px 20px;display:flex;align-items:center;gap:8px 18px;font-family:var(--ui)}
+.mp-sub-tag{flex:none;display:inline-flex;align-items:baseline;gap:8px;padding:5px 12px 4px;border:1px solid var(--accent);outline:1px solid var(--rule);outline-offset:2px;font-family:var(--label);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.mp-sub-tag b{font-family:var(--display);font-weight:400;font-size:17px;letter-spacing:0;color:var(--accent)}
+.mp-sub-tag small{font-size:12px;letter-spacing:.06em;text-transform:none;color:var(--muted)}
+.mp-sub-list{list-style:none;margin:0;padding:2px;display:flex;flex-wrap:nowrap;gap:4px 6px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.mp-sub-list::-webkit-scrollbar{display:none}
+.mp-sub-list a{display:inline-flex;align-items:baseline;gap:7px;padding:5px 10px;border:1px solid transparent;color:var(--ink-2);text-decoration:none;font-size:15px;white-space:nowrap}
+.mp-sub-list a:hover{border-color:var(--rule-strong);color:var(--ink)}
+.mp-sub-n{font-family:var(--label);font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.mp-sub-list a[aria-current]{background:var(--accent);border-color:var(--accent);color:var(--on-accent,var(--ground))}
+.mp-sub-list a[aria-current] .mp-sub-n{color:inherit;opacity:.8}
+.mp-sub a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mp-sub-s{display:none}
+@media (max-width:1439px){.mp-sub-f{display:none}.mp-sub-s{display:inline}}
+@media (max-width:1100px){.mp-sub-tag small{display:none}}
+/* a strip that scrolls fades at each end that has more */
+.mp-sub-list.mp-more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
+.mp-sub-list.mp-less{-webkit-mask-image:linear-gradient(90deg,transparent,#000 36px);mask-image:linear-gradient(90deg,transparent,#000 36px)}
+.mp-sub-list.mp-less.mp-more{-webkit-mask-image:linear-gradient(90deg,transparent,#000 36px,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,transparent,#000 36px,#000 calc(100% - 36px),transparent)}
+
+/* side bar from 861px, under the top bar */
+@media (min-width:861px){
+  :root{--mp-side:240px}
+  body{padding-left:var(--mp-side)}
+  .mp-side{position:fixed;top:var(--mp-top);left:0;bottom:0;z-index:30;width:var(--mp-side);padding:18px;overflow-y:auto;scrollbar-width:thin;background-color:var(--ground);background-image:var(--grain,none);border-right:3px double var(--rule-strong)}
+  .mp-nav{flex-direction:column;gap:2px}
+  .mp-nav > a{gap:13px;padding:8px 10px}
+  .mp-nav > a[aria-current]::before,.mp-nav > a.mp-here::before,.mp-nav .mp-ch-link[aria-current]::before,.mp-nav .mp-ch-link.mp-here::before{left:-18px;top:6px;bottom:6px;width:3px}
+  .mp-nav .mp-back{margin-bottom:6px;border:1px solid var(--rule)}
+  .mp-ch{display:flex;flex-direction:column;margin:8px 0 4px}
+  .mp-ch-btn{display:none!important}
+  .mp-items{display:flex;flex-direction:column;position:static;inset:auto;margin:0;padding:0;border:0;background:none;color:inherit;width:auto;height:auto;overflow:visible}
+}
+@media (min-width:1200px){
+  :root{--mp-side:264px;--mp-top:72px}
+  .mp-side{padding:22px}
+  .mp-seal{width:52px;height:52px}
+  .mp-nm{font-size:25px}
+  .mp-role{font-size:20px}
+  .mp-nav > a[aria-current]::before,.mp-nav > a.mp-here::before,.mp-nav .mp-ch-link[aria-current]::before,.mp-nav .mp-ch-link.mp-here::before{left:-22px}
+}
+/* shorter windows: the side bar tightens step by step so every link stays on screen */
+@media (min-width:861px) and (max-height:900px){.mp-ch-line{display:none}.mp-nav .mp-ch-link{padding-block:6px 5px}.mp-ch{margin:4px 0 2px}.mp-nav .mp-it{padding-block:3px}.mp-grp-t{padding-block:4px 3px}.mp-nav .mp-an-link{padding-block:4px 3px}}
+@media (min-width:861px) and (max-height:820px){.mp-nav > a{padding-block:4px}.mp-nav .mp-it{padding-block:1px}.mp-grp-t{padding-block:2px}.mp-nav .mp-an-link{padding-block:2px}.mp-nav .mp-back{margin-bottom:3px}}
+@media (min-width:861px) and (max-height:720px){.mp-side{padding-block:12px}.mp-nav > a{padding-block:4px}.mp-nav .mp-back{margin-bottom:2px}.mp-nav .mp-it{padding-block:1px}}
+@media (min-width:861px) and (max-height:620px){:root{--mp-top:58px}.mp-seal{width:40px;height:40px}.mp-nm{font-size:21px}.mp-role{font-size:17px}.mp-nav > a{padding-block:4px;font-size:15px}.mp-nav .mp-it{padding-block:1px;font-size:14px}.mp-nav .mp-ch-link{padding-block:4px 3px}}
+@media (min-width:861px) and (max-height:540px){.mp-side{padding-block:8px}.mp-nav > a{padding-block:2px}.mp-nav .mp-it{padding-block:0;font-size:14px}}
+/* the industry groups tighten too; on the shortest windows the other chapter keeps only its own link */
+@media (min-width:861px) and (max-height:720px){.mp-grp-t{padding-block:1px}.mp-nav .mp-an-link{padding-block:1px}.mp-grp-in{padding-bottom:1px}.mp-nav .mp-it{padding-block:0}}
+@media (min-width:861px) and (max-height:620px){.mp-grp-t{padding-block:1px;font-size:11.5px}.mp-grp-in{padding-bottom:0}.mp-grp-n{display:none}}
+@media (min-width:861px) and (max-height:680px){.mp-nav:has(.mp-ch-btn.mp-cur) .mp-ch:not(:has(.mp-cur)) :is(.mp-it,.mp-grp){display:none}}
+@media (min-width:861px) and (max-height:600px){.mp-nav > a{padding-block:3px}.mp-grp-t{padding-block:0}}
+@media (min-width:861px) and (max-width:1060px){.mp-theme .mp-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.mp-theme{width:40px;padding:0}}
+
+/* phones: the name in the middle of the top bar with the switches either side and the "where" line
+   under it; Back, Home, the chapters, About and Contact along the bottom */
+@media (max-width:860px){
+  :root{--mp-top:88px}
+  :root:has(.mp-sub){--mp-sub:48px}
+  .mp-top{grid-template-columns:40px minmax(0,1fr) 40px;grid-template-rows:56px minmax(0,1fr);grid-template-areas:"theme brand gh" "where where where";column-gap:10px;padding:0 12px}
+  .mp-tools{display:contents}
+  .mp-theme{grid-area:theme;width:40px;padding:0}
+  .mp-gh{grid-area:gh}
+  .mp-theme .mp-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .mp-brand{justify-self:center;min-width:0;gap:10px}
+  .mp-seal{width:42px;height:42px}
+  .mp-nm{font-size:20px}
+  .mp-role{font-size:16px}
+  .mp-where{justify-content:center;align-self:stretch;row-gap:0;line-height:1.2;font-size:12px;letter-spacing:.08em;border-top:1px solid var(--rule-soft)}
+  .mp-wn{font-size:15px;margin-right:2px}
+  .mp-sub .mp-in{padding:6px 12px;gap:10px}
+  .mp-sub-tag{padding:4px 9px 3px;font-size:12px;letter-spacing:.1em}
+  .mp-sub-tag small{display:none}
+  .mp-sub-list a{padding:4px 8px;font-size:14.5px}
+  .mp-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:2px;padding:5px 6px calc(5px + env(safe-area-inset-bottom));background-color:var(--ground);background-image:var(--grain,none);border-top:3px double var(--rule-strong);box-shadow:0 -10px 24px -16px rgba(0,0,0,.6)}
+  .mp-ch{display:contents}
+  .mp-nav > a,.mp-nav .mp-ch-btn{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:3px;padding:6px 0 5px;min-height:52px}
+  .mp-nav .mp-l{display:none}
+  .mp-s{display:block;font-size:12px;line-height:1.1;white-space:nowrap}
+  .mp-nav > a[aria-current]::before,.mp-nav > a.mp-here::before,.mp-ch-btn.mp-cur::before,.mp-ch-btn.mp-here::before{top:-5px;left:22%;right:22%;height:2px}
+  .mp-items:popover-open{position:fixed;inset:auto 8px calc(74px + env(safe-area-inset-bottom)) 8px;margin:0;width:auto;max-height:70vh;overflow:auto;display:flex;flex-direction:column;gap:2px;padding:12px 12px 14px;background-color:var(--surface);background-image:var(--grain,none);color:var(--ink);border:3px double var(--rule-strong);box-shadow:0 -12px 40px -10px rgba(0,0,0,.6)}
+  .mp-items::backdrop{background:rgba(5,10,18,.45)}
+  .mp-items .mp-ch-link{margin-bottom:6px;border-bottom:1px solid var(--rule);padding-bottom:10px}
+  .mp-nav .mp-it{padding-block:10px;font-size:16px}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+}
+/* phones, upright: a three-step where line (the Kenya analysis pages) wraps onto two lines, so the bar grows a little */
+@media (max-width:860px) and (min-height:481px){:root:has(.mp-where > :nth-child(5)){--mp-top:98px}}
+/* landscape phones: one slim top bar, as on a desktop, and the series strip scrolls with the page */
+@media (max-width:860px) and (max-height:480px){
+  :root{--mp-top:50px}
+  :root:has(.mp-sub){--mp-sub:0px}
+  .mp-sub{position:relative;top:auto}
+  .mp-top{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:1fr;grid-template-areas:"where brand tools"}
+  .mp-tools{display:flex;justify-self:end;gap:6px}
+  .mp-where{justify-content:flex-start;border-top:0}
+  .mp-seal{width:32px;height:32px}
+  .mp-who{flex-direction:row;align-items:baseline;gap:10px}
+  .mp-nm{font-size:18px}
+  .mp-role{font-size:15px}
+  .mp-theme,.mp-gh{width:34px;min-height:34px}
+  .mp-nav > a,.mp-nav .mp-ch-btn{min-height:40px;flex-direction:row;gap:6px;padding-block:4px}
+  .mp-items:popover-open{max-height:calc(100dvh - 64px);bottom:calc(52px + env(safe-area-inset-bottom))}
+  body{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+}
+@media (max-width:380px){.mp-top{padding:0 8px;column-gap:6px}.mp-seal{width:36px;height:36px}.mp-brand{gap:8px}.mp-nm{font-size:18px}.mp-role{font-size:14.5px}.mp-where{font-size:11px;letter-spacing:.06em}}
+@media (max-width:360px){.mp-nav{padding-inline:2px;gap:0}.mp-s{font-size:11.5px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mp-nav a,.mp-beads,.mp-nm{transition:none}}
+@media print{.mp-top,.mp-side,.mp-sub{display:none}body{padding:0!important}}
+
+.tip{z-index:40}
+@media print{body::before{display:none}body{background-image:none}}
+@media (min-width:861px) and (max-width:1140px){.hero,.grid2,.method{grid-template-columns:minmax(0,1fr)}.stamp{text-align:left}}
+/* mp-nav end */
+</style>
+
+<style>
+.wrap{gap:44px}
+.lede,.sechead p{font-size:18px; line-height:1.5}
+.small{font-size:14px}
+.note{font-size:15px; line-height:1.5}
+.bn .k{font-size:15.5px; line-height:1.4; max-width:34ch}
+.three{display:flex; flex-direction:column; gap:16px}
+.three .row{display:grid; grid-template-columns:150px minmax(0,1fr) 64px; gap:12px; align-items:center}
+.three .nm{font-size:17px; line-height:1.2}
+.three .nm small{display:block; font-family:var(--ui); font-size:13.5px; color:var(--muted); margin-top:2px}
+.three .v{font-family:var(--ui); font-size:20px; text-align:right; font-variant-numeric:tabular-nums}
+.track{position:relative; height:26px; background:var(--rule-soft); border-radius:2px}
+.track .fill{position:absolute; left:0; top:0; bottom:0; background-color:color-mix(in oklab, var(--series) 70%, var(--surface)); border-radius:2px}
+.track .med{position:absolute; top:-5px; bottom:-5px; width:3px; margin-left:-1.5px; background:var(--ink); border-radius:1px}
+.keyline{display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--ui); font-size:14px; color:var(--ink-2)}
+.keyline i{display:inline-block; width:14px; height:12px; vertical-align:-1px; margin-right:6px}
+.keyline i.tick{width:3px; height:16px; vertical-align:-3px; background:var(--ink)}
+details.nums{font-family:var(--ui); font-size:15px; color:var(--ink-2); margin-top:10px}
+details.nums summary{cursor:pointer; color:var(--accent); width:max-content; padding:4px 0}
+details.nums .tablewrap{margin-top:8px; max-height:420px; overflow:auto}
+details.nums table{font-size:14.5px}
+table caption{caption-side:top; text-align:left; font-family:var(--ui); font-size:14px; color:var(--muted); padding:0 0 6px}
+.cases{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:16px}
+.case{display:flex; flex-direction:column; gap:10px}
+.case h3{font-size:21px}
+.case .verdict{display:inline-block; font-family:var(--ui); font-size:14px; padding:2px 8px; border-radius:999px; border:1px solid var(--rule-strong); color:var(--ink-2); white-space:nowrap}
+.case .verdict.slow{border-color:var(--loss); color:var(--loss)}
+.case .act{font-family:var(--ui); font-size:14px; color:var(--muted)}
+.case p{font-size:16px; line-height:1.45; color:var(--ink-2)}
+.qbars{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; align-items:end}
+.qbar{display:flex; flex-direction:column; gap:4px; align-items:stretch; font-family:var(--ui); font-size:13px; color:var(--muted); text-align:center}
+.qbar .col{position:relative; height:96px; background:var(--rule-soft); border-radius:2px}
+.qbar .col b{position:absolute; left:18%; right:18%; bottom:0; background-color:color-mix(in oklab, var(--series) 70%, var(--surface)); border-radius:2px 2px 0 0}
+.qbar.under .col b{background-color:color-mix(in oklab, var(--loss) 75%, var(--surface))}
+.qbar .col i{position:absolute; left:6%; right:6%; height:3px; margin-top:-1.5px; background:var(--ink)}
+.qbar .pct{font-size:14.5px; color:var(--ink); font-variant-numeric:tabular-nums}
+.tabs{display:flex; flex-wrap:wrap; gap:3px; background:var(--rule-soft); padding:3px; border-radius:8px; width:max-content; max-width:100%}
+.tabs button{font-family:var(--ui); font-size:15px; border:0; background:transparent; color:var(--ink-2); padding:7px 13px; border-radius:6px; cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.chart text{font-size:14px}
+.chart .acted{fill:var(--loss)}
+.stat .s{font-size:14px}
+.stat .k{font-size:13.5px}
+.caveat{font-family:var(--ui); font-size:15px; line-height:1.5; color:var(--ink-2); border-left:2px solid var(--accent); padding-left:12px; max-width:80ch}
+.method p{font-size:16.5px; line-height:1.5}
+.method ul{font-size:15px; line-height:1.5}
+@media (max-width:600px){
+  .three .row{grid-template-columns:minmax(0,1fr) 58px}
+  .three .row .track{grid-column:1 / -1; grid-row:2}
+  .qbar .col{height:80px}
+}
+</style>
+<!-- mp-nav start -->
+<a class="mp-skip" href="#mp-content">Skip to content</a>
+<header class="mp-top">
+<nav class="mp-where" aria-label="You are here"><a class="mp-wc" href="https://maidenpeter.github.io/#data"><b class="mp-wn">I</b> Data analysis</a><span class="mp-ws" aria-hidden="true">/</span><span class="mp-wc" aria-current="location">Claims settlement</span></nav>
+<a class="mp-brand" href="https://maidenpeter.github.io/"><svg class="mp-seal" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<defs><pattern id="mp-hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v2.6" stroke="currentColor" stroke-width=".55"/></pattern></defs>
+<circle cx="32" cy="32" r="30.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<circle cx="32" cy="32" r="28.3" fill="none" stroke="currentColor" stroke-width=".5"/>
+<circle class="mp-beads" cx="32" cy="32" r="25.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="0 3.377"/>
+<circle cx="32" cy="32" r="23.2" fill="url(#mp-hatch)" fill-opacity=".22" stroke="currentColor" stroke-width=".8"/>
+<circle cx="32" cy="32" r="21.6" fill="none" stroke="currentColor" stroke-width=".35"/>
+<path d="M32 13.4l1.7 1.7-1.7 1.7-1.7-1.7z" fill="currentColor"/>
+<text x="32" y="40.6" text-anchor="middle"><tspan>M</tspan><tspan dx="-2.4">P</tspan></text>
+<path d="M21.5 46.6h8M34.5 46.6h8" stroke="currentColor" stroke-width=".7" stroke-linecap="round"/>
+<path d="M32 44.5l2.1 2.1-2.1 2.1-2.1-2.1z" fill="currentColor"/>
+</svg><span class="mp-who"><b class="mp-nm">Marion Peter</b><span class="mp-role">Data &amp; Actuarial Engineer</span></span></a>
+<div class="mp-tools"><button class="mp-theme" type="button" hidden><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17z"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg><span class="mp-l">Paper theme</span></button><a class="mp-gh" href="https://github.com/maidenpeter" aria-label="GitHub" title="GitHub"><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></svg><span class="mp-l">GitHub</span></a></div>
+</header>
+<div class="mp-side"><nav class="mp-nav" aria-label="Main"><a class="mp-back" href="https://maidenpeter.github.io/#data"><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12h-15M10.5 6l-6 6 6 6"/></svg><span class="mp-l">Back</span><span class="mp-s">Back</span></a><a href="https://maidenpeter.github.io/" data-spy=""><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7M6 9v11.5h4.5V15h3v5.5H18V9"/></svg><span class="mp-l">Home</span><span class="mp-s">Home</span></a><div class="mp-ch"><button class="mp-ch-btn mp-cur" aria-current="true" type="button" popovertarget="mp-ch-data" data-spy="data work signals claims ask data-more"><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17M7 17v-5M12 17V6.5M17 17V9.5"/></svg><span class="mp-s">Data</span></button><div class="mp-items" id="mp-ch-data" popover aria-label="Data analysis"><a class="mp-ch-link" href="https://maidenpeter.github.io/#data" aria-current="true" data-spy="data work signals claims ask data-more"><span class="mp-num">I</span><span class="mp-ch-t">Data analysis</span><span class="mp-ch-line">Insurance, automotive and aviation data, checked before it is believed</span></a><details class="mp-grp" open><summary class="mp-grp-t">Insurance<span class="mp-grp-n">7</span></summary><div class="mp-grp-in"><details class="mp-grp mp-an"><summary class="mp-grp-t"><span class="mp-an-n">1</span>Kenya series<span class="mp-grp-n">6</span></summary><div class="mp-grp-in"><a class="mp-it" href="https://maidenpeter.github.io/kenya-insurance/"><span class="mp-it-n">01</span>Overview</a><a class="mp-it" href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-loss-map.html"><span class="mp-it-n">02</span>Loss map</a><a class="mp-it" href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-market-structure.html"><span class="mp-it-n">03</span>Market structure</a><a class="mp-it" href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-reinsurance-flows.html"><span class="mp-it-n">04</span>Reinsurance flows</a><a class="mp-it" href="https://maidenpeter.github.io/ira-kenya-reinsurance/page/kenya-cedant-scorecard.html"><span class="mp-it-n">05</span>Cedant scorecard</a><a class="mp-it" href="https://maidenpeter.github.io/ira-kenya-data/explorer/kenya-insurer-explorer.html"><span class="mp-it-n">06</span>Insurer explorer</a></div></details><a class="mp-it mp-an-link" href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-claims-settlement.html" aria-current="page"><span class="mp-an-n">2</span>Claims settlement</a></div></details><details class="mp-grp"><summary class="mp-grp-t">Automotive<span class="mp-grp-n">1</span></summary><div class="mp-grp-in"><a class="mp-it" href="https://maidenpeter.github.io/work/dealer-revenue/">Dealer revenue audit</a></div></details><details class="mp-grp"><summary class="mp-grp-t">Aviation<span class="mp-grp-n">1</span></summary><div class="mp-grp-in"><a class="mp-it" href="https://maidenpeter.github.io/#cargoshield">CargoShield</a></div></details></div></div><div class="mp-ch"><button class="mp-ch-btn" type="button" popovertarget="mp-ch-actuarial" data-spy="actuarial apps actuarial-cases"><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4.5v4.5H4zM9.75 4h4.5v4.5h-4.5zM15.5 4H20v4.5h-4.5zM4 9.75h4.5v4.5H4zM9.75 9.75h4.5v4.5h-4.5zM4 15.5h4.5V20H4z"/></svg><span class="mp-s">Actuarial</span></button><div class="mp-items" id="mp-ch-actuarial" popover aria-label="Actuarial analysis"><a class="mp-ch-link" href="https://maidenpeter.github.io/#actuarial" data-spy="actuarial apps actuarial-cases"><span class="mp-num">II</span><span class="mp-ch-t">Actuarial analysis</span><span class="mp-ch-line">Reserving, IFRS 17 and pricing</span></a><a class="mp-it" href="https://maidenpeter.github.io/#hil">Health IBNR Lab</a><a class="mp-it" href="https://maidenpeter.github.io/#ipl">Persistency Lab</a><a class="mp-it" href="https://maidenpeter.github.io/work/ifrs17-measurement/">IFRS 17 measurement</a><a class="mp-it" href="https://maidenpeter.github.io/work/valuation-adequacy/">Reserve adequacy test</a><a class="mp-it" href="https://maidenpeter.github.io/#agroshield">AgroShield pricing</a></div></div><a href="https://maidenpeter.github.io/ask/" data-spy=""><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v11.5h-9l-5 4v-4h-3zM9.6 8.4a2.4 2.4 0 1 1 3.4 2.2c-.6.3-1 .8-1 1.5M12 14v.1"/></svg><span class="mp-l">Ask the data</span><span class="mp-s">Ask</span></a><a href="https://maidenpeter.github.io/about/" data-spy="method"><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5zM4.5 20.5c.6-3.9 3.6-6 7.5-6s6.9 2.1 7.5 6"/></svg><span class="mp-l">About</span><span class="mp-s">About</span></a><a href="https://maidenpeter.github.io/#contact" data-spy="contact"><svg class="mp-ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5h17v13h-17zM3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span class="mp-l">Contact</span><span class="mp-s">Contact</span></a></nav></div>
+<span id="mp-content" tabindex="-1"></span>
+<!-- mp-nav end -->
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Kenyan insurance, analysis 2: claims settlement</div>
+      <h1>Kenya Claims Settlement</h1>
+      <p class="lede">How much of what is claimed gets paid, how fast, and by whom: general insurance and life, every insurer, every quarter IRA has published since 2017. Built from the Insurance Regulatory Authority's quarterly claims settlement statistics.</p>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <section id="hero">
+    <div class="hero">
+      <div class="bignums" id="bignums"></div>
+      <div class="panel">
+        <h3 id="threeh"></h3>
+        <p class="small" style="margin:2px 0 14px" id="threes"></p>
+        <div class="three" id="three"></div>
+        <div class="keyline" style="margin-top:14px"><span><i style="background:color-mix(in oklab, var(--series) 70%, var(--surface))"></i>all claims, pooled</span><span><i class="tick"></i>the median insurer</span></div>
+        <details class="nums"><summary>The numbers</summary><div class="tablewrap"><table id="threet"></table></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="queue">
+    <div class="sechead">
+      <div class="eyebrow">The queue</div>
+      <h2>Liability claims wait</h2>
+      <p id="queuelede"></p>
+    </div>
+    <div class="panel">
+      <h3>Liability claims still outstanding at the end of each quarter</h3>
+      <p class="small" style="margin:2px 0 8px">General insurers, number of claims. Gaps are quarters IRA has not published.</p>
+      <div class="chart" id="queuechart"></div>
+      <details class="nums"><summary>The numbers</summary><div class="tablewrap"><table id="queuet"></table></div></details>
+    </div>
+  </section>
+
+  <section id="speed">
+    <div class="sechead">
+      <div class="eyebrow">Three speeds</div>
+      <h2>Life claims are paid quickly, liability claims are disputed</h2>
+      <p id="speedlede"></p>
+    </div>
+    <div class="panel">
+      <h3>The median insurer's payment ratio, each quarter</h3>
+      <p class="small" style="margin:2px 0 8px" id="speeds"></p>
+      <div class="chart" id="speedchart"></div>
+      <details class="nums"><summary>The numbers</summary><div class="tablewrap"><table id="speedt"></table></div></details>
+    </div>
+  </section>
+
+  <section id="insurers">
+    <div class="sechead">
+      <div class="eyebrow">By insurer</div>
+      <h2 id="insh"></h2>
+      <p id="inslede"></p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Business" id="instabs"></div>
+    <div class="panel" role="tabpanel" id="inspanel">
+      <h3 id="insch"></h3>
+      <p class="small" style="margin:2px 0 8px" id="inscs"></p>
+      <div class="chart" id="inschart"></div>
+      <details class="nums"><summary>The numbers</summary><div class="tablewrap"><table id="inst"></table></div></details>
+    </div>
+    <p class="caveat">From the insurers' unaudited returns to the IRA. A screening view, not a credit opinion. A low payment ratio can mean a book of slow claims (injury cases that go to court) as much as slow payment.</p>
+  </section>
+
+  <section id="warning">
+    <div class="sechead">
+      <div class="eyebrow">The five insurers the regulator stepped into</div>
+      <h2>Was the warning in the claims returns?</h2>
+      <p id="warnlede"></p>
+    </div>
+    <div class="cases" id="cases"></div>
+    <p class="keyline"><span><i style="background:color-mix(in oklab, var(--series) 70%, var(--surface))"></i>the insurer's liability payment ratio</span><span><i style="background:color-mix(in oklab, var(--loss) 75%, var(--surface))"></i>under half the median</span><span><i class="tick"></i>the median insurer</span></p>
+    <div class="stat" id="runstat"></div>
+    <p class="note" id="runnote"></p>
+  </section>
+
+  <section id="checks">
+    <div class="sechead">
+      <div class="eyebrow">Can the returns be trusted?</div>
+      <h2>What the checks found</h2>
+      <p id="checklede"></p>
+    </div>
+    <div class="stat" id="checkstat"></div>
+  </section>
+
+  <section id="method">
+    <div class="sechead"><div class="eyebrow">Method</div><h2>How the numbers are built</h2></div>
+    <div class="method">
+      <div style="display:flex; flex-direction:column; gap:12px">
+        <p>IRA publishes each insurer's claims movement every quarter: claims outstanding at the start, claims reported and revived, claims paid, declined and closed as no claim, and claims still outstanding at the end. The payment ratio is IRA's own: claims paid in the quarter over the claims open to the insurer in the quarter, which is paid plus declined plus closed plus still outstanding. Over a year it is pooled, quarter by quarter.</p>
+        <p>Three businesses are shown. Liability claims are claims by third parties, most of them injury and damage from motor accidents. Non-liability claims are the insured's own: medical, motor own damage, property and the rest. Life covers death, maturity, pension and funeral claims under long-term business.</p>
+      </div>
+      <ul id="methodlist"></ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Source: Insurance Regulatory Authority, Kenya, quarterly claims settlement statistics, Q1 2017 to Q1 2026 (summaries of insurers' unaudited monthly returns). Regulator actions: Capital FM, IRA on X. Extraction, the name crosswalk and the checks are in ira-kenya-data; this analysis is in ira-kenya-insurance. Everything here is public data.</p>
+    <p>Marion Peter &middot; built with Python and pandas</p>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const D = /*__DATA__*/null;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pc = (v, d=0) => v === null || v === undefined ? 'n/a' : (v*100).toFixed(d) + '%';
+const int = v => v === null || v === undefined ? 'n/a' : Math.round(v).toLocaleString('en-GB');
+const ksh = v => v === null || v === undefined ? 'n/a' : 'KSh ' + (v/1000).toFixed(1) + 'bn';   // v in KSh millions
+const ql = p => 'Q' + p.slice(5) + ' ' + p.slice(0, 4);
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const ym = d => MONTHS[+d.slice(5, 7) - 1] + ' ' + d.slice(0, 4);
+const span = (a, b) => pc(a) === pc(b) ? `about ${pc(a)}` : `${pc(a)} to ${pc(b)}`;
+const tip = $('tip');
+function showTip(e, h){ tip.innerHTML = h; tip.hidden = false; const r = tip.getBoundingClientRect(); let x = e.clientX+14, y = e.clientY+14; if (x+r.width > innerWidth-8) x = e.clientX-r.width-14; if (y+r.height > innerHeight-8) y = e.clientY-r.height-14; tip.style.left = x+'px'; tip.style.top = y+'px'; }
+function bindTips(root){ root.querySelectorAll('[data-tip]').forEach(el => { el.addEventListener('mousemove', e => showTip(e, el.dataset.tip)); el.addEventListener('mouseleave', () => tip.hidden = true); }); }
+function table(el, cap, head, rows){ el.innerHTML = `<caption>${esc(cap)}</caption><thead><tr>${head.map((h, i) => `<th class="${i ? '' : 'l'}">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td class="${i ? '' : 'l'}">${c}</td>`).join('')}</tr>`).join('')}</tbody>`; }
+
+const P = D.periods, M = D.market, Y = D.last, B = {liab: 'Liability', nonl: 'Non-liability', life: 'Life'};
+const BS = {liab: 'third parties, mostly motor injury', nonl: 'medical, own damage, property', life: 'death, maturity, pension, funeral'};
+const at = (k, p) => M[k][P.indexOf(p)];
+const lastP = D.published[D.published.length-1];
+const yq = k => [1,2,3,4].map(q => at(k, `${Y}Q${q}`)).filter(Boolean);
+const pooled = k => D.years[k][Y].pr;
+const medY = k => D.ins[k].med;
+const L4 = yq('liab'), q4 = at('liab', `${Y}Q4`);
+const paidQ = L4.reduce((a, x) => a + x.paid, 0) / L4.length;
+const clearQ = q4.close / paidQ;
+const insurers = new Set(D.ins.liab.rows.map(r => r.id)).size;
+
+$('stamp').innerHTML = `${D.published.length} quarters, ${ql(D.published[0])} to ${ql(lastP)}<br>${D.runs.compared} general insurers with a liability book<br>Claims, IRA quarterly statistics`;
+
+$('bignums').innerHTML = `
+  <p class="thesis">In an average quarter of ${Y}, Kenya's general insurers paid ${pc(pooled('liab'))} of the liability claims open to them. Life insurers paid ${pc(pooled('life'))}.</p>
+  <div class="bn"><span class="v">${int(q4.close)}</span><span class="k">liability claims still outstanding at the end of ${Y}, ${ksh(q4.ca)} by the insurers' own estimates</span></div>
+  <div class="bn"><span class="v">${clearQ.toFixed(1)}</span><span class="k">quarters of payments at the ${Y} pace, ${int(paidQ)} claims a quarter, to clear them if no new claim arrived</span></div>`;
+
+$('threeh').textContent = `Of every 100 claims open in a quarter of ${Y}, how many were paid that quarter`;
+$('threes').textContent = `Pooled over the four quarters. The bar counts every claim; the mark is the insurer in the middle, among insurers with at least ${D.min_open} claims open.`;
+$('three').innerHTML = ['liab','nonl','life'].map(k => `<div class="row"><div class="nm">${B[k]}<small>${BS[k]}</small></div>
+  <div class="track"><span class="fill" style="width:${pooled(k)*100}%" data-tip="${B[k]}, ${Y}: ${pc(pooled(k),1)} of all open claims paid in the quarter"></span><span class="med" style="left:${medY(k)*100}%" data-tip="${B[k]}, ${Y}: the median insurer paid ${pc(medY(k),1)}"></span></div>
+  <div class="v">${pc(pooled(k))}</div></div>`).join('');
+bindTips($('three'));
+table($('threet'), `Payment ratio, ${Y}, pooled over four quarters`, ['Business', 'All claims', 'Median insurer', 'Insurers compared'],
+  ['liab','nonl','life'].map(k => [B[k], pc(pooled(k),1), pc(medY(k),1), D.ins[k].rows.length]));
+
+// the queue
+(function(){
+  const rows = P.map(p => ({p, x: at('liab', p)}));
+  const pub = rows.filter(r => r.x);
+  const W = 1100, H = 300, Lp = 64, R = 12, T = 22, Bt = 44;
+  const max = Math.ceil(Math.max(...pub.map(r => r.x.close)) / 25000) * 25000;
+  const bw = (W-Lp-R) / rows.length, yv = v => T + (1 - v/max) * (H-T-Bt);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Liability claims outstanding at each quarter end">`;
+  for (let t = 0; t <= max; t += 25000) s += `<line x1="${Lp}" x2="${W-R}" y1="${yv(t)}" y2="${yv(t)}" stroke="var(--rule-soft)"/><text x="${Lp-8}" y="${yv(t)+5}" text-anchor="end">${t/1000}k</text>`;
+  const peak = pub.reduce((a, r) => r.x.close > a.x.close ? r : a);
+  rows.forEach((r, i) => {
+    const x = Lp + i*bw + 2, w = bw - 4;
+    if (r.p.endsWith('Q1')) s += `<text x="${x}" y="${H-Bt+20}">${r.p.slice(0,4)}</text>`;
+    if (!r.x) { s += `<rect x="${x}" y="${yv(max*0.08)}" width="${w}" height="${yv(0)-yv(max*0.08)}" fill="none" stroke="var(--rule)" stroke-dasharray="3 3" data-tip="${ql(r.p)}: not published"/>`; return; }
+    s += `<rect x="${x}" y="${yv(r.x.close)}" width="${w}" height="${yv(0)-yv(r.x.close)}" rx="1.5" fill="color-mix(in oklab, var(--series) 70%, var(--surface))" data-tip="${ql(r.p)}: ${int(r.x.close)} liability claims outstanding; ${int(r.x.paid)} paid in the quarter, ${int(r.x.rep)} reported${r.x.ca !== null ? `; ${ksh(r.x.ca)} outstanding` : ''}"/>`;
+    if (r === peak || r.p === lastP || r.p === D.published[0]) s += `<text x="${i ? x+w/2 : x}" y="${yv(r.x.close)-7}" text-anchor="${i ? 'middle' : 'start'}" class="lab">${int(r.x.close)}</text>`;
+  });
+  s += `<text x="${W-R}" y="${H-6}" text-anchor="end">dashed: quarter not published</text>`;
+  $('queuechart').innerHTML = s + '</svg>'; bindTips($('queuechart'));
+  table($('queuet'), 'Liability claims, general insurers, by quarter', ['Quarter', 'Outstanding at end', 'Reported', 'Paid', 'Paid of open', 'Outstanding, KSh'],
+    pub.map(r => [ql(r.p), int(r.x.close), int(r.x.rep), int(r.x.paid), pc(r.x.pr,1), r.x.ca === null ? '' : ksh(r.x.ca)]));
+  const first = pub[0].x, ca0 = pub.find(r => r.x.ca !== null);
+  $('queuelede').innerHTML = `Claims by third parties, most of them for injury in motor accidents, take years: the insurer disputes liability or quantum, and many end in court. At the end of ${Y} general insurers had ${int(q4.close)} of them outstanding, against ${int(first.close)} at the end of ${ql(D.published[0])}, with a peak of ${int(peak.x.close)} in ${ql(peak.p)}. They paid ${int(paidQ)} a quarter in ${Y}, so the queue held ${clearQ.toFixed(1)} quarters of payments. By value the queue grew from ${ksh(ca0.x.ca)} in ${ql(ca0.p)}, the first quarter IRA printed amounts, to ${ksh(q4.ca)}.`;
+})();
+
+// three speeds over time
+(function(){
+  const W = 1100, H = 320, Lp = 52, R = 110, T = 14, Bt = 40;
+  const xs = i => Lp + (i + 0.5) * (W-Lp-R) / P.length, yv = v => T + (1 - v) * (H-T-Bt);
+  const cols = {liab: 'var(--loss)', nonl: 'var(--series)', life: 'var(--gain)'};
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Median insurer payment ratio by quarter">`;
+  [0, .25, .5, .75, 1].forEach(t => s += `<line x1="${Lp}" x2="${W-R}" y1="${yv(t)}" y2="${yv(t)}" stroke="var(--rule-soft)"/><text x="${Lp-8}" y="${yv(t)+5}" text-anchor="end">${pc(t)}</text>`);
+  P.forEach((p, i) => { if (p.endsWith('Q1')) s += `<text x="${xs(i)}" y="${H-Bt+22}" text-anchor="middle">${p.slice(0,4)}</text>`; });
+  ['liab','nonl','life'].forEach(k => {
+    let seg = [], segs = [];
+    P.forEach((p, i) => { const x = at(k, p); if (x && x.med !== null) seg.push([xs(i), yv(x.med)]); else if (seg.length) { segs.push(seg); seg = []; } });
+    if (seg.length) segs.push(seg);
+    segs.forEach(sg => s += `<polyline fill="none" stroke="${cols[k]}" stroke-width="2.5" points="${sg.map(q => q.join(',')).join(' ')}"/>`);
+    P.forEach((p, i) => { const x = at(k, p); if (x && x.med !== null) s += `<circle cx="${xs(i)}" cy="${yv(x.med)}" r="4" fill="${cols[k]}" data-tip="${B[k]}, ${ql(p)}: the median insurer paid ${pc(x.med,1)} of open claims (${x.n} insurers); all claims pooled ${pc(x.pr,1)}"/>`; });
+    const lx = at(k, lastP);
+    s += `<text x="${xs(P.length-1)+10}" y="${yv(lx.med)+5}" style="fill:${cols[k]}; font-weight:600">${B[k]} ${pc(lx.med)}</text>`;
+  });
+  $('speedchart').innerHTML = s + '</svg>'; bindTips($('speedchart'));
+  table($('speedt'), "The median insurer's payment ratio by quarter", ['Quarter', 'Liability', 'Non-liability', 'Life'],
+    D.published.map(p => [ql(p), ...['liab','nonl','life'].map(k => { const x = at(k, p); return x && x.med !== null ? pc(x.med,1) : ''; })]));
+  const yr = k => D.years[k], full = Object.keys(D.years.liab).map(Number).filter(y => yr('liab')[y].q === 4);
+  const y0 = full[0];
+  $('speeds').textContent = `Among insurers with at least ${D.min_open} claims open in the quarter. The median keeps the two largest medical insurers, which report most non-liability claims by number, from setting the line.`;
+  $('speedlede').innerHTML = `A life claim is usually a death certificate or a maturity date; most are paid within the quarter they arrive. A liability claim is a dispute. In ${Y} the median life insurer paid ${pc(medY('life'))} of the claims open to it each quarter, the median general insurer ${pc(medY('nonl'))} of its own-damage, medical and property claims and ${pc(medY('liab'))} of its liability claims. Pooled across the market, the liability ratio was ${pc(yr('liab')[y0].pr,1)} in ${y0} and ${pc(yr('liab')[Y].pr,1)} in ${Y}; life rose from ${pc(yr('life')[y0].pr,1)} to ${pc(yr('life')[Y].pr,1)}.`;
+})();
+
+// by insurer
+const acted = new Set(D.reg.map(r => r.id)), actedOn = Object.fromEntries(D.reg.map(r => [r.id, r]));
+function drawIns(k){
+  const I = D.ins[k], rows = I.rows;
+  const W = 1100, rowH = 24, Lp = 250, R = 150, T = 8;
+  const H = T + rows.length*rowH + 30;
+  const x = v => Lp + v * (W-Lp-R);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${B[k]} payment ratio by insurer, ${Y}">`;
+  [0, .25, .5, .75, 1].forEach(t => s += `<line x1="${x(t)}" x2="${x(t)}" y1="${T}" y2="${H-26}" stroke="var(--rule-soft)"/><text x="${x(t)}" y="${H-8}" text-anchor="middle">${pc(t)}</text>`);
+  s += `<line x1="${x(I.med)}" x2="${x(I.med)}" y1="${T-4}" y2="${H-26}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="5 4"/>`;
+  rows.forEach((r, i) => {
+    const y = T + i*rowH, a = acted.has(r.id.replace('_life', ''));
+    const note = a ? ` (${actedOn[r.id.replace('_life', '')].action}, ${ym(actedOn[r.id.replace('_life', '')].date)})` : '';
+    s += `<text x="${Lp-10}" y="${y+rowH/2+5}" text-anchor="end" class="lab${a ? ' acted' : ''}">${esc(r.name)}${a ? ' *' : ''}</text>`;
+    s += `<rect x="${x(0)}" y="${y+5}" width="${Math.max(1.5, x(r.pr)-x(0))}" height="${rowH-10}" rx="2" fill="${r.pr < I.med/2 ? 'color-mix(in oklab, var(--loss) 75%, var(--surface))' : 'color-mix(in oklab, var(--series) 70%, var(--surface))'}" data-tip="${esc(r.name)}${esc(note)}, ${Y}: paid ${int(r.paid)} of ${int(r.act)} open claims over the quarters, ${pc(r.pr,1)}; ${int(r.close)} outstanding at the end of the year"/>`;
+    s += `<text x="${x(r.pr)+8}" y="${y+rowH/2+5}">${pc(r.pr,1)}</text>`;
+  });
+  s += `<text x="${x(I.med)+6}" y="${H-30}" class="strong">median ${pc(I.med,1)}</text>`;
+  $('inschart').innerHTML = s + '</svg>'; bindTips($('inschart'));
+  $('insch').textContent = `${B[k]} claims: share of open claims paid in the quarter, ${Y}`;
+  const nAct = rows.filter(r => acted.has(r.id.replace('_life', ''))).length;
+  const acts = [...new Set(rows.filter(r => acted.has(r.id.replace('_life', ''))).map(r => { const a = actedOn[r.id.replace('_life', '')]; return `${a.action} from ${ym(a.date)}`; }))];
+  $('inscs').textContent = `Each insurer with at least ${D.min_open} ${B[k].toLowerCase()} claims open in an average quarter of ${Y}, pooled over the four quarters. Dashed line: the median insurer. Red bars: under half the median.${nAct ? ` * Under ${acts.join('; ')}.` : ''}`;
+  table($('inst'), `${B[k]} claims by insurer, ${Y}`, ['Insurer', 'Paid of open', 'Paid in the year', 'Open, summed over quarters', `Outstanding at end of ${Y}`, 'Outstanding, KSh'],
+    rows.slice().reverse().map(r => [esc(r.name), pc(r.pr,1), int(r.paid), int(r.act), int(r.close), r.ca === null ? '' : ksh(r.ca)]));
+  [...$('instabs').children].forEach(b => b.setAttribute('aria-selected', b.dataset.k === k ? 'true' : 'false'));
+}
+$('instabs').innerHTML = ['liab','nonl','life'].map(k => `<button type="button" role="tab" data-k="${k}" aria-controls="inspanel">${B[k]}</button>`).join('');
+$('instabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) drawIns(b.dataset.k); });
+drawIns('liab');
+(function(){
+  const r = D.ins.liab.rows, lo = r.filter(x => x.pr < D.ins.liab.med/2);
+  $('insh').textContent = `Who paid, ${Y}`;
+  $('inslede').innerHTML = `${r.length} general insurers had a liability book big enough to compare in ${Y}. The median paid ${pc(D.ins.liab.med,1)} of its open liability claims each quarter; ${lo.length} paid under half that. On life business the median insurer paid ${pc(D.ins.life.med,1)}. The tabs switch between the three businesses.`;
+})();
+
+// the five
+(function(){
+  const order = {invesco: 0, xplico: 1, corporate: 2, resolution: 3, trident: 4};
+  const reg = D.reg.slice().sort((a, b) => order[a.id] - order[b.id]);
+  const under = r => r.q.filter(q => q.under).length;
+  const story = {
+    resolution: r => `A medical insurer: its liability book was small and paid close to or above the median. The claims returns did not show what was coming; the regulator cited unsettled claims when it acted.`,
+    trident: r => `The opposite of a warning: Trident reported paying ${pc(Math.min(...r.q.map(q => q.pr)))} to ${pc(Math.max(...r.q.map(q => q.pr)))} of its liability claims a quarter, ${Math.round(Math.min(...r.q.map(q => q.sh)))} to ${Math.round(Math.max(...r.q.map(q => q.sh)))} times the median. A claims return can be as hard to believe as a balance sheet.`,
+  };
+  $('cases').innerHTML = reg.map(r => {
+    const u = under(r), mx = Math.max(...r.q.map(q => Math.max(q.pr, q.med))) * 1.1;
+    const verdict = u === 4 ? 'under half the median in all four' : u ? `under half the median in ${u} of 4` : 'no slowdown';
+    const txt = story[r.id] ? story[r.id](r) : `In the last four quarters it reported before the regulator acted, it paid ${r.q.map(q => pc(q.pr,1)).join(', ')} of its open liability claims, against a median of ${span(Math.min(...r.q.map(q => q.med)), Math.max(...r.q.map(q => q.med)))}. It had ${int(r.q[r.q.length-1].open)} liability claims open in its last quarter.`;
+    return `<div class="panel case"><h3>${esc(r.name)}</h3>
+      <div class="act">${r.src ? `<a href="${esc(r.src)}" target="_blank" rel="noopener">${esc(r.action)}</a>` : esc(r.action)}, ${ym(r.date)}</div>
+      <div><span class="verdict${u >= 3 ? ' slow' : ''}">${verdict}</span></div>
+      <div class="qbars">${r.q.map(q => `<div class="qbar${q.under ? ' under' : ''}" data-tip="${esc(r.name)}, ${ql(q.p)}: paid ${pc(q.pr,1)} of ${int(q.open)} open liability claims; median insurer ${pc(q.med,1)}"><span class="pct">${pc(q.pr)}</span><div class="col"><b style="height:${Math.max(1, q.pr/mx*100)}%"></b><i style="top:${100 - q.med/mx*100}%"></i></div><span>${ql(q.p)}</span></div>`).join('')}</div>
+      <p>${txt}</p></div>`;
+  }).join('');
+  bindTips($('cases'));
+  const slow = reg.filter(r => under(r) >= 3);
+  $('warnlede').innerHTML = `IRA has placed five general insurers under statutory management or liquidation since 2022. For each, the four quarters of claims returns it filed last before the regulator acted, compared with the median insurer that quarter. ${slow.length} of the five were paying liability claims at under half the median rate in at least three of those four quarters: ${slow.map(r => esc(r.name)).join(', ')}.`;
+  const R = D.runs;
+  $('runstat').innerHTML = `
+    <div><span class="k">Insurers with four quarters running under half the median, ${D.published[0].slice(0,4)} to ${lastP.slice(0,4)}</span><span class="v">${R.insurers}</span><span class="s">of ${R.compared} general insurers with a liability book</span></div>
+    <div><span class="k">Of those, later under the regulator</span><span class="v">${R.acted}</span><span class="s">${R.acted_names.map(esc).join(', ')}</span></div>
+    <div><span class="k">Under half the median in every quarter of ${Y}</span><span class="v">${R.in_year.length}</span><span class="s">${R.in_year.map(esc).join(', ')}</span></div>`;
+  $('runnote').innerHTML = `Paying liability claims slowly is common, and on its own it is not a sign of trouble: ${R.insurers - R.acted} of the ${R.insurers} insurers with such a run carried on writing business, and an insurer that contests injury claims hard may pay slowly by policy. Read it with the balance sheet, as the Cedant Scorecard does, and treat a return that is too good, like Trident's, as a question in its own right. Five cases is a small sample.`;
+})();
+
+// checks
+(function(){
+  const C = D.checks, tot = Object.values(C).reduce((a, c) => a + c.passed + c.explained + c.failed, 0);
+  const c = k => C[k], n = k => c(k).passed + c(k).explained + c(k).failed;
+  $('checklede').innerHTML = `${int(tot)} checks on the ${D.published.length} quarterly workbooks, run in ira-kenya-data. The rows add up to IRA's printed industry line in every table but two, and both are explained: in Q1 2020 IRA's printed life total leaves out Absa Life Assurance, in the first quarter it was printed under its new name, and in Q1 2017 the liability line is one claim higher than its rows. Where an insurer's own return does not add up, it is kept as printed and counted.`;
+  $('checkstat').innerHTML = `
+    <div><span class="k">Printed totals matched</span><span class="v">${int(c('sum_equals_printed_total').passed)}</span><span class="s">of ${int(n('sum_equals_printed_total'))} columns; ${c('sum_equals_printed_total').explained} explained, ${c('sum_equals_printed_total').failed} unexplained</span></div>
+    <div><span class="k">Payment ratio as IRA printed it</span><span class="v">${int(c('payment_ratio_as_printed').passed)}</span><span class="s">of ${int(n('payment_ratio_as_printed'))} insurer-quarters, recomputed to within 0.05 points</span></div>
+    <div><span class="k">Returns where the claims do not add up</span><span class="v">${int(c('movement_adds_up').failed)}</span><span class="s">of ${int(n('movement_adds_up'))}: start, plus reported, less settled, is not the end</span></div>
+    <div><span class="k">Quarters that do not start where the last ended</span><span class="v">${int(c('opening_equals_last_closing').failed)}</span><span class="s">of ${int(n('opening_equals_last_closing'))} insurer-quarters with a published quarter before</span></div>`;
+  const gaps = P.filter(p => !D.published.includes(p));
+  $('methodlist').innerHTML = [
+    `Quarters not in the data: ${gaps.map(ql).join(', ')}. Q1 2018 has life business only.`,
+    `From Q3 2018 to Q2 2020 the column printed as "claims revived" does not add to the count, and IRA prints the same column as "claims revised" from Q3 2020. It is read as revised for those eight quarters. The payment ratio does not use it.`,
+    `Amounts are printed from Q4 2022, in KSh thousands; they are the insurers' estimates of what open claims will cost. Counts are used for every ratio on this page.`,
+    `Insurers are compared when they had at least ${D.min_open} claims open in the quarter, or on average over the year with claims returns in at least three of its four quarters. A return that prints a negative count, or no claims at all, has no ratio. Micro insurers are left out.`,
+    `Insurers are joined across renames with reference/claims_crosswalk.csv in ira-kenya-data: 227 printed names, 48 general and 29 life companies.`,
+    `"Under half the median": the insurer's payment ratio below half the median insurer's in the same quarter. Regulator actions are in reference/regulator_actions.csv.`,
+  ].map(x => `<li>${x}</li>`).join('');
+})();
+</script>
+<script id="mp-nav-js">(function(){var d=document.documentElement,side=document.querySelector('.mp-side');if(!side)return;
+var each=function(sel,f){[].forEach.call(document.querySelectorAll(sel),f)},hide=function(p){try{p.hidePopover()}catch(x){}};
+// a short desktop window starts with the groups that do not hold this page folded, so the side bar fits
+// the series strip opens scrolled to the current page, and fades at each end that has more
+var sl=document.querySelector('.mp-sub-list');if(sl){var sc=sl.querySelector('a[aria-current]');var edge=function(){sl.classList.toggle('mp-more',sl.scrollLeft+sl.clientWidth<sl.scrollWidth-2);sl.classList.toggle('mp-less',sl.scrollLeft>2)};var mid=function(){if(sc)sl.scrollLeft+=sc.getBoundingClientRect().left-sl.getBoundingClientRect().left-(sl.clientWidth-sc.offsetWidth)/2;edge()};mid();addEventListener('load',mid);if(document.fonts)document.fonts.ready.then(mid);sl.addEventListener('scroll',edge,{passive:true});addEventListener('resize',edge)}
+if(matchMedia('(min-width:861px) and (max-height:680px)').matches)each('.mp-side .mp-grp[open]',function(g){if(!g.querySelector('[aria-current]'))g.open=false});
+var b=document.querySelector('.mp-theme');if(b){var l=b.querySelector('.mp-l');
+var cur=function(){return d.getAttribute('data-theme')||'dark'};
+var lab=function(){var c=cur();l.textContent=c==='dark'?'Paper theme':'Ink theme';b.setAttribute('aria-label','Switch to '+(c==='dark'?'paper':'ink')+' theme')};
+b.hidden=false;b.addEventListener('click',function(){var x=cur()==='dark'?'light':'dark';d.setAttribute('data-theme',x);try{localStorage.setItem('mp-theme',x)}catch(e){}lab()});lab()}
+var touched=false;['wheel','touchstart','keydown','mousedown'].forEach(function(t){addEventListener(t,function(){touched=true},{once:true,passive:true})});
+var ready=function(){var h=location.hash,t=null;try{t=h&&document.getElementById(decodeURIComponent(h.slice(1)))}catch(e){}if(t&&!touched)t.scrollIntoView();d.classList.add('mp-ready')};
+if(document.readyState==='complete')d.classList.add('mp-ready');else addEventListener('load',ready);
+var bk=side.querySelector('.mp-back');if(bk){var same=false;try{same=new URL(document.referrer).origin===location.origin}catch(e){}
+var st=function(){var s=history.state;return s&&typeof s==='object'?s:null},put=function(n){var s=st()||{};s.mpd=n;try{history.replaceState(s,'')}catch(e){}};
+var s0=st(),depth=s0&&typeof s0.mpd==='number'?s0.mpd:(same?1:0);put(depth);
+var show=function(){if(bk.hasAttribute('data-home'))bk.hidden=depth<1},sync=function(){var s=st();if(s&&typeof s.mpd==='number')depth=s.mpd;show()};
+bk.addEventListener('click',function(e){if(depth>0&&history.length>1){e.preventDefault();history.back()}});
+addEventListener('popstate',sync);addEventListener('pageshow',sync);
+addEventListener('hashchange',function(){var s=st();if(s&&typeof s.mpd==='number')depth=s.mpd;else{depth+=1;put(depth)}show()});show()}
+var guard=false;
+document.addEventListener('pointerdown',function(e){var o=document.querySelector('[popover]:popover-open');guard=!!o&&!o.contains(e.target)&&!(e.target.closest&&e.target.closest('[popovertarget]'))},true);
+document.addEventListener('pointercancel',function(){guard=false},true);
+document.addEventListener('click',function(e){if(guard&&e.detail){guard=false;e.preventDefault();e.stopPropagation();return}guard=false;
+var a=e.target.closest&&e.target.closest('[popover] a[href]'),p=a&&a.closest('[popover]');if(p&&p.matches(':popover-open'))hide(p)},true);
+each('.pop',function(p){p.addEventListener('focusout',function(e){if(e.relatedTarget&&!p.contains(e.relatedTarget)&&p.matches(':popover-open'))hide(p)})});
+var mq=matchMedia('(min-width:861px)'),shut=function(){if(mq.matches)each('.mp-items',function(p){if(p.matches(':popover-open'))hide(p)})};
+if(mq.addEventListener)mq.addEventListener('change',shut);else if(mq.addListener)mq.addListener(shut);
+if(!HTMLElement.prototype.hasOwnProperty('popover')){each('.mp-ch-btn',function(x){x.addEventListener('click',function(){var a=x.nextElementSibling&&x.nextElementSibling.querySelector('.mp-ch-link');if(a)location.href=a.href})});
+each('button[popovertarget]:not(.mp-ch-btn)',function(x){x.addEventListener('click',function(){var t=document.getElementById(x.getAttribute('popovertarget'));if(t)t.toggleAttribute('data-open')})})}
+var nav=side.querySelector('.mp-nav'),home=location.pathname==='/'||location.pathname==='/index.html',
+secs=home?[].slice.call(document.querySelectorAll('main section[id]')):[],
+links=[].slice.call(nav.querySelectorAll('[data-spy]'));if(!secs.length)return;
+var wh=document.querySelector('.mp-where[data-where]'),wmap={},shown=null;try{wmap=JSON.parse(wh.getAttribute('data-where'))}catch(e){}
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var draw=function(key){var cr=wmap.hasOwnProperty(key)?wmap[key]:wmap[''];if(!wh||!cr||shown===key)return;shown=key;
+wh.innerHTML=cr.map(function(c,i){var t=c.length===3?c:[null,c[0],c[1]],inner=(t[0]?'<b class="mp-wn">'+t[0]+'</b> ':'')+esc(t[1]);
+return(i===cr.length-1||!t[2])?'<span class="mp-wc" aria-current="location">'+inner+'</span>':'<a class="mp-wc" href="'+esc(t[2])+'">'+inner+'</a>'}).join('<span class="mp-ws" aria-hidden="true">/</span>')};
+function spy(){var y=window.innerHeight*0.3,c='',any=false;
+for(var i=0;i<secs.length;i++)if(secs[i].getBoundingClientRect().top<=y)c=secs[i].id;
+if(window.innerHeight+window.scrollY>=d.scrollHeight-2)c=secs[secs.length-1].id;
+links.forEach(function(a){var on=!!c&&a.getAttribute('data-spy').split(' ').indexOf(c)>-1;a.classList.toggle('mp-here',on);if(on)any=true});
+nav.classList.toggle('mp-spying',any);draw(c)}
+var q=0;window.addEventListener('scroll',function(){if(!q)q=requestAnimationFrame(function(){q=0;spy()})},{passive:true});
+window.addEventListener('resize',spy);spy()})();</script>

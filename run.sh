@@ -8,3 +8,5 @@ python src/structure/build.py
 python src/structure/build_page.py
 python src/reinsurance/build.py
 python src/reinsurance/build_page.py
+python src/claims/build.py
+python src/claims/build_page.py

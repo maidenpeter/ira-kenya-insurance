@@ -87,6 +87,20 @@ From 2018 to 2025 Kenya's general insurers passed KSh 402.4bn of premium to rein
 **The Cedant Scorecard.** Insurers keeping under 50% of their premium had a median score of 69.7 on the scorecard's other measures, against 53.5 for those keeping 70% and over (rank correlation -0.35, 2018 to 2025). It is a correlation, not a cause, and the same group was also graded D or E most often: 31% of its insurer-years, against 12% (50% to 70%) and 25% (70% and over).
 <!-- reinsurance flows end -->
 
+## Claims settlement (analysis 2)
+
+<!-- claims start -->
+IRA publishes every insurer's claims movement each quarter: claims open at the start, claims reported, paid, declined and closed as no claim, and claims still open at the end. [ira-kenya-data](https://github.com/maidenpeter/ira-kenya-data) extracts the 32 quarterly workbooks IRA has published from Q1 2017 to Q1 2026, joins every printed name to a company and checks them 12,791 times. This module turns them into IRA's own payment ratio: claims paid in the quarter over the claims open in the quarter. It is the second analysis in the series, after the five pages above.
+
+**Three speeds.** In an average quarter of 2025 general insurers paid 11.7% of the liability claims open to them (claims by third parties, most of them injury from motor accidents) and 60.1% of their non-liability claims (medical, own damage, property), and life insurers paid 78.7% of theirs. The median insurer paid 9.2%, 39.8% and 79.0%. Two medical insurers report most non-liability claims by number, which is why the market and the median differ there.
+
+**The queue.** 125,141 liability claims were outstanding at the end of 2025, KSh 33.4bn by the insurers' own estimates: 7.2 quarters of payments at the 2025 pace of 17,448 a quarter. The count peaked at 150,062 in Q2 2024; by value the queue grew from KSh 29.7bn in Q4 2022, the first quarter IRA printed amounts.
+
+**The five the regulator stepped into.** In the last four quarters each reported before the regulator acted, Invesco and Corporate paid liability claims at under half the median insurer's rate in all four, Xplico in three of four. Resolution, mainly a medical insurer, paid close to or above the median; Trident reported paying 4 to 7 times the median. Paying slowly is common: 12 of the 39 general insurers compared had four quarters running under half the median at some point since 2017, and 3 of them later came under the regulator.
+
+**Caveats.** The returns are unaudited. A low payment ratio can reflect a book of slow claims as much as slow payment. 8 insurer-quarters print a negative count and are given no ratio; where an insurer's own claims do not add up from one quarter to the next, the return is kept as printed and counted. This is a screening view, not a credit opinion.
+<!-- claims end -->
+
 ## See it
 
 `page/kenya-insurance-loss-map.html` opens in any browser: the class map year by year, the rate gap by class and by insurer, the motor loss by company, the low loss ratio test and the expense curve for any year.
@@ -94,6 +108,8 @@ From 2018 to 2025 Kenya's general insurers passed KSh 402.4bn of premium to rein
 `page/kenya-insurance-market-structure.html`: every insurer's share, concentration over time, the fragmentation cost, growth against results, share shifts, the class mix and a timeline of entries and exits.
 
 `page/kenya-insurance-reinsurance-flows.html`: cession by class and year, retention against size for every insurer, the change in each insurer's retention, the local reinsurers' capacity against what is ceded, their results by company and class, and retention against the Cedant Scorecard.
+
+`page/kenya-claims-settlement.html` (analysis 2): the liability claims queue quarter by quarter, the median insurer's payment ratio for liability, non-liability and life claims, every insurer's payment ratio for the last full year, the five regulator cases against the median, and what the checks found.
 
 ## Files
 
@@ -120,12 +136,17 @@ From 2018 to 2025 Kenya's general insurers passed KSh 402.4bn of premium to rein
 | `output/reinsurance_market.csv` | Per year: premium ceded, cession rate, the return basis, how far insurers' rates moved, and the local reinsurers' accepted premium against it |
 | `output/reinsurance_reinsurer_results.csv` | Each local reinsurer, and all of them together, by class and year: premium accepted, claims, commissions, expenses, result and ratios |
 | `output/reinsurance_scorecard_link.csv` | Insurers grouped by retention against the Cedant Scorecard's score, with and without its retention metric |
+| `output/claims_market.csv` | Per quarter and business (general liability, general non-liability, life): claims open, paid, declined, closed and outstanding, the market's and the median insurer's payment ratio, and amounts from Q4 2022 |
+| `output/claims_insurer_year.csv` | Every insurer, business and year: claims open and paid over the year's quarters, the pooled payment ratio, claims outstanding at the year's last quarter, and whether it is compared |
+| `output/claims_regulator.csv` | The five regulator cases: liability payment ratio in each of the last four quarters before the action, against the median |
+| `output/claims_runs.csv` | Every run of four published quarters in which a general insurer paid liability claims at under half the median insurer's rate |
+| `output/claims_checks_summary.csv` | ira-kenya-data's checks on the claims tables, counted by result |
 | `reference/regulator_actions.csv` | The five regulator interventions since 2022, with sources |
 | `reference/entries_exits.csv` | Every entry, exit, merger and split, with sources |
 
 ## Running it
 
-Clone next to [ira-kenya-data](https://github.com/maidenpeter/ira-kenya-data) (or set `IRA_DATA_DIR`). The reinsurance module also reads the Cedant Scorecard, so clone [ira-kenya-reinsurance](https://github.com/maidenpeter/ira-kenya-reinsurance) beside it too (or set `IRA_REINSURANCE_DIR`). Then:
+Clone next to [ira-kenya-data](https://github.com/maidenpeter/ira-kenya-data) (or set `IRA_DATA_DIR`). The reinsurance module also reads the Cedant Scorecard, so clone [ira-kenya-reinsurance](https://github.com/maidenpeter/ira-kenya-reinsurance) beside it too (or set `IRA_REINSURANCE_DIR`). The modules read ira-kenya-data's tables, which it builds locally from IRA's files with `./run_all.sh`; the outputs here are committed, so the tests and pages work without them. Then:
 
 ```
 pip install -r requirements.txt

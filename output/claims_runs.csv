@@ -1,0 +1,82 @@
+company_id,company_name,first,last,max_share_of_median,regulator_action,action_date
+cannon_general,Cannon General Insurance,2018Q2,2019Q1,0.395497,,
+cannon_general,Cannon General Insurance,2018Q3,2019Q2,0.323198,,
+cannon_general,Cannon General Insurance,2018Q4,2019Q3,0.393143,,
+cannon_general,Cannon General Insurance,2019Q1,2019Q4,0.393143,,
+cannon_general,Cannon General Insurance,2019Q2,2020Q1,0.393143,,
+cannon_general,Cannon General Insurance,2019Q3,2020Q2,0.393143,,
+cannon_general,Cannon General Insurance,2019Q4,2020Q3,0.353710,,
+cannon_general,Cannon General Insurance,2020Q1,2020Q4,0.353710,,
+cannon_general,Cannon General Insurance,2020Q2,2021Q4,0.353710,,
+cannon_general,Cannon General Insurance,2022Q4,2024Q1,0.184236,,
+cannon_general,Cannon General Insurance,2023Q3,2024Q2,0.184236,,
+cannon_general,Cannon General Insurance,2023Q4,2024Q3,0.184236,,
+cannon_general,Cannon General Insurance,2024Q1,2024Q4,0.084561,,
+cannon_general,Cannon General Insurance,2024Q2,2025Q1,0.084561,,
+cannon_general,Cannon General Insurance,2024Q3,2025Q2,0.258615,,
+cannon_general,Cannon General Insurance,2024Q4,2025Q3,0.258615,,
+corporate,Corporate Insurance Company,2025Q1,2025Q4,0.235660,statutory management,2026-03
+ga,GA Insurance,2017Q4,2018Q4,0.373594,,
+ga,GA Insurance,2018Q2,2019Q1,0.432274,,
+icea_lion_general,ICEA Lion General Insurance,2017Q1,2017Q4,0.430072,,
+icea_lion_general,ICEA Lion General Insurance,2022Q4,2023Q3,0.490328,,
+icea_lion_general,ICEA Lion General Insurance,2023Q1,2023Q4,0.488630,,
+invesco,Invesco Assurance Company,2022Q4,2023Q3,0.139425,"licence cancelled, liquidation",2023-12
+invesco,Invesco Assurance Company,2023Q1,2023Q4,0.139425,"licence cancelled, liquidation",2023-12
+invesco,Invesco Assurance Company,2023Q2,2024Q1,0.139425,"licence cancelled, liquidation",2023-12
+invesco,Invesco Assurance Company,2023Q3,2024Q2,0.160710,"licence cancelled, liquidation",2023-12
+kenyan_alliance,The Kenyan Alliance Insurance,2023Q3,2024Q2,0.238004,,
+kenyan_alliance,The Kenyan Alliance Insurance,2023Q4,2024Q3,0.238004,,
+kenyan_alliance,The Kenyan Alliance Insurance,2024Q1,2024Q4,0.238004,,
+kenyan_alliance,The Kenyan Alliance Insurance,2024Q2,2025Q1,0.118376,,
+kenyan_alliance,The Kenyan Alliance Insurance,2024Q3,2025Q2,0.149678,,
+kenyan_alliance,The Kenyan Alliance Insurance,2024Q4,2025Q3,0.181096,,
+monarch,The Monarch Insurance,2017Q1,2017Q4,0.469461,,
+monarch,The Monarch Insurance,2017Q2,2018Q2,0.469461,,
+monarch,The Monarch Insurance,2017Q3,2018Q3,0.245214,,
+monarch,The Monarch Insurance,2017Q4,2018Q4,0.419963,,
+monarch,The Monarch Insurance,2019Q2,2020Q1,0.497088,,
+monarch,The Monarch Insurance,2019Q3,2020Q2,0.497088,,
+monarch,The Monarch Insurance,2023Q2,2024Q1,0.498192,,
+monarch,The Monarch Insurance,2023Q3,2024Q2,0.274780,,
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2019Q1,2019Q4,0.474344,,
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2019Q2,2020Q1,0.474344,,
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2019Q3,2020Q2,0.474344,,
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2019Q4,2020Q3,0.499931,,
+ncba_insurance,NCBA Insurance (formerly AIG Kenya),2020Q1,2020Q4,0.499931,,
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2023Q1,2023Q4,0.376118,,
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2023Q2,2024Q1,0.483968,,
+old_mutual_general,Old Mutual General Insurance (formerly UAP),2023Q3,2024Q2,0.483968,,
+pacis,Pacis Insurance Company,2019Q3,2020Q2,0.444036,,
+pacis,Pacis Insurance Company,2023Q1,2023Q4,0.391217,,
+tausi,Tausi Assurance Company,2017Q1,2017Q4,0.313485,,
+tausi,Tausi Assurance Company,2017Q2,2018Q2,0.313485,,
+tausi,Tausi Assurance Company,2017Q3,2018Q3,0.393789,,
+tausi,Tausi Assurance Company,2017Q4,2018Q4,0.393789,,
+tausi,Tausi Assurance Company,2018Q2,2019Q1,0.393789,,
+tausi,Tausi Assurance Company,2018Q3,2019Q2,0.393789,,
+tausi,Tausi Assurance Company,2019Q4,2020Q3,0.435580,,
+tausi,Tausi Assurance Company,2020Q1,2020Q4,0.435580,,
+tausi,Tausi Assurance Company,2020Q2,2021Q4,0.338969,,
+tausi,Tausi Assurance Company,2020Q3,2022Q3,0.338969,,
+tausi,Tausi Assurance Company,2020Q4,2022Q4,0.357535,,
+tausi,Tausi Assurance Company,2021Q4,2023Q1,0.357535,,
+tausi,Tausi Assurance Company,2022Q3,2023Q2,0.357535,,
+tausi,Tausi Assurance Company,2022Q4,2023Q3,0.357535,,
+tausi,Tausi Assurance Company,2023Q1,2023Q4,0.402707,,
+tausi,Tausi Assurance Company,2023Q2,2024Q1,0.402707,,
+tausi,Tausi Assurance Company,2023Q3,2024Q2,0.402707,,
+tausi,Tausi Assurance Company,2023Q4,2024Q3,0.402707,,
+tausi,Tausi Assurance Company,2024Q1,2024Q4,0.301002,,
+tausi,Tausi Assurance Company,2024Q2,2025Q1,0.301002,,
+tausi,Tausi Assurance Company,2024Q3,2025Q2,0.309375,,
+tausi,Tausi Assurance Company,2024Q4,2025Q3,0.346807,,
+trident,Trident Insurance Company,2017Q1,2017Q4,0.193894,statutory management,2026-03
+trident,Trident Insurance Company,2017Q2,2018Q2,0.193894,statutory management,2026-03
+trident,Trident Insurance Company,2017Q3,2018Q3,0.146374,statutory management,2026-03
+trident,Trident Insurance Company,2017Q4,2018Q4,0.146374,statutory management,2026-03
+trident,Trident Insurance Company,2018Q2,2019Q1,0.055152,statutory management,2026-03
+trident,Trident Insurance Company,2018Q3,2019Q2,0.055152,statutory management,2026-03
+trident,Trident Insurance Company,2018Q4,2019Q3,0.055152,statutory management,2026-03
+trident,Trident Insurance Company,2019Q1,2019Q4,0.039890,statutory management,2026-03
+trident,Trident Insurance Company,2019Q2,2020Q1,0.358141,statutory management,2026-03
