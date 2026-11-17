@@ -72,7 +72,9 @@ The only fourth-quarter error flag from 2018 is Intra-Africa Q4 2024 (`premium_r
 
 ### Something the brief should know about the data repo
 
-ira-kenya-data tracks its processed panels in git: `data/processed/*.csv`, including the 211,785-row class table, and `explorer/explorer_data.json`. They are public on GitHub now. That contradicts "Marion does not release her IRA data files, raw or cleaned". This module adds only small derived outputs, but the existing files are Marion's call. Nothing was removed.
+When this module was built, ira-kenya-data tracked its processed panels in git: `data/processed/*.csv`, including the 211,785-row class table, and `explorer/explorer_data.json`. That contradicted "Marion does not release her IRA data files, raw or cleaned".
+
+Marion ruled that no raw or raw-like data may be public. ira-kenya-data's history was rewritten without the panels, the explorer's data file and the row-level validation tables. They are now built locally only, ignored by git, and guarded by a test. This module reads them from the local copy and publishes only its small derived outputs.
 
 ## Questions shipped
 
@@ -158,6 +160,6 @@ All in `output/`, small and derived; no panel or row-level table is copied.
   - **East Africa Re.** It made an underwriting profit in every year it filed.
   - **Lowest retention, 2025:** Bupa Global keeps 9% of its premium, Occidental 44%, Mayfair 45%.
   - **Largest changes since 2018:** Occidental 75% to 44%, NCBA 23% to 51%.
-- **Published data files.** ira-kenya-data publishes its processed panels (above).
+- **Published data files.** Resolved: ira-kenya-data no longer publishes its processed panels, in its current files or its history (above).
 - **A data fix for ira-kenya-data.** In the class panel, the five reinsurers' Q4 2025 and Q1 2026 gross direct and inward premium rows are tagged as insurer rows (300 rows). This module is not affected.
 - **A missing return.** IRA lists Sanlam Allianz General (then Jubilee Allianz General) with all zeros for 2024, so it is out of the 2024 totals. The page names it, with the screening caveat; the README does not name it.
