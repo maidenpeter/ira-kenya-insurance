@@ -29,3 +29,20 @@ An insurer-year is flagged when motor earned premium is at least KSh 0.2bn and t
 ## Expense scale
 
 Management expenses over gross premium (not earned premium, which retention distorts), every insurer with more than KSh 0.1bn of gross premium, regressed on the log of gross premium each year. The slope times log 2 gives the change per doubling of premium.
+
+## Reinsurance flows
+
+Gross premium is the class table's gross premium income (gross direct plus inward premium) and net premium its net premium income, fourth quarter, year to date. Premium ceded is gross less net premium; it is checked against the revenue account's outward reinsurance for every insurer and year, to within KSh 5,000 (the rounding in IRA's tables).
+
+    cession rate = (gross premium - net premium) / gross premium
+    retention    = net premium / gross premium
+
+Insurers are IRA's insurer segment with micro insurers; the local reinsurers are IRA's reinsurer segment. Retention by insurer, the size bands (under KSh 3bn, KSh 3bn to 10bn, over KSh 10bn) and the change since 2018 cover insurers writing at least KSh 0.5bn that year, the Cedant Scorecard's peer threshold. The change since 2018 counts MUA with Saham, whose book it took over in 2021; insurers formed after 2018 are left out because they have no like-for-like starting point.
+
+Claims in the class tables and revenue accounts are net of reinsurance, and IRA publishes no gross claims, so recoveries cannot be measured. The local reinsurers' accepted premium against what insurers ceded is an upper bound on the share that could have stayed in Kenya: the reinsurers also accept business from abroad, and insurers cede abroad and to each other.
+
+IRA's returns moved the profit and loss account and balance sheet to IFRS 17 lines from Q1 2024. The revenue account and class tables kept their premium lines, the identities hold in every year, and insurers' cession rates moved no more across the switch than in other years, so the series is treated as unbroken and the switch is marked on the chart.
+
+The Cedant Scorecard comparison uses its published scores as they stand, and also a score without the retention metric: the business profile pillar re-weighted to scale and diversification, the other pillars unchanged.
+
+The plan, the data checks behind these choices and the questions left out are in `docs/reinsurance-plan.md`.
