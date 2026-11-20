@@ -1,8 +1,58 @@
-# ira-kenya-insurance
+<p align="center">
+  <img src="assets/readme/seal.svg" width="84" alt="">
+</p>
 
-Kenya's general insurance market from the insurer's side: where the money is lost, who carries the loss and what it would take to close the gap. Built from the Insurance Regulatory Authority's quarterly returns, full years 2018 to 2025, using the tables in [ira-kenya-data](https://github.com/maidenpeter/ira-kenya-data).
+<h1 align="center">Kenya Insurance Analysis</h1>
 
-Three modules so far: where the money is lost (the Loss Map), who holds the market (Market Structure) and what is passed on to reinsurers (Reinsurance Flows). The IFRS 17 transition follows.
+<p align="center">
+  <b>Where does Kenya's general insurance market lose money,<br>
+  who carries the loss, and what would it take to close the gap?</b>
+</p>
+
+<p align="center">
+  <a href="https://maidenpeter.github.io/kenya-insurance/"><b>Open the Kenya series</b></a>
+  &nbsp;|&nbsp; <a href="#the-four-pages">The four pages</a>
+  &nbsp;|&nbsp; <a href="#where-the-money-is-lost">The loss</a>
+  &nbsp;|&nbsp; <a href="#market-structure-a-crowded-market">Structure</a>
+  &nbsp;|&nbsp; <a href="#reinsurance-flows">Reinsurance</a>
+  &nbsp;|&nbsp; <a href="#claims-settlement-analysis-2">Claims</a>
+  &nbsp;|&nbsp; <a href="#why-i-built-this">Why I built this</a>
+</p>
+
+<p align="center"><sub>A portfolio project by Marion Peter. Built from the Insurance Regulatory Authority's unaudited quarterly returns, full years 2018 to 2025.</sub></p>
+
+<p align="center">
+  <a href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-loss-map.html"><img src="assets/readme/hero.webp" width="920" alt="Kenya general insurance, 2018 to 2025: motor lost KSh 52.6bn, every other class made KSh 19.6bn, with the underwriting result of each class as a bar"></a>
+</p>
+
+## In one minute
+
+Kenya's insurance regulator publishes every general insurer's accounts each quarter. Read together, from 2018 to 2025,
+they tell one story: the market lost KSh 33.1bn on underwriting, motor alone lost KSh 52.6bn, and every other class
+together made KSh 19.6bn.
+
+This repository follows that story through four pages, built from the validated tables in
+[ira-kenya-data](https://github.com/maidenpeter/ira-kenya-data): where the money is lost and what premiums would have
+to do, who holds the market, how much risk is passed on to reinsurers, and whether claims get paid.
+
+> [!NOTE]
+> Everything here is public IRA data. Nothing comes from inside any insurer. The returns are unaudited, and every view
+> that names an insurer is a screening view, not a credit opinion.
+
+## The four pages
+
+Click a picture to open the page. Each one has its numbers in a table under every chart.
+
+<table>
+  <tr>
+    <td width="50%" valign="top"><a href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-loss-map.html"><img src="assets/readme/lossmap.webp" alt="The Loss Map: combined ratio by class and year, 2018 to 2025"></a><br><b>Loss Map</b><br><sub>The class map year by year, the rate gap by class and by insurer, the motor loss by company, the low loss ratio test and the expense curve.</sub></td>
+    <td width="50%" valign="top"><a href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-market-structure.html"><img src="assets/readme/structure.webp" alt="Market Structure: every insurer's share and the market's concentration"></a><br><b>Market Structure</b><br><sub>Every insurer's share, concentration over time, the fragmentation cost, growth against results, share shifts, the class mix, entries and exits.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top"><a href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-reinsurance-flows.html"><img src="assets/readme/flows.webp" alt="Reinsurance Flows: the share of premium ceded by class"></a><br><b>Reinsurance Flows</b><br><sub>Cession by class and year, retention against size, each insurer's change, the local reinsurers' capacity and results, and retention against the Cedant Scorecard.</sub></td>
+    <td width="50%" valign="top"><a href="https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-claims-settlement.html"><img src="assets/readme/claims.webp" alt="Claims Settlement: the liability claims queue quarter by quarter"></a><br><b>Claims Settlement</b> (analysis 2)<br><sub>The liability claims queue, the median insurer's payment ratio, every insurer's last full year, and the five regulator cases against the median.</sub></td>
+  </tr>
+</table>
 
 ## Where the money is lost
 
@@ -22,7 +72,7 @@ From 2018 to 2025 Kenya's general insurers lost KSh 33.1bn on underwriting. Moto
 
 In 2025 motor was 27% of gross premium, 37% of earned premium and 40% of claims. It lost money in every one of the eight years, and in every year it lost more than the whole market did.
 
-## What premiums would have to do
+### What premiums would have to do
 
 On 2023 to 2025 experience, using the loss ratio method of ratemaking:
 
@@ -37,17 +87,17 @@ The investment income version credits every class with the market's investment i
 
 This matters now. In September 2024 the Court of Appeal ruled that IRA has the power to regulate premium rates, but struck down its 2009 motor minimum rate guidelines because IRA had not shown that price setting was the right tool. Any new attempt will need evidence of this kind.
 
-## Who carries the motor loss
+### Who carries the motor loss
 
 Forty insurers wrote motor over the period. Only three made a meaningful profit on it: GA (KSh 0.12bn), Mayfair (KSh 0.40bn) and Trident (KSh 0.57bn). Ten insurers carry 62% of the loss.
 
-## Motor results that are too good to be true
+### Motor results that are too good to be true
 
 The market's loss ratio on all motor business, private and commercial together, ran between 65% and 81%. Ten insurers booked a year under 40%. Eight of those ten faced regulator action, negative equity or equity below IRA's minimum capital at some point since 2018, against 7 of the other 28 motor insurers (Fisher's exact test, p = 0.006; the gap holds at 35%, 45% and 50% thresholds). For seven of the ten the trouble came in the same year or later.
 
 The list includes Invesco's 11% in 2023, the year it was liquidated, and Trident's 13% and 30% in 2021 and 2022, the two years before it stopped filing returns. Trident's motor profit above sits on those two years. A motor book that looks far better than everyone else's is more often a reserving question than a pricing success.
 
-## Small insurers pay far more to run
+### Small insurers pay far more to run
 
 In 2025, insurers writing under KSh 3bn a year spent a median 34% of gross premium on management expenses. Those writing over KSh 10bn spent 15%. Across the market, each doubling of premium comes with about six points less expense (correlation -0.68, and between -0.63 and -0.81 in every year).
 
@@ -103,15 +153,19 @@ IRA publishes every insurer's claims movement each quarter: claims open at the s
 
 ## See it
 
-`page/kenya-insurance-loss-map.html` opens in any browser: the class map year by year, the rate gap by class and by insurer, the motor loss by company, the low loss ratio test and the expense curve for any year.
+Each page opens in any browser from the `page/` folder, and is live on the site:
 
-`page/kenya-insurance-market-structure.html`: every insurer's share, concentration over time, the fragmentation cost, growth against results, share shifts, the class mix and a timeline of entries and exits.
-
-`page/kenya-insurance-reinsurance-flows.html`: cession by class and year, retention against size for every insurer, the change in each insurer's retention, the local reinsurers' capacity against what is ceded, their results by company and class, and retention against the Cedant Scorecard.
-
-`page/kenya-claims-settlement.html` (analysis 2): the liability claims queue quarter by quarter, the median insurer's payment ratio for liability, non-liability and life claims, every insurer's payment ratio for the last full year, the five regulator cases against the median, and what the checks found.
+| Page | What it shows |
+|---|---|
+| [`page/kenya-insurance-loss-map.html`](https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-loss-map.html) | The class map year by year, the rate gap by class and by insurer, the motor loss by company, the low loss ratio test and the expense curve for any year |
+| [`page/kenya-insurance-market-structure.html`](https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-market-structure.html) | Every insurer's share, concentration over time, the fragmentation cost, growth against results, share shifts, the class mix and a timeline of entries and exits |
+| [`page/kenya-insurance-reinsurance-flows.html`](https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-insurance-reinsurance-flows.html) | Cession by class and year, retention against size for every insurer, the change in each insurer's retention, the local reinsurers' capacity against what is ceded, their results by company and class, and retention against the Cedant Scorecard |
+| [`page/kenya-claims-settlement.html`](https://maidenpeter.github.io/ira-kenya-insurance/page/kenya-claims-settlement.html) (analysis 2) | The liability claims queue quarter by quarter, the median insurer's payment ratio for liability, non-liability and life claims, every insurer's payment ratio for the last full year, the five regulator cases against the median, and what the checks found |
 
 ## Files
+
+<details>
+<summary>Every output file, and what it holds</summary>
 
 | File | What it holds |
 |---|---|
@@ -143,6 +197,8 @@ IRA publishes every insurer's claims movement each quarter: claims open at the s
 | `output/claims_checks_summary.csv` | ira-kenya-data's checks on the claims tables, counted by result |
 | `reference/regulator_actions.csv` | The five regulator interventions since 2022, with sources |
 | `reference/entries_exits.csv` | Every entry, exit, merger and split, with sources |
+
+</details>
 
 ## Running it
 
@@ -176,4 +232,25 @@ The tests check that every class result adds up, that classes add to the market,
 - Regulator actions and entries and exits: see `reference/regulator_actions.csv` and `reference/entries_exits.csv`
 - US Department of Justice, Herfindahl-Hirschman Index (2023 Merger Guidelines thresholds): https://www.justice.gov/atr/herfindahl-hirschman-index
 
-Marion Peter
+## Why I built this
+
+From 2023 to 2024 I was an actuarial analyst at a Kenyan insurer, working on product and claims analysis for pricing
+decisions and on portfolio, risk and profitability analysis. The question under most of that work is the one this
+repository asks of the whole market: which business makes money, which loses it, and what the price would have to be.
+
+Inside a company, that question is answered with the company's own data, and the data stays there. IRA's returns let it
+be asked of every insurer at once, in public, where anyone can check the answer. The market's answer is plain: motor
+has lost money in every year since 2018, and the rest of the book pays for it. Since the Court of Appeal's 2024 ruling,
+any new attempt to regulate motor rates will need evidence of exactly this kind.
+
+The other pages follow the questions an insurer's board or a reinsurer would ask next: who holds the market, how much
+of the risk leaves it, and whether claims get paid. Each is built from the same validated tables, and each number on
+a page can be found in the files above.
+
+---
+
+<p align="center">
+  <sub>Part of a portfolio at <a href="https://maidenpeter.github.io/">maidenpeter.github.io</a>, with the data in
+  <a href="https://github.com/maidenpeter/ira-kenya-data">ira-kenya-data</a> and the scorecard in
+  <a href="https://github.com/maidenpeter/ira-kenya-reinsurance">ira-kenya-reinsurance</a>.</sub>
+</p>
